@@ -184,6 +184,13 @@ if ($trows > '0') {
             }
         }
 
+				//Fix bag for type and typeprice
+				$result7 = $xoopsDB->query('SELECT nom_type FROM ' . $xoopsDB->prefix('adslight_type') . ' WHERE id_type=' . (int)$type);
+        list($nom_type) = $xoopsDB->fetchRow($result7);
+
+        $result8 = $xoopsDB->query('SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . ' WHERE id_price=' . (int)$typeprice);
+        list($nom_price) = $xoopsDB->fetchRow($result8);
+      
         $GLOBALS['xoopsTpl']->assign('submitter', $submitter);
         $GLOBALS['xoopsTpl']->assign('usid', $usid);
         $GLOBALS['xoopsTpl']->assign('read', "$hits " . _ADSLIGHT_VIEW2);
@@ -240,11 +247,11 @@ if ($trows > '0') {
             'title'       => $myts->htmlSpecialChars($title),
             'status'      => $myts->htmlSpecialChars($status_is),
             'expire'      => $myts->htmlSpecialChars($expire),
-            'type'        => $myts->htmlSpecialChars($type),
+            'type'        => $myts->htmlSpecialChars($nom_type),
             'desctext'    => $myts->displayTarea($desctext),
             'tel'         => $myts->htmlSpecialChars($tel),
             'price'       => $myts->htmlSpecialChars($price),
-            'typeprice'   => $myts->htmlSpecialChars($typeprice),
+            'typeprice'   => $myts->htmlSpecialChars($nom_price),
             'date'        => $myts->htmlSpecialChars($date),
             'email'       => $myts->htmlSpecialChars($email),
             'submitter'   => $myts->htmlSpecialChars($submitter),
