@@ -320,7 +320,14 @@ if (Request::hasVar('submit', 'POST')) {
 
         $form->addElement(new \XoopsFormText(_ADSLIGHT_TITLE2, 'title', 40, 50, ''), true);
 
-        $form->addElement(Utility::getEditor($helper), true);
+		$options           = [];
+        $options['name']   = 'desctext';
+        $options['value']  = '';
+        $options['cols']   = '100%';
+        $options['width']  = '100%';
+        $options['height'] = '400px';
+        $options['rows']   = 10;
+        $form->addElement(Utility::getEditor($helper, $options), true);
 
         //        $form->addElement(new \XoopsFormEditor(_ADSLIGHT_DESC, $helper->getConfig('adslightEditorUser'), $options, $nohtml = FALSE, $onfailure = 'textarea'));
         //        $optionsTrayNote->addElement($bodynote);
