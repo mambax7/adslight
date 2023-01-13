@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -24,7 +22,7 @@ declare(strict_types=1);
 $rssContent = [];
 /**
  * @param DOMDocument $item
- * @param string $type
+ * @param string      $type
  * @return array
  */
 function rssTags($item, $type): array
@@ -47,6 +45,7 @@ function rssTags($item, $type): array
     $y['date_created'] = $date;
     $y['description']  = $description;
     $y['type']         = $type;
+
     return $y;
 }
 
@@ -58,11 +57,11 @@ function rssChannel($channel): void
     global $rssContent;
     $items = $channel->getElementsByTagName('item');
     // Processing channel
-    $y             = rssTags($channel, 0);        // get description of channel, type 0
+    $y            = rssTags($channel, 0);        // get description of channel, type 0
     $rssContent[] = $y;
     // Processing articles
     foreach ($items as $item) {
-        $y             = rssTags($item, 1);    // get description of article, type 1
+        $y            = rssTags($item, 1);    // get description of article, type 1
         $rssContent[] = $y;
     }
 }
@@ -75,7 +74,7 @@ function rssRetrieve($url): void
     global $rssContent;
     $doc = new DOMDocument();
     $doc->load($url);
-    $channels    = $doc->getElementsByTagName('channel');
+    $channels   = $doc->getElementsByTagName('channel');
     $rssContent = [];
     foreach ($channels as $channel) {
         rssChannel($channel);
@@ -90,20 +89,20 @@ function rssRetrieveLinks($url): void
     global $rssContent;
     $doc = new DOMDocument();
     $doc->load($url);
-    $channels    = $doc->getElementsByTagName('channel');
+    $channels   = $doc->getElementsByTagName('channel');
     $rssContent = [];
     foreach ($channels as $channel) {
         $items = $channel->getElementsByTagName('item');
         foreach ($items as $item) {
-            $y             = rssTags($item, 1);    // get description of article, type 1
+            $y            = rssTags($item, 1);    // get description of article, type 1
             $rssContent[] = $y;
         }
     }
 }
 
 /**
- * @param string    $url
- * @param int $size
+ * @param string $url
+ * @param int    $size
  * @return string
  */
 function rssLinks($url, $size = 15): string
@@ -129,9 +128,9 @@ function rssLinks($url, $size = 15): string
 }
 
 /**
- * @param string    $url
- * @param int $size
- * @param int $site
+ * @param string $url
+ * @param int    $size
+ * @param int    $site
  * @return string
  */
 function rssDisplay(
@@ -176,14 +175,15 @@ function rssDisplay(
     if ($opened) {
         $page .= '</ul>';
     }
+
     return $page;
 }
 
 /**
- * @param string    $url
- * @param int $size
- * @param int $site
- * @param int $withdate
+ * @param string $url
+ * @param int    $size
+ * @param int    $site
+ * @param int    $withdate
  * @return string
  */
 function rssDisplayForum(
@@ -226,5 +226,6 @@ function rssDisplayForum(
     if ($opened) {
         $page .= '</ul>';
     }
+
     return $page;
 }

@@ -14,13 +14,11 @@
  * feedback plugin for xoops modules
  *
  * @copyright      module for xoops
- * @license        GPL 2.0 or later
- * @package        general
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since          1.0
  * @min_xoops      2.5.9
  * @author         XOOPS - Website:<https://xoops.org>
  */
-
 $moduleDirName      = \basename(\dirname(__DIR__, 2));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
@@ -41,4 +39,4 @@ define('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_OTHERS', 'Misc');
 define('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_CONTENT', 'Feedback content');
 define('CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_FOR', 'Feedback for module ');
 define('CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_SUCCESS', 'Feedback successfully sent');
-define('CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_ERROR', 'An errror occured when feedback was sent!');
+define('CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_ERROR', 'An errror occurred when feedback was sent!');

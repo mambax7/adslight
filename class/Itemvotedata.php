@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -18,10 +16,9 @@ namespace XoopsModules\Adslight;
  * Module: Adslight
  *
  * @category        Module
- * @package         adslight
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @link            https://xoops.org/
  * @since           1.0.0
  */
@@ -38,8 +35,14 @@ use XoopsModules\Adslight\{
  */
 class Itemvotedata extends \XoopsObject
 {
-    public $helper;
-    public $permHelper;
+    private $ratingid;
+    private $lid;
+    private $ratinguser;
+    private $rating;
+    private $ratinghostname;
+    private $date_created;
+    public  $helper;
+    public  $permHelper;
 
     /**
      * Constructor

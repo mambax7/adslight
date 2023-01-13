@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Form;
 
@@ -20,7 +18,7 @@ namespace XoopsModules\Adslight\Form;
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Module\Helper\Permission;
@@ -54,7 +52,7 @@ class TypeForm extends \XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_ADSLIGHT_TYPE_ADD) : \sprintf(\AM_ADSLIGHT_TYPE_EDIT);
+        $title = $this->targetObject->isNew() ? \AM_ADSLIGHT_TYPE_ADD : \AM_ADSLIGHT_TYPE_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 

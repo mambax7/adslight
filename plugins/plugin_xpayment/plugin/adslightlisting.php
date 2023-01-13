@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /**
  * @param $invoice
@@ -11,6 +9,7 @@ function PaidAdslightlistingHook($invoice): bool
     $sql = 'update ' . $GLOBALS['xoopsDB']->prefix('adslight_listing') . ' set `valid` = \'Yes\' where `lid`= "' . $invoice->getVar('key') . '"';
     $GLOBALS['xoopsDB']->queryF($sql);
     require_once $GLOBALS['xoops']->path('/modules/xpayment/plugin/xpayment.php');
+
     return PaidXPaymentHook($invoice);
 }
 
@@ -21,6 +20,7 @@ function PaidAdslightlistingHook($invoice): bool
 function UnpaidAdslightlistingHook($invoice): bool
 {
     require_once $GLOBALS['xoops']->path('/modules/xpayment/plugin/xpayment.php');
+
     return UnpaidXPaymentHook($invoice);
 }
 
@@ -31,5 +31,6 @@ function UnpaidAdslightlistingHook($invoice): bool
 function CancelAdslightlistingHook($invoice): bool
 {
     require_once $GLOBALS['xoops']->path('/modules/xpayment/plugin/xpayment.php');
+
     return CancelXPaymentHook($invoice);
 }

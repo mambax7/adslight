@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Common;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Adslight\Common;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -20,7 +18,7 @@ namespace XoopsModules\Adslight\Common;
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
@@ -64,18 +62,18 @@ class FileChecker
                 $path_status .= "$file_path (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'NOTAVAILABLE') . ') ';
             }
         } elseif (self::compareFiles($file_path, $original_file_path)) {
-                $path_status = "<img src='$pathIcon16/1.png' >";
-                $path_status .= "$file_path (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'AVAILABLE') . ') ';
-            } else {
-                $path_status = "<img src='$pathIcon16/0.png' >";
-                $path_status .= "$file_path (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'NOTAVAILABLE') . ') ';
-                $path_status .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
-                $path_status .= "<input type='hidden' name='op' value='copyfile'>";
-                $path_status .= "<input type='hidden' name='file_path' value='$file_path'>";
-                $path_status .= "<input type='hidden' name='original_file_path' value='$original_file_path'>";
-                $path_status .= "<input type='hidden' name='redirect' value='$redirectFile'>";
-                $path_status .= "<button class='submit' onClick='this.form.submit();'>" . \constant('CO_' . $moduleDirNameUpper . '_' . 'CREATETHEFILE') . '</button>';
-                $path_status .= '</form>';
+            $path_status = "<img src='$pathIcon16/1.png' >";
+            $path_status .= "$file_path (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'AVAILABLE') . ') ';
+        } else {
+            $path_status = "<img src='$pathIcon16/0.png' >";
+            $path_status .= "$file_path (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'NOTAVAILABLE') . ') ';
+            $path_status .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
+            $path_status .= "<input type='hidden' name='op' value='copyfile'>";
+            $path_status .= "<input type='hidden' name='file_path' value='$file_path'>";
+            $path_status .= "<input type='hidden' name='original_file_path' value='$original_file_path'>";
+            $path_status .= "<input type='hidden' name='redirect' value='$redirectFile'>";
+            $path_status .= "<button class='submit' onClick='this.form.submit();'>" . \constant('CO_' . $moduleDirNameUpper . '_' . 'CREATETHEFILE') . '</button>';
+            $path_status .= '</form>';
         }
 
         return $path_status;
@@ -114,6 +112,7 @@ class FileChecker
         }
         $crc1 = \mb_strtoupper(\dechex(\crc32(file_get_contents($file1_path))));
         $crc2 = \mb_strtoupper(\dechex(\crc32(file_get_contents($file2_path))));
+
         return !($crc1 !== $crc2);
     }
 

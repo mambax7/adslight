@@ -12,14 +12,13 @@
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
  * @author       jlm69 (www.jlmzone.com)
  * @author       mamba (www.xoops.org)
  */
-
 if (file_exists(__DIR__ . '/mainfile.php')) {
     require_once __DIR__ . '/mainfile.php';
 } elseif (file_exists(__DIR__ . '/../mainfile.php')) {

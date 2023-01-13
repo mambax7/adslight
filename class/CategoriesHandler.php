@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -20,20 +18,18 @@ namespace XoopsModules\Adslight;
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
-
-
 
 /**
  * Class CategoriesHandler
  */
 class CategoriesHandler extends \XoopsPersistableObjectHandler
 {
-    private const TABLE = 'adslight_categories';
-    private const ENTITY = Categories::class;
+    private const TABLE      = 'adslight_categories';
+    private const ENTITY     = Categories::class;
     private const ENTITYNAME = 'Categories';
-    private const KEYNAME = 'cid';
+    private const KEYNAME    = 'cid';
     private const IDENTIFIER = 'title';
     /**
      * @var Helper
@@ -45,12 +41,11 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
      * @param null|\XoopsDatabase                $db
      * @param null|Helper $helper
      */
-
     public function __construct(\XoopsDatabase $db = null, $helper = null)
     {
         /** @var Helper $this- >helper */
         $this->helper = $helper;
-        $this->db = $db;
+        $this->db     = $db;
         parent::__construct($db, static::TABLE, static::ENTITY, static::KEYNAME, static::IDENTIFIER);
     }
 
@@ -67,7 +62,6 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
         return $obj;
     }
 
-
     //====================================
 
     /**
@@ -80,7 +74,7 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
         if (-1 == $pid) {
             return $this->getCount();
         }
-        $helper   = Helper::getInstance();
+        $helper = Helper::getInstance();
         /** @var \Xmf\Module\Helper\Permission $permHelper */
         $permHelper = $this->helper->getHandler('Permission');
         $criteria   = new \CriteriaCompo();

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Common;
 
@@ -18,7 +16,7 @@ namespace XoopsModules\Adslight\Common;
  */
 
 /**
- * @license      https://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @copyright    https://xoops.org 2000-2020 &copy; XOOPS Project
  * @author       ZySpec <zyspec@yahoo.com>
  * @author       Mamba <mambax7@gmail.com>
@@ -67,8 +65,8 @@ class SysUtility
     {
         global $start, $order, $sort;
 
-        $selectView   = '';
-        $helper        = Helper::getInstance();
+        $selectView = '';
+        $helper     = Helper::getInstance();
 
         //$pathModIcon16 = XOOPS_URL . '/modules/' . $moduleDirName . '/' . $helper->getConfig('modicons16');
         $pathModIcon16 = $helper->url($helper->getModule()->getInfo('modicons16'));
@@ -140,15 +138,18 @@ class SysUtility
 
         $sql    = 'SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "' . $table . '" AND COLUMN_NAME = "' . $columnName . '"';
         $result = $GLOBALS['xoopsDB']->query($sql);
-        if (!$result instanceof \mysqli_result) {
-            //            exit($GLOBALS['xoopsDB']->error());
+        if (!$GLOBALS['xoopsDB']->isResultSet($result)) {
+ 
+            //            \trigger_error($GLOBALS['xoopsDB']->error());
             $logger = \XoopsLogger::getInstance();
             $logger->handleError(\E_USER_WARNING, $sql, __FILE__, __LINE__);
+
             return null;
         }
 
-        $row = $GLOBALS['xoopsDB']->fetchBoth($result);
+        $row      = $GLOBALS['xoopsDB']->fetchBoth($result);
         $enumList = \explode(',', \str_replace("'", '', \mb_substr($row['COLUMN_TYPE'], 5, -6)));
+
         return $enumList;
     }
 
@@ -163,19 +164,36 @@ class SysUtility
      */
     public static function cloneRecord(string $tableName, string $idField, int $id): ?int
     {
-        $newId = null;
+        $newId     = null;
         $tempTable = '';
-        $table = $GLOBALS['xoopsDB']->prefix($tableName);
+        $table     = $GLOBALS['xoopsDB']->prefix($tableName);
         // copy content of the record you wish to clone
-        $sql       = "SELECT * FROM $table WHERE $idField='" . $id . "' ";
+        $sql    = "SELECT * FROM $table WHERE $idField='" . $id . "' ";
         $result = $GLOBALS['xoopsDB']->query($sql);
 
-        if ($result instanceof \mysqli_result) {
+        if ($GLOBALS['xoopsDB']->isResultSet($result)) {
             $tempTable = $GLOBALS['xoopsDB']->fetchArray($result, \MYSQLI_ASSOC);
+        } else {
+            //            trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            $logger = \XoopsLogger::getInstance();
+            $logger->handleError(\E_USER_WARNING, $sql, __FILE__, __LINE__);
+
+            return null;
+        }
+
+        $result = $xoopsDB->query($sql);
+        if ($xoopsDB->isResultSet($result)) {
+            $result_array = $xoopsDB->fetchArray($result);
+        } else {
+            trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            $logger = \XoopsLogger::getInstance();
+            $logger->handleError(\E_USER_WARNING, $sql, __FILE__, __LINE__);
+
+            return null;
         }
 
         if (!$tempTable) {
-            exit($GLOBALS['xoopsDB']->error());
+            \trigger_error($GLOBALS['xoopsDB']->error());
         }
         // set the auto-incremented id's value to blank.
         unset($tempTable[$idField]);
@@ -183,10 +201,11 @@ class SysUtility
         $sql    = "INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", $tempTable) . "')";
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         if (!$result) {
-            exit($GLOBALS['xoopsDB']->error());
+            \trigger_error($GLOBALS['xoopsDB']->error());
         }
         // Return the new id
         $newId = $GLOBALS['xoopsDB']->getInsertId();
+
         return $newId;
     }
 
@@ -198,11 +217,11 @@ class SysUtility
      * @TODO: Refactor to consider HTML5 & void (self-closing) elements
      * @TODO: Consider using https://github.com/jlgrall/truncateHTML/blob/master/truncateHTML.php
      *
-     * @param string      $text         String to truncate.
-     * @param int|null    $length       Length of returned string, including ellipsis.
+     * @param string   $text         String to truncate.
+     * @param int|null $length       Length of returned string, including ellipsis.
      * @param string   $ending       Ending to be appended to the trimmed string.
-     * @param bool        $exact        If false, $text will not be cut mid-word
-     * @param bool        $considerHtml If true, HTML tags would be handled correctly
+     * @param bool     $exact        If false, $text will not be cut mid-word
+     * @param bool     $considerHtml If true, HTML tags would be handled correctly
      *
      * @return string Trimmed string.
      */
@@ -249,7 +268,7 @@ class SysUtility
                 $contentLength = \mb_strlen(\preg_replace('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', ' ', $lineMatchings[2]));
                 if ($totalLength + $contentLength > $length) {
                     // the number of characters which are left
-                    $left            = $length - $totalLength;
+                    $left           = $length - $totalLength;
                     $entitiesLength = 0;
                     // search for html entities
                     if (\preg_match_all('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', $lineMatchings[2], $entities, \PREG_OFFSET_CAPTURE)) {
@@ -268,7 +287,7 @@ class SysUtility
                     // maximum length is reached, so get off the loop
                     break;
                 }
-                $truncate     .= $lineMatchings[2];
+                $truncate    .= $lineMatchings[2];
                 $totalLength += $contentLength;
 
                 // if the maximum length is reached, get off the loop
@@ -359,6 +378,7 @@ class SysUtility
         \trigger_error(__METHOD__ . " is deprecated, use Xmf\Database\Tables instead - instantiated from {$trace[0]['file']} line {$trace[0]['line']},");
 
         $result = $GLOBALS['xoopsDB']->queryF("SHOW COLUMNS FROM   $table LIKE '$fieldname'");
+
         return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0);
     }
 
@@ -374,7 +394,7 @@ class SysUtility
                 throw new \RuntimeException(\sprintf('Unable to create the %s directory', $folder));
             }
             file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }
@@ -405,6 +425,7 @@ class SysUtility
     public static function addField(string $field, string $table)
     {
         global $xoopsDB;
+
         return $xoopsDB->queryF('ALTER TABLE ' . $table . " ADD $field;");
     }
 }

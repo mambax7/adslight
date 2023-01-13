@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -46,8 +44,8 @@ $GLOBALS['xoopsOption']['template_main'] = 'adslight_members.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
 
-$lid       = Request::getInt('lid', 0, 'GET');
-$usid      = Request::getInt('usid', 0, 'GET');
+$lid      = Request::getInt('lid', 0, 'GET');
+$usid     = Request::getInt('usid', 0, 'GET');
 $moduleId = $xoopsModule->getVar('mid');
 if (is_object($GLOBALS['xoopsUser'])) {
     $groups = $GLOBALS['xoopsUser']->getGroups();

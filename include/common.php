@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -12,8 +10,8 @@ declare(strict_types=1);
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @copyright    XOOPS Project (https://xoops.org)/
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  */
 
@@ -25,7 +23,6 @@ use XoopsModules\Adslight\{
 
 /** @var Helper $helper */
 /** @var Utility $utility */
-
 require_once \dirname(__DIR__) . '/preloads/autoloader.php';
 $moduleDirName      = \basename(\dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
@@ -43,7 +40,7 @@ $helper->loadLanguage('common');
 //$downloadHandler     = new Adslight\DownloadHandler($xoopsDB);
 
 if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
-    define($moduleDirNameUpper . '_DIRNAME', basename(dirname(__DIR__)));
+    define($moduleDirNameUpper . '_' . 'DIRNAME', basename(dirname(__DIR__)));
     define($moduleDirNameUpper . '_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/');
     define($moduleDirNameUpper . '_PATH', XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/');
     define($moduleDirNameUpper . '_URL', XOOPS_URL . '/modules/' . $moduleDirName . '/');
@@ -85,7 +82,7 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)
     $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }
 
-$GLOBALS['xoopsTpl']->assign('mod_url', XOOPS_URL . '/modules/' . $moduleDirName);
+$GLOBALS['xoopsTpl']->assign('mod_url', $helper->url());
 // Local icons path
 if (is_object($helper->getModule())) {
     $pathModIcon16 = $helper->getModule()->getInfo('modicons16');
@@ -94,3 +91,11 @@ if (is_object($helper->getModule())) {
     $GLOBALS['xoopsTpl']->assign('pathModIcon16', XOOPS_URL . '/modules/' . $moduleDirName . '/' . $pathModIcon16);
     $GLOBALS['xoopsTpl']->assign('pathModIcon32', $pathModIcon32);
 }
+
+xoops_loadLanguage('main', $moduleDirName);
+if (class_exists('D3LanguageManager')) {
+    require_once XOOPS_TRUST_PATH . '/libs/altsys/class/D3LanguageManager.class.php';
+    $langman = D3LanguageManager::getInstance();
+    $langman->read('main.php', $moduleDirName);
+}
+

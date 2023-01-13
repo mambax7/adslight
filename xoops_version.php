@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -13,14 +11,13 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
  * @author       jlm69 (www.jlmzone.com)
  * @author       mamba (www.xoops.org)
  */
-
 require_once __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName      = \basename(__DIR__);
@@ -47,7 +44,7 @@ if (file_exists(XOOPS_ROOT_PATH . '/modules/adslight/sql/' . $xoopsConfig['langu
     $adslight_sql = 'sql/english/mysql.sql';
 }
 
-$modversion['version']             = '2.4';
+$modversion['version']             = '2.4.0';
 $modversion['module_status']       = 'Beta 1 NOT RELEASED';
 $modversion['release_date']        = '2021/10/21';
 $modversion['name']                = _MI_ADSLIGHT_NAME;
@@ -74,7 +71,7 @@ $modversion['onInstall']        = 'include/oninstall.php';
 $modversion['onUpdate']         = 'include/onupdate.php';
 
 $modversion['release']           = '12-08-2021';
-$modversion['support_site_url']  = 'http://#';
+$modversion['support_site_url']  = 'https://#';
 $modversion['support_site_name'] = 'AdsLight';
 
 // Tables crée depuis le fichier sql
@@ -124,10 +121,8 @@ $modversion['templates'] = [
 
     ['file' => 'admin/adslight_admin_testtablesorter.tpl', 'description' => ''],
 
-
     ['file' => 'adslight_listing.tpl', 'description' => ''],
     ['file' => 'adslight_listing_list0.tpl', 'description' => ''],
-
 ];
 
 // ------------------- Blocks ------------------- //

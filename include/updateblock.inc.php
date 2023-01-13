@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,21 +12,20 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
  * @author       jlm69 (www.jlmzone.com)
  * @author       mamba (www.xoops.org)
  */
-
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 // Keep Block option values when update (by nobunobu)
 global $xoopsDB;
 $query  = 'SELECT SQL_CACHE mid FROM ' . $xoopsDB->prefix('modules') . " WHERE dirname='" . $modversion['dirname'] . "' ";
 $result = $xoopsDB->query($query);
-if ($result instanceof \mysqli_result) {
+if ($xoopsDB->isResultSet($result)) {
     $record = $xoopsDB->fetchArray($result);
 }
 if ($record) {

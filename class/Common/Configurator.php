@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Common;
 
@@ -17,7 +15,7 @@ namespace XoopsModules\Adslight\Common;
  * Configurator Class
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author      XOOPS Development Team
  */
 
@@ -47,8 +45,8 @@ class Configurator
     {
         $config = require \dirname(__DIR__, 2) . '/config/config.php';
 
-        $this->name            = $config->name;
-//        $this->paths           = $config->paths;
+        $this->name = $config->name;
+        //        $this->paths           = $config->paths;
         $this->uploadFolders   = $config->uploadFolders;
         $this->copyBlankFiles  = $config->copyBlankFiles;
         $this->copyTestFolders = $config->copyTestFolders;

@@ -1,12 +1,10 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -18,13 +16,13 @@ declare(strict_types=1);
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
+
 /** @var Admin $adminObject */
 /** @var Helper $helper */
-
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 //It recovered the value of argument op in URL$
@@ -36,7 +34,7 @@ $sort  = Request::getString('sort', '');
 //$xoTheme->addStylesheet($helper->url( 'assets/css/tablesorter/theme.blue.min.css'));
 
 $moduleDirName = \basename(\dirname(__DIR__));
-$GLOBALS['xoopsTpl']->assign('mod_url', XOOPS_URL . '/modules/' . $moduleDirName);
+$GLOBALS['xoopsTpl']->assign('mod_url', $helper->url());
 $xoTheme->addStylesheet($helper->url('assets/js/tablesorter/css/theme.blue.css'));
 
 $adminObject->displayNavigation(basename(__FILE__));
@@ -53,7 +51,6 @@ switch ($op) {
         $form            = $conditionObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('condition.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -73,7 +70,6 @@ switch ($op) {
         $form = $conditionObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_ADSLIGHT_ADD_CONDITION, 'condition.php?op=new', 'add');
         $adminObject->addItemButton(AM_ADSLIGHT_CONDITION_LIST, 'condition.php', 'list');
@@ -82,7 +78,6 @@ switch ($op) {
         $form            = $conditionObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $conditionObject = $conditionHandler->get(Request::getString('id_condition', ''));
         if (1 == Request::getInt('ok', 0)) {
@@ -95,12 +90,10 @@ switch ($op) {
                 echo $conditionObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'id_condition' => Request::getString('id_condition', ''), 'op' => 'delete',], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_ADSLIGHT_FORMSUREDEL, $conditionObject->getVar('nom_condition')));
+            xoops_confirm(['ok' => 1, 'id_condition' => Request::getString('id_condition', ''), 'op' => 'delete'], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_ADSLIGHT_FORMSUREDEL, $conditionObject->getVar('nom_condition')));
         }
         break;
-
     case 'clone':
-
         $id_field = Request::getString('id_condition', '');
 
         if ($utility::cloneRecord('adslight_condition', 'id_condition', $id_field)) {
@@ -137,7 +130,11 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new \XoopsPageNav(
-                $conditionTempRows, $conditionPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $conditionTempRows,
+                $conditionPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null !== $pagenav ? $pagenav->renderNav() : '');
         }
@@ -181,7 +178,11 @@ switch ($op) {
             if ($conditionCount > $conditionPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new \XoopsPageNav(
-                    $conditionCount, $conditionPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $conditionCount,
+                    $conditionPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

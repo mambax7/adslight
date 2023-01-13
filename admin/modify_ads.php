@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -30,7 +28,6 @@ use XoopsModules\Adslight\{
 };
 /** @var Admin $adminObject */
 /** @var Helper $helper */
-
 require_once __DIR__ . '/admin_header.php';
 $op = Request::getString('op', 'list');
 /**
@@ -421,7 +418,6 @@ foreach ($_POST as $k => $v) {
     ${$k} = $v;
 }
 
-
 $cid           = Request::getInt('cid', 0, 'POST');
 $contactby     = Request::getInt('contactby', 0, 'POST');
 $country       = Request::getString('country', '', 'POST');
@@ -444,7 +440,6 @@ $typecondition = Request::getInt('typecondition', 0, 'POST');
 $typeprice     = Request::getInt('typeprice', 0, 'POST');
 $valid         = Request::getString('valid', '', 'POST');
 
-
 $pa  = Request::getString('pa', '', 'GET');
 $lid = Request::getInt('lid', 0);
 $op  = Request::getString('op', '');
@@ -456,7 +451,7 @@ switch ($op) {
         listingDel($lid, $photo);
         break;
     case 'modifyAd':
-       modifyAd($lid);
+        modifyAd($lid);
         break;
     case 'modifyAds':
         modifyAds(

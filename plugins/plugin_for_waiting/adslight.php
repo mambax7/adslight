@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 function b_waiting_adslight(): array
 {
@@ -13,5 +11,6 @@ function b_waiting_adslight(): array
         [$block['pendingnum']] = $xoopsDB->fetchRow($result);
         $block['lang_linkname'] = _ADSLIGHT_PI_WAITING_WAITINGS;
     }
+
     return $block;
 }

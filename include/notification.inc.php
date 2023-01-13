@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -13,12 +11,14 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
  * @author       jlm69 (www.jlmzone.com)
  * @author       mamba (www.xoops.org)
+ * @param mixed $category
+ * @param mixed $item_id
  */
 
 /**
@@ -49,7 +49,7 @@ function adslight_notify_iteminfo(
         $sql = 'SELECT SQL_CACHE title  FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid ={$item_id} LIMIT 1";
 
         $result = $xoopsDB->query($sql);
-        if ($result instanceof \mysqli_result) {
+        if ($xoopsDB->isResultSet($result)) {
             $result_array = $xoopsDB->fetchArray($result);
             $item['name'] = $result_array['title'];
             $item['url']  = XOOPS_URL . '/modules/adslight/index.php?pa=adsview&amp;cid=' . $item_id;
@@ -59,7 +59,7 @@ function adslight_notify_iteminfo(
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         /** @var \XoopsModule $myModule */
-        $myModule      = $moduleHandler->getByDirname('adslight');
+        $myModule = $moduleHandler->getByDirname('adslight');
         $myModule->setErrors('Could not query the database.');
     }
 

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -16,8 +14,8 @@ namespace XoopsModules\Adslight;
 
 /**
  * @copyright   {@link https://xoops.org/ XOOPS Project}
- * @license     {@link http://www.fsf.org/copyleft/gpl.html GNU public license}
- * @author      Hervé Thouzard (http://www.herve-thouzard.com/)
+ * @license     {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2.0 or later}
+ * @author      Hervé Thouzard (https://www.herve-thouzard.com/)
  */
 
 /**
@@ -25,7 +23,7 @@ namespace XoopsModules\Adslight;
  */
 class Currency
 {
-    protected $decimalsCount =0;
+    protected $decimalsCount = 0;
     protected $thousandsSep;
     protected $decimalSep;
     protected $moneyFull;

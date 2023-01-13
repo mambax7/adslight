@@ -1,12 +1,10 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -18,13 +16,13 @@ declare(strict_types=1);
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
+
 /** @var Admin $adminObject */
 /** @var Helper $helper */
-
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
@@ -51,7 +49,6 @@ switch ($op) {
         $form        = $iplogObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('iplog.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -78,7 +75,6 @@ switch ($op) {
         $form = $iplogObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_ADSLIGHT_ADD_IPLOG, 'iplog.php?op=new', 'add');
         $adminObject->addItemButton(AM_ADSLIGHT_IPLOG_LIST, 'iplog.php', 'list');
@@ -87,7 +83,6 @@ switch ($op) {
         $form        = $iplogObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $iplogObject = $iplogHandler->get(Request::getString('ip_id', ''));
         if (1 == Request::getInt('ok', 0)) {
@@ -100,12 +95,10 @@ switch ($op) {
                 echo $iplogObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'ip_id' => Request::getString('ip_id', ''), 'op' => 'delete',], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_ADSLIGHT_FORMSUREDEL, $iplogObject->getVar('ip_id')));
+            xoops_confirm(['ok' => 1, 'ip_id' => Request::getString('ip_id', ''), 'op' => 'delete'], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_ADSLIGHT_FORMSUREDEL, $iplogObject->getVar('ip_id')));
         }
         break;
-
     case 'clone':
-
         $id_field = Request::getString('ip_id', '');
 
         if ($utility::cloneRecord('adslight_iplog', 'ip_id', $id_field)) {
@@ -142,7 +135,11 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new \XoopsPageNav(
-                $iplogTempRows, $iplogPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $iplogTempRows,
+                $iplogPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null !== $pagenav ? $pagenav->renderNav() : '');
         }
@@ -198,7 +195,11 @@ switch ($op) {
             if ($iplogCount > $iplogPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new \XoopsPageNav(
-                    $iplogCount, $iplogPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $iplogCount,
+                    $iplogPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

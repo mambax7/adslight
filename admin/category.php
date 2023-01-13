@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -30,7 +28,6 @@ use XoopsModules\Adslight\{
 };
 
 /** @var Helper $helper */
-
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
@@ -136,7 +133,7 @@ function adsModCat($cid): void
     [$cat_id, $pid, $title, $cat_desc, $cat_keywords, $imgs, $cat_order, $affprice, $cat_moderate, $moderate_subcat] = $xoopsDB->fetchRow($result);
 
     $title    = \htmlspecialchars($title, ENT_QUOTES | ENT_HTML5);
-    $cat_desc = $myts->addSlashes($cat_desc);
+    $cat_desc = $GLOBALS['xoopsDB']->escape($cat_desc);
     echo '<form action="category.php" method="post" name="imcat">';
     echo $GLOBALS['xoopsSecurity']->getTokenHTML();
     echo '<table class="outer" border="0"><tr>

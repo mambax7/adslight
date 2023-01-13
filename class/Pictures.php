@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -16,7 +14,7 @@ namespace XoopsModules\Adslight;
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -43,6 +41,13 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Pictures extends \XoopsObject
 {
+    private $cod_img;
+    private $title;
+    private $date_created;
+    private $date_updated;
+    private $lid;
+    private $uid_owner;
+    private $url;
     /**
      * @var \XoopsMySQLDatabase
      */
@@ -59,7 +64,7 @@ class Pictures extends \XoopsObject
         $lid = null
     ) {
         $this->helper = Helper::getInstance();
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db     = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('cod_img', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('title', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
@@ -148,6 +153,7 @@ class Pictures extends \XoopsObject
     public function getForm(): Form\PicturesForm
     {
         $form = new Form\PicturesForm($this);
+
         return $form;
     }
 }

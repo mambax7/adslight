@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -20,7 +18,7 @@ namespace XoopsModules\Adslight;
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Module\Helper\Permission;
@@ -35,8 +33,18 @@ use XoopsModules\Adslight\{
  */
 class Categories extends \XoopsObject
 {
-    public $helper;
-    public $permHelper;
+    private $cid;
+    private $pid;
+    private $title;
+    private $cat_desc;
+    private $cat_keywords;
+    private $img;
+    private $cat_order;
+    private $affprice;
+    private $cat_moderate;
+    private $moderate_subcat;
+    public  $helper;
+    public  $permHelper;
 
     /**
      * Constructor
@@ -46,7 +54,7 @@ class Categories extends \XoopsObject
     public function __construct()
     {
         parent::__construct();
-        //        /** @var  Adslight\Helper $helper */
+        // /** @var Adslight\Helper $helper */
         //        $this->helper = Adslight\Helper::getInstance();
         $this->permHelper = new Permission();
 
@@ -71,6 +79,7 @@ class Categories extends \XoopsObject
     public function getForm(): Form\CategoriesForm
     {
         $form = new Form\CategoriesForm($this);
+
         return $form;
     }
 

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -52,7 +50,7 @@ function index(): void
 
     /*
     /// Test Release ///
-    $resultat_site = "http://www.i-luc.fr/release/release.html";
+    $resultat_site = "https://www.i-luc.fr/release/release.html";
     $page1 = implode("", file("$resultat_site"));
     if (preg_match("1.07",$page1)) { echo "<table class='outer' border=0 cellspacing=5 cellpadding=0><tr><td width=40>";
       echo "<img src='../assets/images/admin/info_button_32.png' border=0 alt=\"._AM_ADSLIGHT_RELEASEOK.\" ></td><td>";
@@ -64,7 +62,7 @@ function index(): void
       echo "<table class='outer' border=0 cellspacing=5 cellpadding=0><tr><td width=40>";
       echo "<img src='../assets/images/admin/error_button_32.png' border=0 alt=\"._AM_ADSLIGHT_RELEASEDOWNLOAD.\" ></td><td>";
       echo "<span style='color: #FE0101'><b>"._AM_ADSLIGHT_RELEASEISNOTOK."</b></span><br>";
-      echo "<a href='http://www.i-luc.fr/adslight/modules/TDMDownloads/visit.php?cid=1&lid=3'>"._AM_ADSLIGHT_RELEASEDOWNLOAD." > AdsLight 1.08</a></td></tr></table><br>";
+      echo "<a href='https://www.i-luc.fr/adslight/modules/TDMDownloads/visit.php?cid=1&lid=3'>"._AM_ADSLIGHT_RELEASEDOWNLOAD." > AdsLight 1.08</a></td></tr></table><br>";
 
       }
       */
@@ -111,9 +109,9 @@ function index(): void
 
                  <tr class="odd">
                  <td>
-                 <strong>Plugin Waiting Module :</strong> <a href="http://sourceforge.net/projects/adslight/files/Plugins%20AdsLight/Plugin%20Waiting%20Module/">Download</a><br><br>
-                 <strong>Plugin Sitemap Module :</strong> <a href="http://sourceforge.net/projects/adslight/files/Plugins%20AdsLight/Plugin%20Sitemap%20Module/">Download</a><br><br>
-                <strong>Plugin Waiting Rssfit :</strong> <a href="http://sourceforge.net/projects/adslight/files/Plugins%20AdsLight/Plugin%20Waiting%20Rssfit/">Download</a><br><br>
+                 <strong>Plugin Waiting Module :</strong> <a href="https://sourceforge.net/projects/adslight/files/Plugins%20AdsLight/Plugin%20Waiting%20Module/">Download</a><br><br>
+                 <strong>Plugin Sitemap Module :</strong> <a href="https://sourceforge.net/projects/adslight/files/Plugins%20AdsLight/Plugin%20Sitemap%20Module/">Download</a><br><br>
+                <strong>Plugin Waiting Rssfit :</strong> <a href="https://sourceforge.net/projects/adslight/files/Plugins%20AdsLight/Plugin%20Waiting%20Rssfit/">Download</a><br><br>
                 <strong>Plugin Xpayment :</strong> <a href="https://sourceforge.net/projects/adslight/files/Plugins%20AdsLight/Plugin%20xpayment%20Module/">Download</a><br><br>
                  </td>
                   </tr>
@@ -161,7 +159,7 @@ function index(): void
         echo '<table width="50%" border="0" class="outer">
                 <tr><th align="left">'._AM_ADSLIGHT_MENURSS_TITLE.'</th></tr>';
 
-                  $url = "http://www.i-luc.fr/adslight/backend.php";
+                  $url = "https://www.i-luc.fr/adslight/backend.php";
         echo rssDisplay($url, 3, false, true);
 
 
@@ -242,11 +240,11 @@ function index(): void
                 <th align="left">' . _AM_ADSLIGHT_DOWNLOADS_TITLE . '</th></tr>
 
                   <tr class="odd"><td><img src="../assets/images/admin/brick.png" border=0 >
-                  <a href="http://sourceforge.net/projects/adslight/files/Plugins%20AdsLight/">' . _AM_ADSLIGHT_DOWNLOADS_PLUGINS . '</a>
+                  <a href="https://sourceforge.net/projects/adslight/files/Plugins%20AdsLight/">' . _AM_ADSLIGHT_DOWNLOADS_PLUGINS . '</a>
                   </td></tr>
 
                   <!-- <tr class="even"><td><img src="../assets/images/admin/world.png" border=0 >
-                  <a href="http://www.i-luc.fr/adslight/modules/TDMDownloads/index.php">' . _AM_ADSLIGHT_DOWNLOADS_MAPS . '</a>
+                  <a href="https://www.i-luc.fr/adslight/modules/TDMDownloads/index.php">' . _AM_ADSLIGHT_DOWNLOADS_MAPS . '</a>
                   </td></tr> -->
 
                   </table><br>';

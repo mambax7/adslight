@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -31,16 +29,15 @@ use XoopsModules\Adslight\{
 
 
 /** @var Helper $helper */
-
 require_once __DIR__ . '/header.php';
 
 global $xoopsModule, $xoopsDB, $xoopsConfig, $xoopsUser;
 
 $helper = Helper::getInstance();
-$myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts   = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 $moduleId = $xoopsModule->getVar('mid');
-$groups    = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
+$groups   = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
 /** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $perm_itemid      = Request::getInt('item_id', 0, 'POST');
@@ -67,7 +64,7 @@ if (Request::hasVar('submit', 'POST')) {
     $howlong = $helper->getConfig('adslight_howlong');
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
-//mb TODO        redirect_header(XOOPS_URL . '/', 3, $GLOBALS['xoopsSecurity']->getErrors());
+        //mb TODO        redirect_header(XOOPS_URL . '/', 3, $GLOBALS['xoopsSecurity']->getErrors());
     }
 
     if ('' === Request::getString('title', '', 'POST')) {
@@ -159,10 +156,10 @@ if (Request::hasVar('submit', 'POST')) {
         $sql                     = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
         $result2                 = $xoopsDB->query($sql);
         if ($result2 instanceof \mysqli_result) {
-            $row = $xoopsDB->fetchArray($result2);
-            $tags['CATEGORY_TITLE']  = $row['title'];
+            $row                    = $xoopsDB->fetchArray($result2);
+            $tags['CATEGORY_TITLE'] = $row['title'];
         }
-        $tags['CATEGORY_URL']    = XOOPS_URL . "/modules/adslight/viewcats.php?cid={$cid}";
+        $tags['CATEGORY_URL'] = XOOPS_URL . "/modules/adslight/viewcats.php?cid={$cid}";
         /** @var \XoopsNotificationHandler $notificationHandler */
         $notificationHandler = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('global', 0, 'new_listing', $tags);
@@ -185,10 +182,10 @@ if (Request::hasVar('submit', 'POST')) {
         $tags['ADMIN_LINK']    = XOOPS_URL . '/modules/adslight/admin/validate_ads.php';
         $tags['NEWAD']         = _ADSLIGHT_NEWAD;
 
-        $sql                    = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
-        $result2                = $xoopsDB->query($sql);
+        $sql     = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
+        $result2 = $xoopsDB->query($sql);
         if ($result2 instanceof \mysqli_result) {
-            $row = $xoopsDB->fetchArray($result2);
+            $row                    = $xoopsDB->fetchArray($result2);
             $tags['CATEGORY_TITLE'] = $row['title'];
         }
 
@@ -283,7 +280,7 @@ if (Request::hasVar('submit', 'POST')) {
             $helper->redirect('index.php', 3, _NOPERM);
         }
 
-        $sql = 'SELECT title, cat_moderate FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
+        $sql      = 'SELECT title, cat_moderate FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
         $category = $xoopsDB->query($sql);
 
         [$cat_title, $cat_moderate] = $xoopsDB->fetchRow($category);

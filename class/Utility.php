@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -16,7 +14,7 @@ namespace XoopsModules\Adslight;
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -358,7 +356,7 @@ class Utility extends Common\SysUtility
             case 'priceD':
                 $orderby = 'price DESC';
                 break;
-            case'dateD':
+            case 'dateD':
             default:
                 $orderby = 'date_created DESC';
                 break;
@@ -637,6 +635,7 @@ class Utility extends Common\SysUtility
             }
             $format = \str_replace($fmatch[0], $value, $format);
         }
+
         return $format;
     }
 
@@ -648,7 +647,7 @@ class Utility extends Common\SysUtility
      * @param array  $groups group with granted permission
      * @param        $categoryId
      * @param        $permName
-     * @return bool TRUE if the no errors occured
+     * @return bool TRUE if the no errors occurred
      */
     public static function saveCategoryPermissions($groups, $categoryId, $permName): bool
     {
@@ -681,7 +680,7 @@ class Utility extends Common\SysUtility
     {
         global $xoTheme;
         $helper = Helper::getInstance();
-        $fld = XOOPS_URL . '/modules/adslight/' . 'assets/';
+        $fld    = XOOPS_URL . '/modules/adslight/' . 'assets/';
 
         if (1 === $helper->getConfig('adslight_lightbox')) {
             // $xoTheme->addScript(XOOPS_URL . '/browse.php?Frameworks/jquery/plugins/jquery.lightbox.js');
@@ -753,6 +752,7 @@ class Utility extends Common\SysUtility
     {
         $localeCode ?? \locale_get_default();
         $fmt = new \NumberFormatter($localeCode, \NumberFormatter::CURRENCY);
+
         return $fmt->formatCurrency($number, $currency);
     }
 
@@ -770,12 +770,13 @@ class Utility extends Common\SysUtility
         $currentDefault  = \locale_get_default();
         $fmt             = new \NumberFormatter($currentDefault, \NumberFormatter::DECIMAL);
         $formattedNumber = $fmt->format((float)$number);
+
         return 1 === $currencyPosition ? $currencySymbol . $formattedNumber : $formattedNumber . ' ' . $currencySymbol;
     }
 
     /**
      * @param Categories $categoryObj
-     * @param int        $level
+     * @param int $level
      */
     public static function displayCategory(Categories $categoryObj, $level = 0): void
     {

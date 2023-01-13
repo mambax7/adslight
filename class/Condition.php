@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Adslight;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -20,7 +18,7 @@ namespace XoopsModules\Adslight;
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Adslight\{
@@ -35,8 +33,10 @@ use XoopsModules\Adslight\{
  */
 class Condition extends \XoopsObject
 {
-        public $helper;
-    public $permHelper;
+    private $id_condition;
+    private $nom_condition;
+    public  $helper;
+    public  $permHelper;
 
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Condition extends \XoopsObject
     public function __construct()
     {
         parent::__construct();
-        //        /** @var  Adslight\Helper $helper */
+        // /** @var Adslight\Helper $helper */
         //        $this->helper = Adslight\Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
 
@@ -63,6 +63,7 @@ class Condition extends \XoopsObject
     public function getForm(): Form\ConditionForm
     {
         $form = new Form\ConditionForm($this);
+
         return $form;
     }
 
@@ -93,4 +94,3 @@ class Condition extends \XoopsObject
         return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('id_condition'));
     }
 }
-

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Common;
 
@@ -22,7 +20,7 @@ use Xmf\Database\Tables;
  * @category  Migrate
  * @author    Richard Griffith <richard@geekwright.com>
  * @copyright 2016 XOOPS Project (https://xoops.org)
- * @license   GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license   GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @link      https://xoops.org
  */
 class Migrate extends \Xmf\Database\Migrate
@@ -33,8 +31,8 @@ class Migrate extends \Xmf\Database\Migrate
 
     /**
      * Migrate constructor.
-     * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function __construct()
     {
@@ -49,8 +47,6 @@ class Migrate extends \Xmf\Database\Migrate
         $this->moduleDirName = \basename(\dirname(__DIR__, 2));
         parent::__construct($this->moduleDirName);
     }
-
-
 
     /**
      * rename table if needed
@@ -74,9 +70,9 @@ class Migrate extends \Xmf\Database\Migrate
             $tableName   = $table['tablename'];
             $tableExists = $tables->useTable($tableName);
             if ($tableExists) {
-                $oldName      = $table['from'];
-                $newName      = $table['to'];
-                $tableDetails = $tables->dumpTables();
+                $oldName = $table['from'];
+                $newName = $table['to'];
+                //                $tableDetails = $tables->dumpTables();
 
                 $attributes = $tables->getColumnAttributes($tableName, $oldName);
                 //                if (false !== \strpos($attributes, ' int(')) {
@@ -87,7 +83,6 @@ class Migrate extends \Xmf\Database\Migrate
                     //
                     //                    $tables->dropIndex($name, $table)
                     //                    $tables->addIndex($name, $table, $column, $unique = false)
-
                 }
             }
         }

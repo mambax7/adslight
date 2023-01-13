@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /**
  * You may not change or alter any portion of this comment or credits
@@ -10,7 +8,7 @@ declare(strict_types=1);
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)/
  * @license         GNU GPL 2 (https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * 2.5.9
  * @author          Michael Beck (aka Mamba)
@@ -19,16 +17,13 @@ declare(strict_types=1);
 use Xmf\Database\TableLoad;
 use Xmf\Request;
 use Xmf\Yaml;
-use XoopsModules\Adslight\{
-    Helper,
-    Common\Configurator,
-    Utility
-};
+use XoopsModules\Adslight\Common\Configurator;
+use XoopsModules\Adslight\Helper;
+use XoopsModules\Adslight\Utility;
 
 /** @var Helper $helper */
 /** @var Utility $utility */
 /** @var Configurator $configurator */
-
 require_once \dirname(__DIR__, 3) . '/include/cp_header.php';
 require \dirname(__DIR__) . '/preloads/autoloader.php';
 
@@ -50,7 +45,7 @@ switch ($op) {
             loadSampleData();
         } else {
             xoops_cp_header();
-            xoops_confirm(['ok' => 1, 'op' => 'load'], 'index.php', \sprintf(\constant('CO_' . $moduleDirNameUpper . '_' . 'LOAD_SAMPLEDATA_CONFIRM')), \constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM'), true);
+            xoops_confirm(['ok' => 1, 'op' => 'load'], 'index.php', \constant('CO_' . $moduleDirNameUpper . '_' . 'LOAD_SAMPLEDATA_CONFIRM'), \constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM'), true);
             xoops_cp_footer();
         }
         break;
@@ -58,7 +53,16 @@ switch ($op) {
         saveSampleData();
         break;
     case 'clear':
-        clearSampleData();
+        if (Request::hasVar('ok', 'REQUEST') && 1 === Request::getInt('ok', 0)) {
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                redirect_header($helper->url('admin/index.php'), 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
+            clearSampleData();
+        } else {
+            xoops_cp_header();
+            xoops_confirm(['ok' => 1, 'op' => 'clear'], 'index.php', sprintf(constant('CO_' . $moduleDirNameUpper . '_' . 'CLEAR_SAMPLEDATA')), constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM'), true);
+            xoops_cp_footer();
+        }
         break;
 }
 
@@ -154,7 +158,7 @@ function exportSchema(): void
 /**
  * loadTableFromArrayWithReplace
  *
- * @param string $table  value with should be used insead of original value of $search
+ * @param string $table  value which should be used instead of original value of $search
  *
  * @param array  $data   array of rows to insert
  *                       Each element of the outer array represents a single table row.
@@ -204,6 +208,7 @@ function loadTableFromArrayWithReplace($table, $data, $search, $replace): int
             }
         }
     }
+
     return $count;
 }
 

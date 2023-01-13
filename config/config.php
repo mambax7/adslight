@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyrightXOOPS Project (https://xoops.org)
- * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author         XOOPS Development Team
  */
 
@@ -23,6 +21,7 @@ use Xmf\Module\Admin;
 $moduleDirName      = \basename(\dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 xoops_loadLanguage('common', $moduleDirName);
+
 return (object)[
     'name'            => $moduleDirNameUpper . ' Module Configurator',
     'paths'           => [

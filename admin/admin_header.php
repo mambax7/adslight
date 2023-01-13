@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  */
 
@@ -23,7 +21,6 @@ use XoopsModules\Adslight\Helper;
 
 /** @var Admin $adminObject */
 /** @var Helper $helper */
-
 require \dirname(__DIR__) . '/preloads/autoloader.php';
 require \dirname(__DIR__, 3) . '/include/cp_header.php';
 require \dirname(__DIR__, 3) . '/class/xoopsformloader.php';
@@ -38,13 +35,13 @@ $helper = Helper::getInstance();
 global $xoTheme;
 
 if (!isset($xoTheme)) {
-    include_once $GLOBALS['xoops']->path('/class/theme.php');
+    require_once $GLOBALS['xoops']->path('/class/theme.php');
     $GLOBALS['xoTheme'] = new \xos_opal_Theme();
     $xoTheme            = $GLOBALS['xoTheme'];
 }
 
 $moduleDirName = \basename(\dirname(__DIR__));
-$GLOBALS['xoopsTpl']->assign('mod_url', XOOPS_URL . '/modules/' . $moduleDirName);
+$GLOBALS['xoopsTpl']->assign('mod_url', $helper->url());
 //$xoTheme->addStylesheet('browse.php?Frameworks/jquery/plugins/css/tablesorter/theme.blue.min.css');
 //$xoTheme->addStylesheet($helper->url( 'assets/js/tablesorter/css/theme.blue.css'));
 $xoTheme->addStylesheet($helper->url('assets/js/tablesorter/css/jquery.tablesorter.pager.min.css'));
@@ -91,10 +88,4 @@ $picturesHandler = $helper->getHandler('Pictures');
 /** @var \XoopsPersistableObjectHandler $repliesHandler */
 $repliesHandler = $helper->getHandler('Replies');
 
-
 //$xoTheme->addStylesheet($helper->url( 'assets/css/tablesorter/theme.blue.css'));
-
-
-
-
-

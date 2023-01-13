@@ -1,13 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
 -------------------------------------------------------------------------
                      ADSLIGHT 2: Module for Xoops
 
         Redesigned and ameliorate By iluc user at www.frxoops.org
         Started with the Classifieds module and made MANY changes
-        Website: http://www.limonads.com
+        Website: https://www.limonads.com
         Contact: adslight.translate@gmail.com
 -------------------------------------------------------------------------
              Original credits below Version History
@@ -334,7 +332,7 @@ define('_ADSLIGHT_CANCEL', 'Cancel');
 //Added for 1.2 RC1
 define('_ADSLIGHT_ADDED_TO_CAT', 'A new listing has been added to the category ');
 define('_ADSLIGHT_RECIEVING_NOTIF', 'You have subscribed to receive notifications of this sort.');
-define('_ADSLIGHT_ERROR_NOTIF', 'If this is an error or you wish not to receive further such notifications, please update your subscriptions by visiting the link below:');
+define('_ADSLIGHT_ERROR_NOTIF', 'If this is an error, or if you wish not to receive further such notifications, please update your subscriptions by visiting the link below:');
 define('_ADSLIGHT_FOLLOW_LINK', 'Here is a link to the new listing');
 define('_ADSLIGHT_YOU_CAN_VIEW_BELOW', 'You can view the full ad at the link below');
 define('_ADSLIGHT_LISTING_NUMBER', 'Listing Number:');

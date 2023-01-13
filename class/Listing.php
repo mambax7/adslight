@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -20,10 +18,9 @@ use Xmf\Module\Helper\Permission;
  * Module: Adslight
  *
  * @category        Module
- * @package         adslight
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @link            https://xoops.org/
  * @since           1.0.0
  */
@@ -35,8 +32,36 @@ use Xmf\Module\Helper\Permission;
  */
 class Listing extends \XoopsObject
 {
-    public $helper;
-    public $permHelper;
+    private $lid;
+    private $cid;
+    private $title;
+    private $status;
+    private $expire;
+    private $type;
+    private $desctext;
+    private $tel;
+    private $price;
+    private $typeprice;
+    private $typecondition;
+    private $date_created;
+    private $email;
+    private $submitter;
+    private $usid;
+    private $town;
+    private $country;
+    private $contactby;
+    private $premium;
+    private $valid;
+    private $photo;
+    private $hits;
+    private $item_rating;
+    private $item_votes;
+    private $user_rating;
+    private $user_votes;
+    private $comments;
+    private $remind;
+    public  $helper;
+    public  $permHelper;
 
     /**
      * Constructor

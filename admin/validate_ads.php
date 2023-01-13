@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -30,7 +28,6 @@ use XoopsModules\Adslight\{
 };
 /** @var Admin $adminObject */
 /** @var Helper $helper */
-
 require_once __DIR__ . '/admin_header.php';
 $op = Request::getString('op', 'list');
 global $moduleDirName;
@@ -739,7 +736,7 @@ function listingValid(
         $tags['APPROVED']   = _AM_ADSLIGHT_APPROVED;
         $subject            = '' . _AM_ADSLIGHT_ANNACCEPT . '';
         $mail               = getMailer();
-        $mail->setTemplateDir($helper->path( "/language/{$xoopsConfig['language']}/mail_template/"));
+        $mail->setTemplateDir($helper->path("/language/{$xoopsConfig['language']}/mail_template/"));
         $mail->setTemplate('listing_approve.tpl');
         $mail->useMail();
         $mail->multimailer->isHTML(true);

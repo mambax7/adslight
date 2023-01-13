@@ -1,13 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
 -------------------------------------------------------------------------
                      ADSLIGHT 2 : Module for Xoops
 
         Redesigned and ameliorate By iluc user at www.frxoops.org
         Started with the Classifieds module and made MANY changes
-        Website : http://www.limonads.com
+        Website : https://www.limonads.com
         Contact : adslight.translate@gmail.com
 -------------------------------------------------------------------------
              Original credits below Version History

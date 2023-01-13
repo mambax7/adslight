@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -12,9 +10,8 @@ declare(strict_types=1);
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package
+ * @copyright    XOOPS Project (https://xoops.org)/
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  */
 
@@ -29,7 +26,6 @@ use XoopsModules\Adslight\{
 /** @var Helper $helper */
 /** @var Utility $utility */
 /** @var Configurator $configurator */
-
 if ((!defined('XOOPS_ROOT_PATH'))
     || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -70,7 +66,7 @@ function xoops_module_pre_update_adslight(\XoopsModule $module): bool
 
 /**
  * Performs tasks required during update of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param XoopsModule     $module {@link XoopsModule}
  * @param null|string|int $previousVersion
  *
  * @return bool true if update successful, false if not
@@ -166,5 +162,6 @@ function xoops_module_update_adslight(\XoopsModule $module, $previousVersion = n
 
         return $grouppermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }
+
     return true;
 }

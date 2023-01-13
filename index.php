@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
 -------------------------------------------------------------------------
@@ -8,7 +6,7 @@ declare(strict_types=1);
 
         Redesigned and ameliorate By iluc user at www.frxoops.org
         Started with the Classifieds module and made MANY changes
-        Website : http://www.limonads.com
+        Website : https://www.limonads.com
         Contact : adslight.translate@gmail.com
 -------------------------------------------------------------------------
              Original credits below Version History
@@ -37,9 +35,9 @@ global $xoopsModule, $xoopsDB;
 
 require_once __DIR__ . '/header.php';
 
-$myts      = \MyTextSanitizer::getInstance();
+$myts     = \MyTextSanitizer::getInstance();
 $moduleId = $xoopsModule->getVar('mid');
-$groups    = $GLOBALS['xoopsUser'] instanceof \XoopsUser ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
+$groups   = $GLOBALS['xoopsUser'] instanceof \XoopsUser ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
 /** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 
@@ -339,7 +337,7 @@ function index(): void
 /**
  * @param $cid
  */
-function categorynewgraphic($cid)
+function categorynewgraphic($cid): void
 {
     global $xoopsDB;
 }

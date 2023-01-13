@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -44,10 +42,9 @@ global $xoopsModule, $xoopsDB, $xoopsConfig, $xoTheme;
 /**
  * Module classes
  */
-
 $lid = Request::getInt('lid', 0, 'GET');
 if (empty($lid)) {
-//mb TODO    $helper->redirect('index.php');
+    //mb TODO    $helper->redirect('index.php');
 }
 
 // Is a member looking ?
@@ -62,7 +59,6 @@ if ($GLOBALS['xoopsUser'] instanceof \XoopsUser) {
     /**
      * Is the user the owner of the album ?
      */
-
     $isOwner = $GLOBALS['xoopsUser']->getVar('uid') === $uid;
 
     $moduleId = $xoopsModule->getVar('mid');
@@ -168,7 +164,7 @@ while ([$title] = $xoopsDB->fetchRow($result)) {
 }
 
 $maxPicturesNumber = $helper->getConfig('adslight_not_premium');
-if ($permit){
+if ($permit) {
     $maxPicturesNumber = $helper->getConfig('adslight_nb_pict');
 }
 $GLOBALS['xoopsTpl']->assign('current_nb_pict', $pictures_number);
@@ -182,8 +178,6 @@ $GLOBALS['xoopsTpl']->assign('lang_upgrade_now', $upgrade);
 
 $GLOBALS['xoopsTpl']->assign('lang_max_nb_pict', sprintf(_ADSLIGHT_YOUCANHAVE, $helper->getConfig('adslight_nb_pict')));
 $GLOBALS['xoopsTpl']->assign('lang_nb_pict', sprintf(_ADSLIGHT_YOUHAVE, $pictures_number));
-
-
 
 $GLOBALS['xoopsTpl']->assign('lang_albumtitle', sprintf(_ADSLIGHT_ALBUMTITLE, '<a href=' . XOOPS_URL . '/userinfo.php?uid=' . addslashes((string)$uid) . '>' . $identifier . '</a>'));
 

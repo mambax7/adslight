@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Common;
 
@@ -17,8 +15,8 @@ namespace XoopsModules\Adslight\Common;
  * Feedback plugin for xoops modules
  *
  * @copyright      XOOPS Project  (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author         Michael Beck <mambax7@gmailc.com>
+ * @license        GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author         Michael Beck <mambax7@gmail.com>
  * @author         Wedega - Email:<webmaster@wedega.com>
  * @author         Fernando Santos (topet05) <fernando@mastop.com.br>
  */
@@ -75,22 +73,34 @@ class ModuleFeedback extends \XoopsObject
         $form = new \XoopsThemeForm(
             \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FB_FORM_TITLE'
-            ), 'formfeedback', 'feedback.php', 'post', true
+            ),
+            'formfeedback',
+            'feedback.php',
+            'post',
+            true
         );
         $form->setExtra('enctype="multipart/form-data"');
         $recipient = new \XoopsFormText(
             \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FB_RECIPIENT'
-            ), 'recipient', 50, 255, $GLOBALS['xoopsModule']->getInfo(
-            'author_mail'
-        )
+            ),
+            'recipient',
+            50,
+            255,
+            $GLOBALS['xoopsModule']->getInfo(
+                'author_mail'
+            )
         );
         $recipient->setExtra('disabled="disabled"');
         $form->addElement($recipient);
         $your_name = new \XoopsFormText(
             \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FB_NAME'
-            ), 'your_name', 50, 255, $this->name
+            ),
+            'your_name',
+            50,
+            255,
+            $this->name
         );
         $your_name->setExtra(
             'placeholder="' . \constant('CO_' . $moduleDirNameUpper . '_' . 'FB_NAME_PLACEHOLER') . '"'
@@ -99,7 +109,11 @@ class ModuleFeedback extends \XoopsObject
         $your_site = new \XoopsFormText(
             \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FB_SITE'
-            ), 'your_site', 50, 255, $this->site
+            ),
+            'your_site',
+            50,
+            255,
+            $this->site
         );
         $your_site->setExtra(
             'placeholder="' . \constant('CO_' . $moduleDirNameUpper . '_' . 'FB_SITE_PLACEHOLER') . '"'
@@ -108,7 +122,11 @@ class ModuleFeedback extends \XoopsObject
         $your_mail = new \XoopsFormText(
             \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FB_MAIL'
-            ), 'your_mail', 50, 255, $this->email
+            ),
+            'your_mail',
+            50,
+            255,
+            $this->email
         );
         $your_mail->setExtra(
             'placeholder="' . \constant('CO_' . $moduleDirNameUpper . '_' . 'FB_MAIL_PLACEHOLER') . '"'
@@ -117,7 +135,9 @@ class ModuleFeedback extends \XoopsObject
         $fbtypeSelect = new \XoopsFormSelect(
             \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE'
-            ), 'fb_type', $this->type
+            ),
+            'fb_type',
+            $this->type
         );
         $fbtypeSelect->addOption('', '');
         $fbtypeSelect->addOption(
@@ -158,11 +178,14 @@ class ModuleFeedback extends \XoopsObject
         $editor                  = new \XoopsFormEditor(
             \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_CONTENT'
-            ), 'fb_content', $editorConfigs
+            ),
+            'fb_content',
+            $editorConfigs
         );
         $form->addElement($editor, true);
         $form->addElement(new \XoopsFormHidden('op', 'send'));
         $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
+
         return $form;
     }
 }

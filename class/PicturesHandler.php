@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -16,7 +14,7 @@ namespace XoopsModules\Adslight;
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -52,11 +50,12 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class PicturesHandler extends \XoopsPersistableObjectHandler
 {
-    private const TABLE = 'adslight_pictures';
-    private const ENTITY = Pictures::class;
+    private const TABLE      = 'adslight_pictures';
+    private const ENTITY     = Pictures::class;
     private const ENTITYNAME = 'Pictures';
-    private const KEYNAME = 'cod_img';
+    private const KEYNAME    = 'cod_img';
     private const IDENTIFIER = 'title';
+
     /**
      * Class constructor
      * @param \XoopsDatabase|null $db
@@ -89,14 +88,14 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a light_pictures
      *
-     * @param int|null $id of the light_pictures
+     * @param int|null   $id of the light_pictures
      * @param array|null $fields
      * @return false|\XoopsModules\Adslight\Pictures reference to the {@link light_pictures} object, FALSE if failed
      */
     public function get($id = null, $fields = null)
     {
-//        $sql = 'SELECT * FROM ' . $this->db->prefix('adslight_pictures') . ' WHERE cod_img=' . $id . ' AND lid=' . $lid . ' ';
-        $sql = 'SELECT * FROM ' . $this->db->prefix('adslight_pictures') . ' WHERE cod_img=' . $id  . ' ';
+        //        $sql = 'SELECT * FROM ' . $this->db->prefix('adslight_pictures') . ' WHERE cod_img=' . $id . ' AND lid=' . $lid . ' ';
+        $sql = 'SELECT * FROM ' . $this->db->prefix('adslight_pictures') . ' WHERE cod_img=' . $id . ' ';
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -159,10 +158,10 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
             $cod_img = $this->db->getInsertId();
         }
         $object->assignVars([
-                                          'cod_img' => $cod_img,
-                                          'lid'     => $lid,
-                                          'url'     => $url,
-                                      ]);
+                                'cod_img' => $cod_img,
+                                'lid'     => $lid,
+                                'url'     => $url,
+                            ]);
 
         return true;
     }
@@ -197,6 +196,7 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
      *
      * @param \CriteriaCompo|\CriteriaElement|null $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
+     * @param mixed                                $as_object
      * @return array  array of {@link Pictures} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false, $as_object = true) //&getObjects(?\CriteriaElement $criteria = null, $id_as_key = false): array
@@ -204,8 +204,7 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('adslight_pictures');
-//        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
+        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -240,7 +239,7 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
     public function getCount(?\CriteriaElement $criteria = null): int
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('adslight_pictures');
-        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
+         if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -256,13 +255,15 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
      * delete Pictures matching a set of conditions
      *
      * @param \CriteriaCompo|\CriteriaElement|null $criteria {@link \CriteriaElement}
+     * @param mixed                                $force
+     * @param mixed                                $asObject
      * @return bool   FALSE if deletion failed
      */
-//    public function deleteAll(?\CriteriaElement $criteria = null): bool
+    //    public function deleteAll(?\CriteriaElement $criteria = null): bool
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('adslight_pictures');
-        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
+         if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -362,7 +363,7 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
      * Upload the file and Save into database
      *
      * @param string $title         A litle description of the file
-     * @param string $pathUpload   The path to where the file should be uploaded
+     * @param string $pathUpload    The path to where the file should be uploaded
      * @param int    $thumbwidth    the width in pixels that the thumbnail will have
      * @param int    $thumbheight   the height in pixels that the thumbnail will have
      * @param int    $pictwidth     the width in pixels that the pic will have
@@ -415,7 +416,7 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
             $picture->setVar('url', $url);
             $picture->setVar('title', $title);
             $uid = $GLOBALS['xoopsUser']->getVar('uid');
-//            $lid = $lid;
+            //            $lid = $lid;
             $picture->setVar('lid', $lid);
             $picture->setVar('uid_owner', $uid);
             $this->insert($picture);
@@ -438,7 +439,7 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
      * @param int    $thumbheight the height in pixels that the thumbnail will have
      * @param int    $pictwidth   the width in pixels that the pic will have
      * @param int    $pictheight  the height in pixels that the pic will have
-     * @param string $pathUpload The path to where the files should be saved after resizing
+     * @param string $pathUpload  The path to where the files should be saved after resizing
      */
     public function resizeImage(
         $img,

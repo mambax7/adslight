@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -13,7 +11,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -59,7 +57,7 @@ echo "<div style='padding: 8px;'>";
 //// France ///
 echo "<table width='100%' border='0' class='outer'><tr><td>";
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_CONTRYLANG . ':</label><img src="../assets/images/flags/fr.png" width="16" height="11" border="0"><b>  Fran&#231;ais</b><br>';
-echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="http://www.i-luc.fr/adslight/modules/newbb/index.php?cat=2" target="_blank" >Forum support Fran&#231;ais</a><br>';
+echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="https://www.i-luc.fr/adslight/modules/newbb/index.php?cat=2" target="_blank" >Forum support Fran&#231;ais</a><br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_DESC . ":</label>Forum d'entraide, Traduction, d&#233;veloppement et support Fran&#231;ais<br>";
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_TRANSLATE . ': </label><a href="mailto:adslight.translate@gmail.com?subject=Correction AdsLight"> Envoyer une correction</a><br>';
 echo '</tr></table><br>';
@@ -67,7 +65,7 @@ echo '</tr></table><br>';
 //// Espagne ///
 echo "<table width='100%' border='0' class='outer'><tr><td>";
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_CONTRYLANG . ':</label><img src="../assets/images/flags/es.png" width="16" height="11" border="0"><b>  Espa&#241;ol</b><br>';
-echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="http://www.i-luc.fr/adslight/modules/newbb/index.php?cat=33" target="_blank" >Foro de soporte en Espa&#241;ol</a><br>';
+echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="https://www.i-luc.fr/adslight/modules/newbb/index.php?cat=33" target="_blank" >Foro de soporte en Espa&#241;ol</a><br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_DESC . ':</label>Foro de soporte, la traducci&oacute;n, el desarrollo y soporte en Espa&#241;ol<br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_TRANSLATE . ': </label><a href="mailto:adslight.translate@gmail.com?subject=Correction AdsLight"> Enviar una correcci&#243;n</a><br>';
 echo '</tr></table><br>';
@@ -75,7 +73,7 @@ echo '</tr></table><br>';
 //// Anglais ///
 echo "<table width='100%' border='0' class='outer'><tr><td>";
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_CONTRYLANG . ':</label><img src="../assets/images/flags/uk.png" width="16" height="11" border="0"><b>  English</b><br>';
-echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="http://www.i-luc.fr/adslight/modules/newbb/index.php?cat=56" target="_blank" >English Support Forum</a><br>';
+echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="https://www.i-luc.fr/adslight/modules/newbb/index.php?cat=56" target="_blank" >English Support Forum</a><br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_DESC . ':</label>Support forum, translation, development and English support<br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_TRANSLATE . ': </label><a href="mailto:adslight.translate@gmail.com?subject=Correction AdsLight"> Send a correction</a><br>';
 echo '</tr></table><br>';
@@ -83,7 +81,7 @@ echo '</tr></table><br>';
 //// Allemand ///
 echo "<table width='100%' border='0' class='outer'><tr><td>";
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_CONTRYLANG . ':</label><img src="../assets/images/flags/de.png" width="16" height="11" border="0"><b>  Deutsch</b><br>';
-echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="http://www.i-luc.fr/adslight/modules/newbb/index.php?cat=64" target="_blank" >Deutsch Support Forum</a><br>';
+echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="https://www.i-luc.fr/adslight/modules/newbb/index.php?cat=64" target="_blank" >Deutsch Support Forum</a><br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_DESC . ':</label>Support Forum, &#220;bersetzung, Entwicklung und deutsche Support<br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_TRANSLATE . ': </label><a href="mailto:adslight.translate@gmail.com?subject=Correction AdsLight"> Senden Sie eine Korrektur</a><br>';
 echo '</tr></table><br>';
@@ -91,7 +89,7 @@ echo '</tr></table><br>';
 //// Bosnie ///
 echo "<table width='100%' border='0' class='outer'><tr><td>";
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_CONTRYLANG . ':</label><img src="../assets/images/flags/ba.png" width="16" height="11" border="0"><b>  Bosanski</b><br>';
-echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="http://www.i-luc.fr/adslight/modules/newbb/index.php?cat=66" target="_blank" >Bosanski Forum za pomoc</a><br>';
+echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="https://www.i-luc.fr/adslight/modules/newbb/index.php?cat=66" target="_blank" >Bosanski Forum za pomoc</a><br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_DESC . ':</label>Podrska forum, prijevod, razvoj i podrsku bosanskih<br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_TRANSLATE . ': </label><a href="mailto:adslight.translate@gmail.com?subject=Correction AdsLight"> Po&#353;alji ispravak</a><br>';
 echo '</tr></table><br>';
@@ -99,7 +97,7 @@ echo '</tr></table><br>';
 //// Néerlandais ///
 echo "<table width='100%' border='0' class='outer'><tr><td>";
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_CONTRYLANG . ':</label><img src="../assets/images/flags/nl.png" width="16" height="11" border="0"><b>  Nederlands</b><br>';
-echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="http://www.i-luc.fr/adslight/modules/newbb/index.php?cat=58" target="_blank" >Nederlandse steun Forum</a><br>';
+echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_WEBLINKS . ':</label><a href="https://www.i-luc.fr/adslight/modules/newbb/index.php?cat=58" target="_blank" >Nederlandse steun Forum</a><br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_DESC . ':</label>Support forum, Vertaling, Nederlands Ontwikkeling en Ondersteuning<br>';
 echo '<label>' . _AM_ADSLIGHT_SUPPORTFORUM_TRANSLATE . ': </label><a href="mailto:adslight.translate@gmail.com?subject=Correction AdsLight"> Stuur een correctie</a><br>';
 echo '</tr></table><br><br><br>';

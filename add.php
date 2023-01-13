@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -31,7 +29,6 @@ use XoopsModules\Adslight\{
 };
 
 /** @var Helper $helper */
-
 $GLOBALS['xoopsOption']['template_main'] = 'adslight_addlisting.tpl';
 require_once __DIR__ . '/header.php';
 
@@ -159,12 +156,12 @@ if (Request::hasVar('submit', 'POST')) {
         $tags['TYPE']            = Utility::getNameType($type);
         $tags['LINK_URL']        = XOOPS_URL . '/modules/adslight/viewads.php?' . '&lid=' . $lid;
         $sql                     = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . ' WHERE cid=' . $cid;
-        $result2 = $xoopsDB->query($sql);
+        $result2                 = $xoopsDB->query($sql);
         if ($result2 instanceof \mysqli_result) {
-            $row = $xoopsDB->fetchArray($result2);
+            $row                    = $xoopsDB->fetchArray($result2);
             $tags['CATEGORY_TITLE'] = $row['title'];
         }
-        $tags['CATEGORY_URL']   = XOOPS_URL . '/modules/adslight/viewcats.php?cid="' . addslashes((string)$cid);
+        $tags['CATEGORY_URL'] = XOOPS_URL . '/modules/adslight/viewcats.php?cid="' . addslashes((string)$cid);
         /** @var \XoopsNotificationHandler $notificationHandler */
         $notificationHandler = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('global', 0, 'new_listing', $tags);
@@ -185,12 +182,12 @@ if (Request::hasVar('submit', 'POST')) {
         $tags['NEED_TO_LOGIN'] = _ADSLIGHT_NEED_TO_LOGIN;
         $tags['ADMIN_LINK']    = XOOPS_URL . '/modules/adslight/admin/validate_ads.php';
         $sql                   = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . ' WHERE cid=' . $cid;
-        $result2                = $xoopsDB->query($sql);
+        $result2               = $xoopsDB->query($sql);
         if ($result2 instanceof \mysqli_result) {
-            $row = $xoopsDB->fetchArray($result2);
+            $row                    = $xoopsDB->fetchArray($result2);
             $tags['CATEGORY_TITLE'] = $row['title'];
         }
-        $tags['NEWAD']          = _ADSLIGHT_NEWAD;
+        $tags['NEWAD'] = _ADSLIGHT_NEWAD;
 
         $mail = xoops_getMailer();
         //@todo - add check to see if directory (and file) exists, otherwise use english
@@ -281,8 +278,8 @@ if (Request::hasVar('submit', 'POST')) {
         // Category select box
         ob_start();
         $mytree->makeMySelBox('title', 'title', $cid, 1, 'cid');
-        $form->addElement(new \XoopsFormLabel(_ADSLIGHT_CAT3, (string)ob_get_clean())??'', true);
-        $sql = 'SELECT title, cat_moderate FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid='" . $xoopsDB->escape($cid) . "'";
+        $form->addElement(new \XoopsFormLabel(_ADSLIGHT_CAT3, (string)ob_get_clean()) ?? '', true);
+        $sql      = 'SELECT title, cat_moderate FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid='" . $xoopsDB->escape($cid) . "'";
         $category = $xoopsDB->query($sql);
         if ($category instanceof \mysqli_result) {
             [$cat_title, $cat_moderate] = $xoopsDB->fetchRow($category);

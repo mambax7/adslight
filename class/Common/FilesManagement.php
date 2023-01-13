@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Common;
 
@@ -16,7 +14,7 @@ namespace XoopsModules\Adslight\Common;
 
 /**
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author      mamba <mambax7@gmail.com>
  */
 trait FilesManagement
@@ -35,7 +33,7 @@ trait FilesManagement
                 }
                 file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
             }
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }
@@ -71,7 +69,7 @@ trait FilesManagement
      * @return      bool     Returns true on success, false on failure
      * @author      Aidan Lister <aidan@php.net>
      * @version     1.0.1
-     * @link        http://aidanlister.com/2004/04/recursively-copying-directories-in-php/
+     * @link        https://aidanlister.com/2004/04/recursively-copying-directories-in-php/
      */
     public static function xcopy($source, $dest): bool
     {
@@ -149,6 +147,7 @@ trait FilesManagement
             // input is not a valid directory
             $success = false;
         }
+
         return $success;
     }
 
@@ -187,6 +186,7 @@ trait FilesManagement
             }
         }
         $iterator = null;   // clear iterator Obj to close file/directory
+
         return \rmdir($src); // remove the directory & return results
     }
 
@@ -224,6 +224,7 @@ trait FilesManagement
             }
         }
         $iterator = null;   // clear iterator Obj to close file/directory
+
         return \rmdir($src); // remove the directory & return results
     }
 
@@ -261,6 +262,7 @@ trait FilesManagement
                 self::rcopy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
             }
         }
+
         return true;
     }
 }

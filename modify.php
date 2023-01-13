@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -30,14 +28,13 @@ use XoopsModules\Adslight\{
 };
 
 /** @var Helper $helper */
-
 require_once __DIR__ . '/header.php';
 
 global $xoopsModule, $xoopsDB, $xoopsConfig, $xoTheme;
 
-$myts      = \MyTextSanitizer::getInstance();
+$myts     = \MyTextSanitizer::getInstance();
 $moduleId = $xoopsModule->getVar('mid');
-$groups    = $GLOBALS['xoopsUser'] instanceof \XoopsUser ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
+$groups   = $GLOBALS['xoopsUser'] instanceof \XoopsUser ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
 /** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $perm_itemid      = Request::getInt('item_id', 0, 'POST');
@@ -292,7 +289,7 @@ function modifyAd($lid): void
             }
             echo '</select></td></tr>';
             $moduleId = $xoopsModule->getVar('mid');
-            $groups    = $GLOBALS['xoopsUser'] instanceof \XoopsUser ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
+            $groups   = $GLOBALS['xoopsUser'] instanceof \XoopsUser ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
             /** @var \XoopsGroupPermHandler $grouppermHandler */
             $grouppermHandler = xoops_getHandler('groupperm');
             $perm_itemid      = Request::getInt('item_id', 0, 'GET');
@@ -347,7 +344,7 @@ function modifyAd($lid): void
     <td class="head">' . _ADSLIGHT_DESC . ' </td><td class="head">';
             //            $wysiwyg_text_area = Utility::getEditor(_ADSLIGHT_DESC, 'desctext', $desctext, '100%', '200px');
 
-//            $desctext = $myts->displayTarea($desctext, 1);
+            //            $desctext = $myts->displayTarea($desctext, 1);
 
             $options           = [];
             $options['name']   = _ADSLIGHT_DESC;
@@ -432,16 +429,16 @@ function modifyAds(
     $contactby,
     $premium,
     $valid
-) {
+): void {
     global $xoopsDB, $myts;
     $helper = Helper::getInstance();
     if (!$GLOBALS['xoopsSecurity']->check()) {
         $helper->redirect('index.php', 3, $GLOBALS['xoopsSecurity']->getErrors());
     }
 
-    $sql = 'UPDATE '
-           . $xoopsDB->prefix('adslight_listing')
-           . " SET cid='${cat}', title='${title}', status='${status}',  expire='${expire}', type='${type}', desctext='${desctext}', tel='${tel}', price='${price}', typeprice='${typeprice}', typecondition='${typecondition}', email='${email}', submitter='${submitter}', town='${town}', country='${country}', contactby='${contactby}', premium='${premium}', valid='${valid}' WHERE lid=${lid}";
+    $sql    = 'UPDATE '
+              . $xoopsDB->prefix('adslight_listing')
+              . " SET cid='${cat}', title='${title}', status='${status}',  expire='${expire}', type='${type}', desctext='${desctext}', tel='${tel}', price='${price}', typeprice='${typeprice}', typecondition='${typecondition}', email='${email}', submitter='${submitter}', town='${town}', country='${country}', contactby='${contactby}', premium='${premium}', valid='${valid}' WHERE lid=${lid}";
     $result = $xoopsDB->query($sql);
 
     $helper->redirect('index.php', 1, _ADSLIGHT_ANNMOD2);

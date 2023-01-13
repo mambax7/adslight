@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -18,10 +16,9 @@ namespace XoopsModules\Adslight;
  * Module: Adslight
  *
  * @category        Module
- * @package         adslight
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @link            https://xoops.org/
  * @since           1.0.0
  */
@@ -36,11 +33,12 @@ $permHelper    = new Permission();
  */
 class ListingHandler extends \XoopsPersistableObjectHandler
 {
-    private const TABLE = 'adslight_listing';
-    private const ENTITY = Listing::class;
+    private const TABLE      = 'adslight_listing';
+    private const ENTITY     = Listing::class;
     private const ENTITYNAME = 'Listing';
-    private const KEYNAME = 'lid';
+    private const KEYNAME    = 'lid';
     private const IDENTIFIER = 'title';
+
     /**
      * Constructor
      */

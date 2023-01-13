@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -16,7 +14,7 @@ namespace XoopsModules\Adslight;
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -77,7 +75,10 @@ class Tree
             $sql .= " ORDER BY ${order}";
         }
 
-        $result = $this->db->query($sql);
+        $result  = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
         $count  = $this->db->getRowsNum($result);
         if (0 === $count) {
             return $arr;
@@ -97,7 +98,7 @@ class Tree
     {
         $idarray = [];
         $sel_id  = (int)$sel_id;
-        $sql = 'SELECT SQL_CACHE ' . $this->id . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id;
+        $sql     = 'SELECT SQL_CACHE ' . $this->id . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id;
         $result  = $this->db->query($sql);
 
         $categories = Utility::getMyItemIds('adslight_view');
@@ -135,7 +136,10 @@ class Tree
         if ('' !== $order) {
             $sql .= " ORDER BY {$order}";
         }
-        $result = $this->db->query($sql);
+        $result  = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
         $count  = $this->db->getRowsNum($result);
         if (0 === $count) {
             return $idarray;
@@ -302,7 +306,7 @@ class Tree
     public function getIdPathFromId($sel_id, $path = ''): string
     {
         $sel_id = (int)$sel_id;
-        $sql = 'SELECT SQL_CACHE ' . $this->pid . ' FROM ' . $this->table . ' WHERE ' . $this->id . '=' . $sel_id;
+        $sql    = 'SELECT SQL_CACHE ' . $this->pid . ' FROM ' . $this->table . ' WHERE ' . $this->id . '=' . $sel_id;
         $result = $this->db->query($sql);
         if (0 === $this->db->getRowsNum($result)) {
             return $path;
@@ -335,6 +339,9 @@ class Tree
         }
 
         $result = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
         $count  = $this->db->getRowsNum($result);
         if (0 === $count) {
             return $parray;
@@ -366,6 +373,9 @@ class Tree
             $sql .= " ORDER BY {$order}";
         }
         $result = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
         $count  = $this->db->getRowsNum($result);
         if (0 === $count) {
             return $parray;
@@ -390,7 +400,7 @@ class Tree
     public function makeAdSelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = ''): void
     {
         global $myts, $xoopsDB;
-        $helper = Helper::getInstance();
+        $helper     = Helper::getInstance();
         $pathIcon16 = Admin::iconUrl('', '16');
         //        require_once XOOPS_ROOT_PATH . '/modules/adslight/include/gtickets.php';
 
@@ -472,7 +482,7 @@ class Tree
 
     public function getCategoryList(): array
     {
-        $sql = 'SELECT SQL_CACHE cid, pid, title FROM ' . $this->table;
+        $sql    = 'SELECT SQL_CACHE cid, pid, title FROM ' . $this->table;
         $result = $this->db->query($sql);
         $ret    = [];
         \MyTextSanitizer::getInstance();

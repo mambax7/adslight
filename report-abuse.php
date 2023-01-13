@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -27,9 +25,7 @@ use XoopsModules\Adslight\{
     Helper,
     Utility
 };
-
 /** @var Helper $helper */
-
 require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/adslight/include/gtickets.php';
 
@@ -116,16 +112,16 @@ function mailAd($lid, $yname, $ymail, $fname, $fmail): void
     $result = $xoopsDB->query($sql);
     [$lid, $title, $expire, $type, $desctext, $tel, $price, $typeprice, $date_created, $email, $submitter, $town, $country, $photo] = $xoopsDB->fetchRow($result);
 
-    $title     = $myts->addSlashes($title);
-    $expire    = $myts->addSlashes($expire);
-    $type      = $myts->addSlashes($type);
+    $title     = $GLOBALS['xoopsDB']->escape($title);
+    $expire    = $GLOBALS['xoopsDB']->escape($expire);
+    $type      = $GLOBALS['xoopsDB']->escape($type);
     $desctext  = $myts->displayTarea($desctext, 1, 1, 1, 1, 1);
-    $tel       = $myts->addSlashes($tel);
-    $price     = $myts->addSlashes($price);
-    $typeprice = $myts->addSlashes($typeprice);
-    $submitter = $myts->addSlashes($submitter);
-    $town      = $myts->addSlashes($town);
-    $country   = $myts->addSlashes($country);
+    $tel       = $GLOBALS['xoopsDB']->escape($tel);
+    $price     = $GLOBALS['xoopsDB']->escape($price);
+    $typeprice = $GLOBALS['xoopsDB']->escape($typeprice);
+    $submitter = $GLOBALS['xoopsDB']->escape($submitter);
+    $town      = $GLOBALS['xoopsDB']->escape($town);
+    $country   = $GLOBALS['xoopsDB']->escape($country);
 
     $tags                       = [];
     $tags['YNAME']              = stripslashes($yname);

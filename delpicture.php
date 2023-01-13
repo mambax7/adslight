@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -37,7 +35,6 @@ require_once __DIR__ . '/header.php';
 /**
  * Module classes
  */
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _ADSLIGHT_TOKENEXPIRED);
 }
@@ -52,15 +49,15 @@ $cod_img = Request::getString('cod_img', '', 'POST');
  * The user must be the owner
  */
 $picturesHandler = $helper->getHandler('Pictures');
-$criteria_img  = new \Criteria('cod_img', $cod_img);
-$uid           = $GLOBALS['xoopsUser']->getVar('uid');
-$criteria_uid  = new \Criteria('uid_owner', $uid);
+$criteria_img    = new \Criteria('cod_img', $cod_img);
+$uid             = $GLOBALS['xoopsUser']->getVar('uid');
+$criteria_uid    = new \Criteria('uid_owner', $uid);
 //$criteria_lid = new \Criteria ('lid',$lid);
 $criteria = new \CriteriaCompo($criteria_img);
 $criteria->add($criteria_uid);
 
 $objectsArray = $picturesHandler->getObjects($criteria);
-$image_name    = $objectsArray[0]->getVar('url');
+$image_name   = $objectsArray[0]->getVar('url');
 /**
  * Try to delete
  */

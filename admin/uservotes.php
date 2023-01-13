@@ -1,12 +1,10 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -18,13 +16,13 @@ declare(strict_types=1);
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
+
 /** @var Admin $adminObject */
 /** @var Helper $helper */
-
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
@@ -38,7 +36,7 @@ $order = Request::getString('order', 'desc');
 $sort  = Request::getString('sort', '');
 
 $moduleDirName = \basename(\dirname(__DIR__));
-$GLOBALS['xoopsTpl']->assign('mod_url', XOOPS_URL . '/modules/' . $moduleDirName);
+$GLOBALS['xoopsTpl']->assign('mod_url', $helper->url());
 $xoTheme->addStylesheet($helper->url('assets/js/tablesorter/css/theme.blue.css'));
 
 $adminObject->displayNavigation(basename(__FILE__));
@@ -55,7 +53,6 @@ switch ($op) {
         $form            = $uservotesObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('uservotes.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -82,16 +79,14 @@ switch ($op) {
         $form = $uservotesObject->getForm();
         $form->display();
         break;
-
     case 'edit':
-//        $adminObject->addItemButton(AM_ADSLIGHT_ADD_USERVOTES, 'uservotes.php?op=new', 'add');
+        //        $adminObject->addItemButton(AM_ADSLIGHT_ADD_USERVOTES, 'uservotes.php?op=new', 'add');
         $adminObject->addItemButton(AM_ADSLIGHT_USERVOTES_LIST, 'uservotes.php', 'list');
         $adminObject->displayButton('left');
         $uservotesObject = $uservotesHandler->get(Request::getString('ratingid', ''));
         $form            = $uservotesObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $uservotesObject = $uservotesHandler->get(Request::getString('ratingid', ''));
         if (1 == Request::getInt('ok', 0)) {
@@ -104,10 +99,9 @@ switch ($op) {
                 echo $uservotesObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'ratingid' => Request::getString('ratingid', ''), 'op' => 'delete',], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_ADSLIGHT_FORMSUREDEL, $uservotesObject->getVar('ratingid')));
+            xoops_confirm(['ok' => 1, 'ratingid' => Request::getString('ratingid', ''), 'op' => 'delete'], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_ADSLIGHT_FORMSUREDEL, $uservotesObject->getVar('ratingid')));
         }
         break;
-
     case 'clone':
         $id_field = Request::getString('ratingid', '');
 
@@ -120,7 +114,7 @@ switch ($op) {
         break;
     case 'list':
     default:
-//        $adminObject->addItemButton(AM_ADSLIGHT_ADD_USERVOTES, 'uservotes.php?op=new', 'add');
+        //        $adminObject->addItemButton(AM_ADSLIGHT_ADD_USERVOTES, 'uservotes.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                    = Request::getInt('start', 0);
         $uservotesPaginationLimit = $helper->getConfig('userpager');
@@ -145,7 +139,11 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new \XoopsPageNav(
-                $uservotesTempRows, $uservotesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $uservotesTempRows,
+                $uservotesPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null !== $pagenav ? $pagenav->renderNav() : '');
         }
@@ -201,7 +199,11 @@ switch ($op) {
             if ($uservotesCount > $uservotesPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new \XoopsPageNav(
-                    $uservotesCount, $uservotesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $uservotesCount,
+                    $uservotesPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

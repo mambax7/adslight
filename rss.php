@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,13 +12,14 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
  * @author       jlm69 (www.jlmzone.com)
  * @author       mamba (www.xoops.org)
  */
+
 use Xmf\Request;
 use XoopsModules\Adslight\{
     Utility
@@ -31,7 +30,7 @@ require_once __DIR__ . '/header.php';
 $allads     = Utility::returnAllAdsRss();
 $base_xoops = 'http://' . $_SERVER['SERVER_NAME'] . mb_substr($_SERVER['REQUEST_URI'], 0, mb_strpos($_SERVER['REQUEST_URI'], 'modules'));
 echo '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="https://www.w3.org/2005/Atom">
 <channel>
 <title>' . $xoopsConfig['sitename'] . '</title>
 <link>' . $base_xoops . '</link>

@@ -11,7 +11,7 @@
 * Examples and original docs at: http://tablesorter.com
 * Dual licensed under the MIT and GPL licenses:
 * http://www.opensource.org/licenses/mit-license.php
-* http://www.gnu.org/licenses/gpl.html
+* https://www.gnu.org/licenses/gpl.html
 *
 * @type jQuery
 * @name tablesorter (FORK)

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -53,8 +51,7 @@ $lid   = Request::getInt('lid', 0, 'POST');
 /**
  * Getting parameters defined in admin side
  */
-
-$pathUpload   = $helper->getConfig('adslight_path_upload', '');
+$pathUpload    = $helper->getConfig('adslight_path_upload', '');
 $pictwidth     = $helper->getConfig('adslight_resized_width');
 $pictheight    = $helper->getConfig('adslight_resized_height');
 $thumbwidth    = $helper->getConfig('adslight_thumb_width');
@@ -67,9 +64,9 @@ $maxfilewidth  = $helper->getConfig('adslight_max_orig_width');
  * If we are receiving a file
  */
 if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
-//    if (!$GLOBALS['xoopsSecurity']->check()) {
-//        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _ADSLIGHT_TOKENEXPIRED);
-//    }
+    //    if (!$GLOBALS['xoopsSecurity']->check()) {
+    //        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _ADSLIGHT_TOKENEXPIRED);
+    //    }
 
     /**
      * Try to upload picture resize it insert in database and then redirect to index

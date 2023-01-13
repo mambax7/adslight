@@ -1,13 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
 -------------------------------------------------------------------------
                      ADSLIGHT 2 : Module for Xoops
 
         Redesigned and ameliorate By iluc user at www.frxoops.org
         Started with the Classifieds module and made MANY changes
-        Website : http://www.limonads.com
+        Website : https://www.limonads.com
         Contact : adslight.translate@gmail.com
 -------------------------------------------------------------------------
              Original credits below Version History
@@ -158,7 +156,7 @@ define('_MI_ADSLIGHT_ORIGH_DESC', "Maximum original picture height in pixels<br>
 define('_MI_ADSLIGHT_UPLOAD_TITLE', 'Path Uploads');
 define('_MI_ADSLIGHT_UPLOAD_DESC', 'Path to your uploads directory<br>in linux should look like /var/www/uploads<br>in windows like C:/Program Files/www');
 define('_MI_ADSLIGHT_LINKUPLOAD_TI', 'Link to your uploads directory');
-define('_MI_ADSLIGHT_LINKUPLOAD_DE', 'This is the address of the root of your uploads <br>like http://www.yoursite.com/uploads');
+define('_MI_ADSLIGHT_LINKUPLOAD_DE', 'This is the address of the root of your uploads <br>like https://www.yoursite.com/uploads');
 define('_MI_ADSLIGHT_MAXFILEBYTES_T', 'Max size in bytes');
 define('_MI_ADSLIGHT_MAXFILEBYTES_D', 'This the maximum size a file of your pictue can have in bytes <br>like 512000 for 500 KB');
 define('_MI_ADSLIGHT_EDITOR', 'Editor to use by Users:');
@@ -309,7 +307,7 @@ define('_MI_ADSLIGHT_EDITOR_ADMIN_DESC', 'Select the Editor to use by the Admin'
 define('_MI_ADSLIGHT_EDITOR_USER', 'Editor: User');
 define('_MI_ADSLIGHT_EDITOR_USER_DESC', 'Select the Editor to use by the User');
 //define('_MI_ADSLIGHT_HELP_DIR', __DIR__);
-//help multi-page
+//help multipage
 define('_MI_ADSLIGHT_DISCLAIMER', 'Disclaimer');
 define('_MI_ADSLIGHT_LICENSE', 'License');
 define('_MI_ADSLIGHT_SUPPORT', 'Support');

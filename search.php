@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -29,7 +27,6 @@ use XoopsModules\Adslight\{
 };
 
 /** @var Helper $helper */
-
 $moduleDirName = \basename(__DIR__);
 //@todo replace the following code - use Filters
 foreach ($_REQUEST as $key => $val) {
@@ -103,9 +100,9 @@ if ('showallbyuser' !== $action) {
         foreach ($temp_queries as $q) {
             $q = trim($q);
             if (mb_strlen($q) >= $xoopsConfigSearch['keyword_min']) {
-                $queries[] = $myts->addSlashes($q);
+                $queries[] = $GLOBALS['xoopsDB']->escape($q);
             } else {
-                $ignored_queries[] = $myts->addSlashes($q);
+                $ignored_queries[] = $GLOBALS['xoopsDB']->escape($q);
             }
         }
         if (0 === count($queries)) {
@@ -116,7 +113,7 @@ if ('showallbyuser' !== $action) {
         if (mb_strlen($query) < $xoopsConfigSearch['keyword_min']) {
             $helper->redirect('search.php', 2, sprintf(_SR_KEYTOOSHORT, $xoopsConfigSearch['keyword_min']));
         }
-        $queries = [$myts->addSlashes($query)];
+        $queries = [$GLOBALS['xoopsDB']->escape($query)];
     }
 }
 switch ($action) {
@@ -234,7 +231,6 @@ switch ($action) {
         break;
     case 'showall':
     case 'showallbyuser':
-
         require_once XOOPS_ROOT_PATH . '/header.php';
 
         $GLOBALS['xoopsTpl']->assign('imgscss', $helper->url('assets/css/adslight.css'));

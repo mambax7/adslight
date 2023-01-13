@@ -1,11 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 ###############################################################################
 ##                RSSFit - Extendable XML news feed generator                ##
 ##                Copyright (c) 2004 - 2005 NS Tai (aka tuff)                ##
-##                       <http://www.brandycoke.com> & ... nbsp;   ##
+##                       <https://www.brandycoke.com> & ... nbsp;   ##
 ###############################################################################
 ##                    XOOPS - PHP Content Management System                  ##
 ##                       Copyright (c) 2000 XOOPS.org                        ##
@@ -57,7 +55,7 @@ class RssfitAdslight
 
     public function loadModule(): bool
     {
-        $mod = &$GLOBALS['moduleHandler']->getByDirname($this->dirname);
+        $mod = &$GLOBALS['module_handler']->getByDirname($this->dirname);
         if (!$mod || !$mod->getVar('isactive')) {
             return false;
         }
@@ -104,6 +102,7 @@ class RssfitAdslight
             $ret[$i]['extras'] = [];
             $i++;
         }
+
         return $ret;
     }
 }

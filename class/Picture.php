@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Adslight;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -20,7 +18,7 @@ namespace XoopsModules\Adslight;
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Adslight\{
@@ -34,6 +32,13 @@ use XoopsModules\Adslight\{
  */
 class Picture extends \XoopsObject
 {
+    public $cod_img;
+    public $title;
+    public $date_created;
+    public $date_updated;
+    public $lid;
+    public $uid_owner;
+    public $url;
     public $helper;
     public $permHelper;
 
@@ -45,7 +50,7 @@ class Picture extends \XoopsObject
     public function __construct()
     {
         parent::__construct();
-        //        /** @var  Adslight\Helper $helper */
+        // /** @var Adslight\Helper $helper */
         //        $this->helper = Adslight\Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
 
@@ -67,6 +72,7 @@ class Picture extends \XoopsObject
     public function getForm(): Form\PicturesForm
     {
         $form = new Form\PicturesForm($this);
+
         return $form;
     }
 
@@ -97,4 +103,3 @@ class Picture extends \XoopsObject
         return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('cod_img'));
     }
 }
-

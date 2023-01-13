@@ -1,13 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
 -------------------------------------------------------------------------
                      ADSLIGHT 2 : Module for Xoops
 
         Redesigned and ameliorate By iluc user at www.frxoops.org
         Started with the Classifieds module and made MANY changes
-        Website : http://www.limonads.com
+        Website : https://www.limonads.com
         Contact : adslight.translate@gmail.com
 -------------------------------------------------------------------------
              Original credits below Version History
@@ -177,7 +175,7 @@ define('_AM_ADSLIGHT_YOU_CAN_VIEW_BELOW', 'You can view the full Listing at the 
 define('_AM_ADSLIGHT_NOREPLY', '!!!  Do not reply to this e-mail, you will not get a reply.  !!!');
 define('_AM_ADSLIGHT_ADDED_TO_CAT', 'A new listing has been added to the category ');
 define('_AM_ADSLIGHT_RECIEVING_NOTIF', 'You have subscribed to receive notifications of this sort.');
-define('_AM_ADSLIGHT_ERROR_NOTIF', 'If this is an error or you wish not to receive further such notifications, please update your subscriptions by visiting the link below:');
+define('_AM_ADSLIGHT_ERROR_NOTIF', 'If this is an error, or if you wish not to receive further such notifications, please update your subscriptions by visiting the link below:');
 define('_AM_ADSLIGHT_FOLLOW_LINK', 'Here is a link to the new listing');
 define('_AM_ADSLIGHT_CAPTCHA', 'Security Code:');
 define('_AM_ADSLIGHT_MODERATE_SUBCATS', 'Moderate subcats of this category');
@@ -186,7 +184,7 @@ define('_AM_ADSLIGHT_FEATURES', 'Features');
 define('_AM_ADSLIGHT_CLONE', 'How to Clone');
 define('_AM_ADSLIGHT_INCOMPLETE', 'Incomplete');
 // Added by iLuc //
-//Item Condition 
+//Item Condition
 define('_AM_ADSLIGHT_ADDCONDITION', 'Add item condition type, e.g. Damaged');
 define('_AM_ADSLIGHT_MODCONDITION', 'Change item condition type');
 define('_AM_ADSLIGHT_ADDCONDITION2', 'The item condition type has been added');
@@ -278,10 +276,10 @@ define('_AM_ADSLIGHT_DONATE_TITLE', ' Donate');
 define('_AM_ADSLIGHT_DONATE', 'AdsLight its use is free and will remain so.<br>You can also make a donation<br>If you want support me.<br>');
 ////RSS Forum
 define('_AM_ADSLIGHT_MENURSSFORUM_TITLE', 'Support forum AdsLight');
-define('_AM_ADSLIGHT_MENURSSFORUM_URL', 'http://www.i-luc.fr/adslight/modules/newbb/rss.php?f=56');
-define('_AM_ADSLIGHT_MENURSSFORUM_LINK1', 'http://www.i-luc.fr/adslight/modules/newbb/viewforum.php?forum=56/#googtrans/auto/en');
+define('_AM_ADSLIGHT_MENURSSFORUM_URL', 'https://www.i-luc.fr/adslight/modules/newbb/rss.php?f=56');
+define('_AM_ADSLIGHT_MENURSSFORUM_LINK1', 'https://www.i-luc.fr/adslight/modules/newbb/viewforum.php?forum=56/#googtrans/auto/en');
 define('_AM_ADSLIGHT_MENURSSFORUM_GOFORUM', 'Go to Forum');
-define('_AM_ADSLIGHT_MENURSSFORUM_LINK2', 'http://www.i-luc.fr/adslight/modules/profile/register.php#googtrans/auto/en');
+define('_AM_ADSLIGHT_MENURSSFORUM_LINK2', 'https://www.i-luc.fr/adslight/modules/profile/register.php#googtrans/auto/en');
 define('_AM_ADSLIGHT_MENURSSFORUM_SUBSCRIT', 'Register');
 ////    RSS AdsLight News
 define('_AM_ADSLIGHT_MENURSS_TITLE', 'News AdsLight');
@@ -624,5 +622,3 @@ define('AM_ADSLIGHT_ADD_SAMPLEDATA', 'Import Sample Data (will delete ALL curren
 define('AM_ADSLIGHT_SAMPLEDATA_SUCCESS', 'Sample Date uploaded successfully');
 
 define('AM_ADSLIGHT_MAINTAINEDBY', 'is maintained by the');
-
-

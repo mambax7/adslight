@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 // $Id: waiting.php,v 1.1 2011/12/29 14:32:48 ohwada Exp $
 

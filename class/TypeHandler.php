@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -20,14 +18,12 @@ use Xmf\Module\Helper\Permission;
  * Module: Adslight
  *
  * @category        Module
- * @package         adslight
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @link            https://xoops.org/
  * @since           1.0.0
  */
-
 $moduleDirName = \basename(\dirname(__DIR__));
 $permHelper    = new Permission();
 
@@ -36,11 +32,12 @@ $permHelper    = new Permission();
  */
 class TypeHandler extends \XoopsPersistableObjectHandler
 {
-    private const TABLE = 'adslight_type';
-    private const ENTITY = Type::class;
+    private const TABLE      = 'adslight_type';
+    private const ENTITY     = Type::class;
     private const ENTITYNAME = 'Type';
-    private const KEYNAME = 'id_type';
+    private const KEYNAME    = 'id_type';
     private const IDENTIFIER = 'nom_type';
+
     /**
      * Constructor
      */

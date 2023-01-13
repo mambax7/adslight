@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -30,7 +28,7 @@ use XoopsModules\Adslight\{
 require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/adslight/include/gtickets.php';
 
-$myts      = \MyTextSanitizer::getInstance();
+$myts     = \MyTextSanitizer::getInstance();
 $moduleId = $xoopsModule->getVar('mid');
 
 $groups = $GLOBALS['xoopsUser'] instanceof \XoopsUser ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
@@ -48,7 +46,7 @@ $prem_perm = $grouppermHandler->checkRight('adslight_premium', $perm_itemid, $gr
 function tips_writing(): void
 {
     global $xoopsDB, $xoopsConfig, $xoopsModule, $xoopsTpl, $myts, $mytree, $meta, $mid, $prem_perm;
-    $helper = Helper::getInstance();
+    $helper                                  = Helper::getInstance();
     $GLOBALS['xoopsOption']['template_main'] = 'adslight_tips_writing_ad.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
 

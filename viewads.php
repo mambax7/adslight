@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -32,12 +30,11 @@ use XoopsModules\Adslight\{
 };
 
 /** @var Helper $helper */
-
 require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/adslight/include/gtickets.php';
 xoops_load('XoopsLocal');
 
-$myts      = \MyTextSanitizer::getInstance();
+$myts     = \MyTextSanitizer::getInstance();
 $moduleId = $xoopsModule->getVar('mid');
 
 if (is_object($GLOBALS['xoopsUser'])) {
@@ -73,10 +70,10 @@ function viewAds($lid = 0): void
 
     $moduleDirName = \basename(__DIR__);
 
-    $pathIcon16     = Admin::iconUrl('', '16');
-    $contact_pm     = $contact = '';
+    $pathIcon16    = Admin::iconUrl('', '16');
+    $contact_pm    = $contact = '';
     $picturesArray = [];
-    $cid            = 0;
+    $cid           = 0;
 
     $tempXoopsLocal                          = new \XoopsLocal();
     $GLOBALS['xoopsOption']['template_main'] = 'adslight_item.tpl';
@@ -434,7 +431,7 @@ function viewAds($lid = 0): void
         if ('' !== $photo) {
             $criteria_lid          = new \Criteria('lid', $lid);
             $criteria_uid          = new \Criteria('uid', $usid);
-            $picturesHandler         = $helper->getHandler('Pictures');
+            $picturesHandler       = $helper->getHandler('Pictures');
             $pictures_object_array = $picturesHandler->getObjects($criteria_lid, $criteria_uid);
             $pictures_number       = $picturesHandler->getCount($criteria_lid);
             if (0 === $pictures_number) {
@@ -509,6 +506,15 @@ function viewAds($lid = 0): void
     $GLOBALS['xoopsTpl']->assign('link_cat', '<a href="viewcats.php?cid=' . addslashes($cid) . '">' . _ADSLIGHT_GORUB . ' ' . $ctitle . '</a>');
 
     $GLOBALS['xoopsTpl']->assign('printA', '<img src="assets/images/print.gif" border="0" alt="' . _ADSLIGHT_PRINT . '" >&nbsp;&nbsp;<a rel="nofollow" href="print.php?op=PrintAd&amp;lid=' . $lid . '">' . _ADSLIGHT_PRINT . '</a>');
+
+    //($helper->getConfig('useRating') == 1);
+    if ((is_dir('../rating'))) {
+        require XOOPS_ROOT_PATH . '/modules/rating/include/rating.php';
+        $GLOBALS['xoopsTpl']->assign('ratingPerm', true);
+        $GLOBALS['xoopsTpl']->assign('ratings', rating($lid));
+    } else {
+        $GLOBALS['xoopsTpl']->assign('ratingPerm', false);
+    }
 }
 
 #  function categorynewgraphic

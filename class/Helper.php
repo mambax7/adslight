@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight;
 
@@ -16,7 +14,7 @@ namespace XoopsModules\Adslight;
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  */
 
@@ -32,15 +30,12 @@ class Helper extends \Xmf\Module\Helper
      */
     public function __construct($debug = false)
     {
-        $this->debug = $debug;
-        if (null === $this->dirname) {
-            $dirname       = \basename(\dirname(__DIR__));
-            $this->dirname = $dirname;
-        }
-        parent::__construct($this->dirname);
+        $this->debug   = $debug;
+        $moduleDirName = \basename(\dirname(__DIR__));
+        parent::__construct($moduleDirName);
     }
 
-    public static function getInstance(bool $debug = false): Helper
+    public static function getInstance(bool $debug = false): self
     {
         static $instance;
         if (null === $instance) {
@@ -75,7 +70,7 @@ class Helper extends \Xmf\Module\Helper
         $helper = self::getInstance();
         $ret    = new $class($db, $helper);
         $this->addLog("Getting handler '$name'");
+
         return $ret;
     }
 }
-

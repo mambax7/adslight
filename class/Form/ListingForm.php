@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Form;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Adslight\Form;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -20,7 +18,7 @@ namespace XoopsModules\Adslight\Form;
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
@@ -29,7 +27,7 @@ use XoopsModules\Adslight;
 require_once \dirname(__DIR__, 2) . '/include/common.php';
 
 $moduleDirName = \basename(\dirname(__DIR__, 2));
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper    = new \Xmf\Module\Helper\Permission();
 
 \xoops_load('XoopsFormLoader');
 
@@ -53,10 +51,9 @@ class ListingForm extends \XoopsThemeForm
 
         $this->helper->loadLanguage('admin');
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_ADSLIGHT_LISTING_ADD) : \sprintf(\AM_ADSLIGHT_LISTING_EDIT);
+        $title = $this->targetObject->isNew() ? \AM_ADSLIGHT_LISTING_ADD : \AM_ADSLIGHT_LISTING_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
-
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
@@ -155,20 +152,19 @@ class ListingForm extends \XoopsThemeForm
 
         // pull the first picture
         /** @var \XoopsPersistableObjectHandler $picturesHandler */
-        $picturesHandler = $this->helper->getHandler('Pictures');
-        $lid = $this->targetObject->getVar('lid');
-        $uid = $this->targetObject->getVar('usid');
-        $criteriaLid = new \Criteria('lid', $lid);
-        $criteriaUid = new \Criteria('uid', $uid);
+        $picturesHandler      = $this->helper->getHandler('Pictures');
+        $lid                  = $this->targetObject->getVar('lid');
+        $uid                  = $this->targetObject->getVar('usid');
+        $criteriaLid          = new \Criteria('lid', $lid);
+        $criteriaUid          = new \Criteria('uid', $uid);
         $picturesObjectsArray = $picturesHandler->getObjects($criteriaLid, $criteriaUid);
         // How many pictures are on the user album
         $picturesCount = $picturesHandler->getCount($criteriaLid);
         if ($picturesCount > 0) {
-            $photo1 = \reset($picturesObjectsArray);
+            $photo1    = \reset($picturesObjectsArray);
             $photoName = $photo1->getVar('url');
-            }
+        }
         $photo = $photoName ?: 'blank.png';
-
 
         $uploadDir   = '/uploads/adslight/';
         $imgtray     = new \XoopsFormElementTray(\AM_ADSLIGHT_LISTING_PHOTO, '<br>');
@@ -187,15 +183,15 @@ class ListingForm extends \XoopsThemeForm
         $imgtray->addElement($fileseltray);
         $this->addElement($imgtray);
         // Hits
-        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_HITS, $this->targetObject->getVar('hits'),'hits'));
+        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_HITS, $this->targetObject->getVar('hits'), 'hits'));
         // Item_rating
-        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_ITEM_RATING, $this->targetObject->getVar('item_rating'),'item_rating'));
+        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_ITEM_RATING, $this->targetObject->getVar('item_rating'), 'item_rating'));
         // Item_votes
-        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_ITEM_VOTES, $this->targetObject->getVar('item_votes'),'item_votes' ));
+        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_ITEM_VOTES, $this->targetObject->getVar('item_votes'), 'item_votes'));
         // User_rating
-        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_USER_RATING, $this->targetObject->getVar('user_rating'),'user_rating' ));
+        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_USER_RATING, $this->targetObject->getVar('user_rating'), 'user_rating'));
         // User_votes
-        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_USER_VOTES, $this->targetObject->getVar('user_votes'),'user_votes' ));
+        $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_USER_VOTES, $this->targetObject->getVar('user_votes'), 'user_votes'));
         // Comments
         $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_COMMENTS, $this->targetObject->getVar('comments'), 'comments'));
         // Remind

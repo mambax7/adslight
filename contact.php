@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +12,7 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  * @author       Pascal Le Boustouller: original author (pascal.e-xoops@perso-search.com)
  * @author       Luc Bizet (www.frxoops.org)
@@ -28,7 +26,6 @@ use XoopsModules\Adslight\{
 };
 
 /** @var Helper $helper */
-
 require_once __DIR__ . '/header.php';
 if (Request::hasVar('submit', 'POST')) {
     // Define Variables for register_globals Off. contribution by Peekay
@@ -44,7 +41,7 @@ if (Request::hasVar('submit', 'POST')) {
 
     //    require_once __DIR__ . '/header.php';
     $moduleId = $xoopsModule->getVar('mid');
-    $groups    = $xoopsUser instanceof \XoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+    $groups   = $xoopsUser instanceof \XoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
     /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
 
@@ -146,7 +143,7 @@ if (Request::hasVar('submit', 'POST')) {
     global $xoopsConfig, $xoopsDB, $myts, $meta;
 
     $moduleId = $xoopsModule->getVar('mid');
-    $groups    = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
+    $groups   = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
     /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
     $perm_itemid      = Request::getInt('item_id', 0, 'POST');

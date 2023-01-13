@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Form;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Adslight\Form;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -20,7 +18,7 @@ namespace XoopsModules\Adslight\Form;
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
@@ -52,7 +50,7 @@ class PriceForm extends \XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_ADSLIGHT_PRICE_ADD) : \sprintf(\AM_ADSLIGHT_PRICE_EDIT);
+        $title = $this->targetObject->isNew() ? \AM_ADSLIGHT_PRICE_ADD : \AM_ADSLIGHT_PRICE_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 

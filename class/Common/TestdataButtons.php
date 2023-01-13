@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Adslight\Common;
 
@@ -15,11 +13,10 @@ namespace XoopsModules\Adslight\Common;
 */
 
 /**
- *
  * @category        Module
  * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Module\Admin;
@@ -34,17 +31,28 @@ use XoopsModules\Adslight\Helper;
  */
 class TestdataButtons
 {
-    //functions for import buttons
-    public static function loadButtonConfig(Admin $adminObject): void
+    /** Button status constants */
+    private const SHOW_BUTTONS = 1;
+    private const HIDE_BUTTONS = 0;
+
+    /**
+     * Load the test button configuration
+     *
+     * @param \Xmf\Module\Admin $adminObject
+     *
+     * @return void
+     */
+    public static function loadButtonConfig($adminObject): void
     {
-        $moduleDirName       = \basename(\dirname(__DIR__, 2));
-        $moduleDirNameUpper  = \mb_strtoupper($moduleDirName);
-        $yamlFile            = \dirname(__DIR__, 2) . '/config/admin.yml';
+        $moduleDirName      = \basename(\dirname(__DIR__, 2));
+        $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
+        $helper              = Helper::getInstance();
+        $yamlFile            = $helper->path('/config/admin.yml');
+        /** @var array $config */
         $config              = Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
         $displaySampleButton = $config['displaySampleButton'];
-        $helper              = Helper::getInstance();
 
-        if (1 === $displaySampleButton) {
+        if (self::SHOW_BUTTONS == $displaySampleButton) {
             \xoops_loadLanguage('admin/modulesadmin', 'system');
             $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'LOAD_SAMPLEDATA'), $helper->url('testdata/index.php?op=load'), 'add');
             $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'), $helper->url('testdata/index.php?op=save'), 'add');
@@ -57,20 +65,30 @@ class TestdataButtons
         }
     }
 
+    /**
+     * Hide the test buttons
+     *
+     * @return void
+     */
     public static function hideButtons(): void
     {
         $yamlFile                   = \dirname(__DIR__, 2) . '/config/admin.yml';
         $app                        = [];
-        $app['displaySampleButton'] = 0;
+        $app['displaySampleButton'] = self::HIDE_BUTTONS;
         Yaml::save($app, $yamlFile);
         \redirect_header('index.php', 0, '');
     }
 
+    /**
+     * Show the test buttons
+     *
+     * @return void
+     */
     public static function showButtons(): void
     {
         $yamlFile                   = \dirname(__DIR__, 2) . '/config/admin.yml';
         $app                        = [];
-        $app['displaySampleButton'] = 1;
+        $app['displaySampleButton'] = self::SHOW_BUTTONS;
         Yaml::save($app, $yamlFile);
         \redirect_header('index.php', 0, '');
     }
