@@ -187,7 +187,7 @@ function modifyAd($lid): void
 
         $contactSel1 = $contactSel2 = $contactSel3 = $contactSel4 = '';
         $selected    = 'contactSel' . (int)$contactby;
-        {$$selected} = ' selected';
+        ${$selected} = ' selected';
 
         echo " <td class='head'>"
              . _AM_ADSLIGHT_CONTACTBY

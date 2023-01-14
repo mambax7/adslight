@@ -496,7 +496,7 @@ class Blocksadmin
     /**
      * @param int $bid
      */
-    public function editBlock(int $bid: void 
+    public function editBlock(int $bid): void
     {
         //        require_once \dirname(__DIR__,2) . '/admin/admin_header.php';
         //        \xoops_cp_header();
