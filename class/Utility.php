@@ -595,9 +595,13 @@ class Utility extends Common\SysUtility
                 $positive = false;
                 $value    *= -1;
             }
-            $letter = $positive ? 'p' : 'n';
-            $prefix = $suffix = $cprefix = $csuffix = $signal = '';
-            $signal = $positive ? $locale['positive_sign'] : $locale['negative_sign'];
+            $letter  = $positive ? 'p' : 'n';
+            $signal  = '';
+            $csuffix = '';
+            $cprefix = '';
+            $suffix  = '';
+            $prefix  = '';
+            $signal  = $positive ? $locale['positive_sign'] : $locale['negative_sign'];
             switch (true) {
                 case 1 === $locale["{$letter}_sign_posn"]
                      && '+' === $flags['usesignal']:
