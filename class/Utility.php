@@ -808,8 +808,8 @@ class Utility extends Common\SysUtility
                 $description = \mb_substr($description, 0, 100 - 1) . '...';
             }
         }
-        $modify = "<a href='category.php?op=mod&amp;cid=" . $categoryObj->cid() . '&amp;pid=' . $categoryObj->pid() . "'>" . $icons['edit'] . '</a>';
-        $delete = "<a href='category.php?op=del&amp;cid=" . $categoryObj->cid() . "'>" . $icons['delete'] . '</a>';
+        $modify = "<a href='category.php?op=mod&amp;cid=" . $categoryObj->cid . '&amp;pid=' . $categoryObj->pid . "'>" . $icons['edit'] . '</a>';
+        $delete = "<a href='category.php?op=del&amp;cid=" . $categoryObj->cid . "'>" . $icons['delete'] . '</a>';
         $spaces = \str_repeat('&nbsp;', ($level * 3));
         /*
         $spaces = '';
@@ -819,25 +819,25 @@ class Utility extends Common\SysUtility
         */
         echo "<tr>\n"
              . "<td class='even center'>"
-             . $categoryObj->cid()
+             . $categoryObj->cid
              . "</td>\n"
              . "<td class='even left'>"
              . $spaces
              . "<a href='"
              . $helper->url()
              . 'category.php?cid='
-             . $categoryObj->cid()
+             . $categoryObj->cid
              . "'><img src='"
              . $helper->url()
              . "assets/images/links/subcat.gif' alt=''>&nbsp;"
-             . $categoryObj->name()
+             . $categoryObj->title
              . "</a></td>\n"
              . "<td class='even center'>"
-             . $categoryObj->weight()
+             . $categoryObj->cat_order
              . "</td>\n"
              . "<td class='even center'> {$modify} {$delete} </td>\n"
              . "</tr>\n";
-        $subCategoriesObj = $helper->getHandler('Categories')->getCategories(0, 0, $categoryObj->cid());
+        $subCategoriesObj = $helper->getHandler('Categories')->getCategories(0, 0, $categoryObj->cid);
         if (\count($subCategoriesObj) > 0) {
             ++$level;
             foreach ($subCategoriesObj as $thiscat) {

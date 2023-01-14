@@ -33,16 +33,16 @@ use XoopsModules\Adslight\{
  */
 class Categories extends \XoopsObject
 {
-    private $cid;
-    private $pid;
-    private $title;
-    private $cat_desc;
+    public  $cid;
+    public  $pid;
+    public  $title;
+    public  $cat_desc;
     private $cat_keywords;
-    private $img;
-    private $cat_order;
-    private $affprice;
-    private $cat_moderate;
-    private $moderate_subcat;
+    public  $img;
+    public  $cat_order;
+    public  $affprice;
+    public  $cat_moderate;
+    public  $moderate_subcat;
     public  $helper;
     public  $permHelper;
 
