@@ -266,7 +266,7 @@ class SysUtility
                 }
                 // calculate the length of the plain text part of the line; handle entities as one character
                 $contentLength = \mb_strlen(\preg_replace('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', ' ', $lineMatchings[2]));
-                if ($totalLength + $contentLength > $length) {
+                if (($totalLength + $contentLength) > $length) {
                     // the number of characters which are left
                     $left           = $length - $totalLength;
                     $entitiesLength = 0;
@@ -424,8 +424,6 @@ class SysUtility
      */
     public static function addField(string $field, string $table)
     {
-        global $GLOBALS['xoopsDB'];
-
         return $GLOBALS['xoopsDB']->queryF('ALTER TABLE ' . $table . " ADD $field;");
     }
 }
