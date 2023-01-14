@@ -64,17 +64,17 @@ class Utility extends Common\SysUtility
 
                 if ($email) {
                     $tags               = [];
-                    $subject            = '' . \_ADSLIGHT_ALMOST . '';
+                    $subject            = \_ADSLIGHT_ALMOST;
                     $tags['TITLE']      = $title;
-                    $tags['HELLO']      = '' . \_ADSLIGHT_HELLO . '';
-                    $tags['YOUR_AD_ON'] = '' . \_ADSLIGHT_YOUR_AD_ON . '';
-                    $tags['VEDIT_AD']   = '' . \_ADSLIGHT_VEDIT_AD . '';
-                    $tags['YOUR_AD']    = '' . \_ADSLIGHT_YOUR_AD . '';
-                    $tags['SOON']       = '' . \_ADSLIGHT_SOON . '';
-                    $tags['VIEWED']     = '' . \_ADSLIGHT_VU . '';
-                    $tags['TIMES']      = '' . \_ADSLIGHT_TIMES . '';
-                    $tags['WEBMASTER']  = '' . \_ADSLIGHT_WEBMASTER . '';
-                    $tags['THANKS']     = '' . \_ADSLIGHT_THANKS . '';
+                    $tags['HELLO']      = \_ADSLIGHT_HELLO;
+                    $tags['YOUR_AD_ON'] = \_ADSLIGHT_YOUR_AD_ON;
+                    $tags['VEDIT_AD']   = \_ADSLIGHT_VEDIT_AD;
+                    $tags['YOUR_AD']    = \_ADSLIGHT_YOUR_AD;
+                    $tags['SOON']       = \_ADSLIGHT_SOON;
+                    $tags['VIEWED']     = \_ADSLIGHT_VU;
+                    $tags['TIMES']      = \_ADSLIGHT_TIMES;
+                    $tags['WEBMASTER']  = \_ADSLIGHT_WEBMASTER;
+                    $tags['THANKS']     = \_ADSLIGHT_THANKS;
                     $tags['TYPE']       = static::getNameType($type);
                     $tags['DESCTEXT']   = $desctext;
                     $tags['HITS']       = $hits;
@@ -126,23 +126,23 @@ class Utility extends Common\SysUtility
                 //  $message = ""._ADS_HELLO." $submitter,\n\n"._ADS_STOP2."\n $type : $title\n $desctext\n"._ADS_STOP3."\n\n"._ADS_VU." $lu "._ADS_VU2."\n\n"._ADS_OTHER." ".XOOPS_URL."/modules/myAds\n\n"._ADS_THANK."\n\n"._ADS_TEAM." ".$meta['title']."\n".XOOPS_URL."";
                 if ($email) {
                     $tags               = [];
-                    $subject            = '' . \_ADSLIGHT_STOP . '';
+                    $subject            = \_ADSLIGHT_STOP;
                     $tags['TITLE']      = $title;
-                    $tags['HELLO']      = '' . \_ADSLIGHT_HELLO . '';
+                    $tags['HELLO']      = \_ADSLIGHT_HELLO;
                     $tags['TYPE']       = static::getNameType($type);
                     $tags['DESCTEXT']   = $desctext;
                     $tags['HITS']       = $hits;
                     $tags['META_TITLE'] = $meta['title'] ?? '';
                     $tags['SUBMITTER']  = $submitter;
-                    $tags['YOUR_AD_ON'] = '' . \_ADSLIGHT_YOUR_AD_ON . '';
-                    $tags['EXPIRED']    = '' . \_ADSLIGHT_EXPIRED . '';
+                    $tags['YOUR_AD_ON'] = \_ADSLIGHT_YOUR_AD_ON;
+                    $tags['EXPIRED']    = \_ADSLIGHT_EXPIRED;
                     $tags['MESSTEXT']   = \stripslashes($message);
-                    $tags['OTHER']      = '' . \_ADSLIGHT_OTHER . '';
-                    $tags['WEBMASTER']  = '' . \_ADSLIGHT_WEBMASTER . '';
-                    $tags['THANKS']     = '' . \_ADSLIGHT_THANKS . '';
-                    $tags['VIEWED']     = '' . \_ADSLIGHT_VU . '';
-                    $tags['TIMES']      = '' . \_ADSLIGHT_TIMES . '';
-                    $tags['TEAM']       = '' . \_ADSLIGHT_TEAM . '';
+                    $tags['OTHER']      = \_ADSLIGHT_OTHER;
+                    $tags['WEBMASTER']  = \_ADSLIGHT_WEBMASTER;
+                    $tags['THANKS']     = \_ADSLIGHT_THANKS;
+                    $tags['VIEWED']     = \_ADSLIGHT_VU;
+                    $tags['TIMES']      = \_ADSLIGHT_TIMES;
+                    $tags['TEAM']       = \_ADSLIGHT_TEAM;
                     $tags['DURATION']   = $expire;
                     $tags['LINK_URL']   = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/viewads.php?' . '&lid=' . $lids;
                     $mail               = \getMailer();
@@ -183,7 +183,7 @@ class Utility extends Common\SysUtility
         }
         $finalrating = $totalrating / $votesDB;
         $finalrating = \number_format($finalrating, 4);
-        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET user_rating={$finalrating}, user_votes={$votesDB} WHERE usid=" . $xoopsDB->escape($sel_id) . '';
+        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET user_rating={$finalrating}, user_votes={$votesDB} WHERE usid=" . $xoopsDB->escape($sel_id);
         //echo $query;
         $xoopsDB->query($query) || exit();
     }
@@ -209,7 +209,7 @@ class Utility extends Common\SysUtility
         }
         $finalrating = $totalrating / $votesDB;
         $finalrating = \number_format($finalrating, 4);
-        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET item_rating={$finalrating}, item_votes={$votesDB} WHERE lid=" . $xoopsDB->escape($sel_id) . '';
+        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET item_rating={$finalrating}, item_votes={$votesDB} WHERE lid=" . $xoopsDB->escape($sel_id);
         //echo $query;
         $xoopsDB->query($query) || exit();
     }
@@ -373,28 +373,28 @@ class Utility extends Common\SysUtility
     {
         $orderbyTrans = '';
         if ('hits ASC' === $orderby) {
-            $orderbyTrans = '' . \_ADSLIGHT_POPULARITYLTOM . '';
+            $orderbyTrans = \_ADSLIGHT_POPULARITYLTOM;
         }
         if ('hits DESC' === $orderby) {
-            $orderbyTrans = '' . \_ADSLIGHT_POPULARITYMTOL . '';
+            $orderbyTrans = \_ADSLIGHT_POPULARITYMTOL;
         }
         if ('title ASC' === $orderby) {
-            $orderbyTrans = '' . \_ADSLIGHT_TITLEATOZ . '';
+            $orderbyTrans = \_ADSLIGHT_TITLEATOZ;
         }
         if ('title DESC' === $orderby) {
-            $orderbyTrans = '' . \_ADSLIGHT_TITLEZTOA . '';
+            $orderbyTrans = \_ADSLIGHT_TITLEZTOA;
         }
         if ('date_created ASC' === $orderby) {
-            $orderbyTrans = '' . \_ADSLIGHT_DATEOLD . '';
+            $orderbyTrans = \_ADSLIGHT_DATEOLD;
         }
         if ('date_created DESC' === $orderby) {
-            $orderbyTrans = '' . \_ADSLIGHT_DATENEW . '';
+            $orderbyTrans = \_ADSLIGHT_DATENEW;
         }
         if ('price ASC' === $orderby) {
             $orderbyTrans = \_ADSLIGHT_PRICELTOH;
         }
         if ('price DESC' === $orderby) {
-            $orderbyTrans = '' . \_ADSLIGHT_PRICEHTOL . '';
+            $orderbyTrans = \_ADSLIGHT_PRICEHTOL;
         }
 
         return $orderbyTrans;
