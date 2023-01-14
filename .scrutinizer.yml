@@ -1,7 +1,7 @@
 # language: php
 build:
   environment:
-    php: 8.0.11
+    php: 8.2.0
   nodes:
     tests: true
     analysis:
