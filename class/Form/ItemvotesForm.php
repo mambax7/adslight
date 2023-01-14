@@ -81,6 +81,6 @@ class ItemvotesForm extends \XoopsThemeForm
         $this->addElement(new \XoopsFormDateTime(\AM_ADSLIGHT_ITEMVOTES_RATINGTIMESTAMP, 'ratingtimestamp', 0, $this->targetObject->getVar('ratingtimestamp')));
 
         $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

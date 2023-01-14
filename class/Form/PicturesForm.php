@@ -83,6 +83,6 @@ class PicturesForm extends \XoopsThemeForm
         $this->addElement(new \XoopsFormTextArea(\AM_ADSLIGHT_PICTURES_URL, 'url', $this->targetObject->getVar('url'), 4, 47), false);
 
         $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

@@ -198,6 +198,6 @@ class ListingForm extends \XoopsThemeForm
         $this->addElement(new \XoopsFormLabel(\AM_ADSLIGHT_LISTING_REMIND, $this->targetObject->getVar('remind'), 'remind'));
 
         $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

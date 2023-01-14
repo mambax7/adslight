@@ -66,6 +66,6 @@ class PriceForm extends \XoopsThemeForm
         $this->addElement(new \XoopsFormText(\AM_ADSLIGHT_PRICE_NOM_PRICE, 'nom_price', 50, 255, $this->targetObject->getVar('nom_price')), false);
 
         $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

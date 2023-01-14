@@ -105,6 +105,6 @@ class RepliesForm extends \XoopsThemeForm
         $this->addElement(new \XoopsFormSelectUser(\AM_ADSLIGHT_REPLIES_R_USID, 'r_usid', false, $this->targetObject->getVar('r_usid'), 1, false), false);
 
         $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

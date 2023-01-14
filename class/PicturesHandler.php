@@ -339,7 +339,7 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
         $form       = new \XoopsThemeForm(\_ADSLIGHT_EDIT_CAPTION, 'form_picture', 'editdesc.php', 'post', true);
         $field_desc = new \XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send = new \XoopsFormButton(\_ADSLIGHT_EDIT, 'submit_button', _SUBMIT, 'submit');
+        $button_send = new \XoopsFormButton(\_ADSLIGHT_EDIT, 'submit_button', \_SUBMIT, 'submit');
         //@todo - replace alt with language string
         $field_warning = new \XoopsFormLabel("<img src='{$filename}' alt='sssss'>");
         $field_cod_img = new \XoopsFormHidden('cod_img', $cod_img);

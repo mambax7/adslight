@@ -181,11 +181,11 @@ class SysUtility
             return null;
         }
 
-        $result = $xoopsDB->query($sql);
-        if ($xoopsDB->isResultSet($result)) {
-            $result_array = $xoopsDB->fetchArray($result);
+        $result = $GLOBALS['xoopsDB']->query($sql);
+        if ($GLOBALS['xoopsDB']->isResultSet($result)) {
+            $result_array = $GLOBALS['xoopsDB']->fetchArray($result);
         } else {
-            trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $GLOBALS['xoopsDB']->error(), \E_USER_ERROR);
             $logger = \XoopsLogger::getInstance();
             $logger->handleError(\E_USER_WARNING, $sql, __FILE__, __LINE__);
 
@@ -424,8 +424,8 @@ class SysUtility
      */
     public static function addField(string $field, string $table)
     {
-        global $xoopsDB;
+        global $GLOBALS['xoopsDB'];
 
-        return $xoopsDB->queryF('ALTER TABLE ' . $table . " ADD $field;");
+        return $GLOBALS['xoopsDB']->queryF('ALTER TABLE ' . $table . " ADD $field;");
     }
 }

@@ -584,7 +584,7 @@ function modifyAdsS(
     $type          = \htmlspecialchars($type, ENT_QUOTES | ENT_HTML5);
     $desctext      = $myts->displayTarea($desctext, 1, 1, 1);
     $tel           = \htmlspecialchars($tel, ENT_QUOTES | ENT_HTML5);
-    $price         = str_replace([' '], '', $price);
+    $price         = str_replace(' ', '', $price);
     $typeprice     = \htmlspecialchars($typeprice, ENT_QUOTES | ENT_HTML5);
     $typecondition = \htmlspecialchars($typecondition, ENT_QUOTES | ENT_HTML5);
     $submitter     = \htmlspecialchars($submitter, ENT_QUOTES | ENT_HTML5);
@@ -697,7 +697,7 @@ function listingValid(
     $type          = \htmlspecialchars($type, ENT_QUOTES | ENT_HTML5);
     $desctext      = $myts->displayTarea($desctext, 1, 1, 1);
     $tel           = \htmlspecialchars($tel, ENT_QUOTES | ENT_HTML5);
-    $price         = str_replace([' '], '', $price);
+    $price         = str_replace(' ', '', $price);
     $typeprice     = \htmlspecialchars($typeprice, ENT_QUOTES | ENT_HTML5);
     $typecondition = \htmlspecialchars($typecondition, ENT_QUOTES | ENT_HTML5);
     $submitter     = \htmlspecialchars($submitter, ENT_QUOTES | ENT_HTML5);
@@ -761,7 +761,7 @@ function listingValid(
     $tags['TYPE']            = Utility::getNameType($type);
     $tags['LINK_URL']        = XOOPS_URL . "/modules/adslight/viewads.php?&lid={$lid}";
 
-    $sql                    = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cat}";
+    $sql                    = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
     $result                 = $xoopsDB->query($sql);
     $row                    = $xoopsDB->fetchArray($result);
     $tags['CATEGORY_TITLE'] = $row['title'];

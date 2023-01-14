@@ -66,6 +66,6 @@ class ConditionForm extends \XoopsThemeForm
         $this->addElement(new \XoopsFormText(\AM_ADSLIGHT_CONDITION_NOM_CONDITION, 'nom_condition', 50, 255, $this->targetObject->getVar('nom_condition')), false);
 
         $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

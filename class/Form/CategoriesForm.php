@@ -135,6 +135,6 @@ class CategoriesForm extends \XoopsThemeForm
         $this->addElement(new \XoopsFormSelectUser(\AM_ADSLIGHT_CATEGORIES_MODERATE_SUBCAT, 'moderate_subcat', false, $this->targetObject->getVar('moderate_subcat'), 1, false), false);
 
         $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

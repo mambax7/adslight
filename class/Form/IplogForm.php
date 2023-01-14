@@ -81,6 +81,6 @@ class IplogForm extends \XoopsThemeForm
         $this->addElement(new \XoopsFormText(\AM_ADSLIGHT_IPLOG_EMAIL, 'email', 50, 255, $this->targetObject->getVar('email')), false);
 
         $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

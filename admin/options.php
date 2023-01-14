@@ -251,9 +251,9 @@ function listingDelType($id_type): void
 #  function listingAddPrice
 #####################################################
 /**
- * @param $type
+ * @param string $nom_price
  */
-function listingAddPrice($type): void
+function listingAddPrice(string $nom_price): void
 {
     global $xoopsDB, $xoopsConfig, $myts, $admin_lang;
     $helper = Helper::getInstance();
@@ -276,7 +276,7 @@ function listingAddPrice($type): void
         echo '</td></tr></table>';
         xoops_cp_footer();
     } else {
-        $nom_price = \htmlspecialchars($price, ENT_QUOTES | ENT_HTML5);
+        $nom_price = \htmlspecialchars($nom_price, ENT_QUOTES | ENT_HTML5);
         if ('' === $nom_price) {
             $nom_price = '! ! ? ! !';
         }
