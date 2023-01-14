@@ -37,7 +37,7 @@ if ((!defined('XOOPS_ROOT_PATH'))
  */
 function tableExists($tablename): bool
 {
-    $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '${tablename}'");
+    $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '{$tablename}'");
 
     return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
 }

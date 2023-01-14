@@ -207,7 +207,7 @@ if (Request::hasVar('submit', 'POST')) {
     $addphotonow = Request::getInt('addphotonow', 0, 'POST');
     if ($addphotonow) {
         //$lid = $xoopsDB->getInsertId();
-        $helper->redirect("view_photos.php?lid=${lid}&uid=${usid}", 3, _ADSLIGHT_ADSADDED);
+        $helper->redirect("view_photos.php?lid={$lid}&uid={$usid}", 3, _ADSLIGHT_ADSADDED);
     } else {
         $helper->redirect('index.php', 3, _ADSLIGHT_ADSADDED);
     }

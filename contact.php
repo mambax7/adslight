@@ -71,7 +71,7 @@ if (Request::hasVar('submit', 'POST')) {
         $teles = Request::getString('tele', '', 'POST');
 
         if ($price) {
-            $price = '' . _ADSLIGHT_PRICE . ' ' . $helper->getConfig('adslight_currency_symbol') . " ${price}";
+            $price = '' . _ADSLIGHT_PRICE . ' ' . $helper->getConfig('adslight_currency_symbol') . " {$price}";
         } else {
             $price = '';
         }
@@ -127,10 +127,10 @@ if (Request::hasVar('submit', 'POST')) {
         $mail->send();
         echo $mail->getErrors();
 
-        $sql = 'INSERT INTO ' . $xoopsDB->prefix('adslight_ip_log') . " values ( '', '${lid}', '${date_created}', '${namep}', '${ipnumber}', '" . Request::getString('post', '', 'POST') . "')";
+        $sql = 'INSERT INTO ' . $xoopsDB->prefix('adslight_ip_log') . " values ( '', '{$lid}', '{$date_created}', '{$namep}', '{$ipnumber}', '" . Request::getString('post', '', 'POST') . "')";
         $xoopsDB->query($sql);
 
-        $sql = 'INSERT INTO ' . $xoopsDB->prefix('adslight_replies') . " values ('','${id}', '${title}', '${date_created}', '${namep}', '${messtext}', '${tele}', '" . Request::getString('post', '', 'POST') . "', '${r_usid}')";
+        $sql = 'INSERT INTO ' . $xoopsDB->prefix('adslight_replies') . " values ('','{$id}', '{$title}', '{$date_created}', '{$namep}', '{$messtext}', '{$tele}', '" . Request::getString('post', '', 'POST') . "', '{$r_usid}')";
         $xoopsDB->query($sql);
 
         redirect_header('index.php', 3, _ADSLIGHT_MESSEND);
@@ -188,7 +188,7 @@ if (Request::hasVar('submit', 'POST')) {
     echo '<b>' . _ADSLIGHT_CONTACTAUTOR . '</b><br><br>';
     echo '' . _ADSLIGHT_TEXTAUTO . '<br>';
     echo '<form onSubmit="return verify();" method="post" action="contact.php" name="cont">';
-    echo "<input type=\"hidden\" name=\"id\" value=\"${lid}\" >";
+    echo "<input type=\"hidden\" name=\"id\" value=\"{$lid}\" >";
     echo '<input type="hidden" name="submit" value="1" >';
     echo "<table width='100%' class='outer' cellspacing='1'>
     <tr>
@@ -197,14 +197,14 @@ if (Request::hasVar('submit', 'POST')) {
         $idd  = $GLOBALS['xoopsUser']->getVar('uname', 'E');
         $idde = $GLOBALS['xoopsUser']->getVar('email', 'E');
 
-        echo "<td class='even'><input type=\"text\" name=\"namep\" size=\"42\" value=\"${idd}\" >";
+        echo "<td class='even'><input type=\"text\" name=\"namep\" size=\"42\" value=\"{$idd}\" >";
     } else {
         echo "<td class='even'><input type=\"text\" name=\"namep\" size=\"42\" ></td>";
     }
     echo "</tr>
     <tr>
       <td class='head'>" . _ADSLIGHT_YOUREMAIL . "</td>
-      <td class='even'><input type=\"text\" name=\"post\" size=\"42\" value=\"${idde}\" ></font></td>
+      <td class='even'><input type=\"text\" name=\"post\" size=\"42\" value=\"{$idde}\" ></font></td>
     </tr>
     <tr>
       <td class='head'>" . _ADSLIGHT_YOURPHONE . "</td>
@@ -226,9 +226,9 @@ if (Request::hasVar('submit', 'POST')) {
         </td></tr></table>
     <br>';
     echo '<input type="hidden" name="ip_id" value="" >';
-    echo "<input type=\"hidden\" name=\"lid\" value=\"${lid}\" >";
-    echo "<input type=\"hidden\" name=\"ipnumber\" value=\"${ipnumber}\" >";
-    echo "<input type=\"hidden\" name=\"date_created\" value=\"${time}\" >";
+    echo "<input type=\"hidden\" name=\"lid\" value=\"{$lid}\" >";
+    echo "<input type=\"hidden\" name=\"ipnumber\" value=\"{$ipnumber}\" >";
+    echo "<input type=\"hidden\" name=\"date_created\" value=\"{$time}\" >";
     echo '<p><input type="submit" name="submit" value="' . _ADSLIGHT_SENDFR . '" ></p>
 ' . $GLOBALS['xoopsSecurity']->getTokenHTML() . '
     </form>';

@@ -18,7 +18,7 @@ class ObjectTree extends \XoopsObjectTree
     //    {
     //        global $xoopsDB;
     //        $sel_id = (int)$sel_id;
-    //        $sql    = 'SELECT ' . $this->parentId . ' FROM ' . $this->table . ' WHERE ' . $this->myId . "=${sel_id}";
+    //        $sql    = 'SELECT ' . $this->parentId . ' FROM ' . $this->table . ' WHERE ' . $this->myId . "={$sel_id}";
     //        $result = $xoopsDB->query($sql);
     //        if (0 === $xoopsDB->getRowsNum($result)) {
     //            return $path;
@@ -47,7 +47,7 @@ class ObjectTree extends \XoopsObjectTree
     //        global $xoopsDB;
     //        $path   = !empty($path) ? '&nbsp;:&nbsp;' . $path : $path;
     //        $sel_id = (int)$sel_id;
-    //        $sql    = 'SELECT ' . $this->parentId . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->myId . "=${sel_id}";
+    //        $sql    = 'SELECT ' . $this->parentId . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->myId . "={$sel_id}";
     //        $result = $xoopsDB->query($sql);
     //        if (0 === $xoopsDB->getRowsNum($result)) {
     //            return $path;

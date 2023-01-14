@@ -66,16 +66,16 @@ function listingDel($lid, $ok): void
                 while ([$purl] = $xoopsDB->fetchRow($result1)) {
                     if ($purl) {
                         $destination = XOOPS_ROOT_PATH . '/uploads/adslight';
-                        if (is_file("${destination}/${purl}")) {
-                            unlink("${destination}/${purl}");
+                        if (is_file("{$destination}/{$purl}")) {
+                            unlink("{$destination}/{$purl}");
                         }
                         $destination2 = XOOPS_ROOT_PATH . '/uploads/adslight/thumbs';
-                        if (is_file("${destination2}/thumb_${purl}")) {
-                            unlink("${destination2}/thumb_${purl}");
+                        if (is_file("{$destination2}/thumb_{$purl}")) {
+                            unlink("{$destination2}/thumb_{$purl}");
                         }
                         $destination3 = XOOPS_ROOT_PATH . '/uploads/adslight/midsize';
-                        if (is_file("${destination3}/resized_${purl}")) {
-                            unlink("${destination3}/resized_${purl}");
+                        if (is_file("{$destination3}/resized_{$purl}")) {
+                            unlink("{$destination3}/resized_{$purl}");
                         }
                         $xoopsDB->queryF(
                             'DELETE FROM ' . $xoopsDB->prefix(
@@ -213,12 +213,12 @@ function modifyAd($lid): void
             echo '<form action="modify.php" method=post enctype="multipart/form-data">';
             echo $GLOBALS['xoopsSecurity']->getTokenHTML();
             echo '<table><tr class="head" border="2">
-    <td class="head">' . _ADSLIGHT_NUMANNN . " </td><td class=\"head\" border=\"1\">${lid} " . _ADSLIGHT_DU . " ${dates}</td>
+    <td class="head">' . _ADSLIGHT_NUMANNN . " </td><td class=\"head\" border=\"1\">{$lid} " . _ADSLIGHT_DU . " {$dates}</td>
     </tr><tr>";
             if ('1' === $helper->getConfig('adslight_diff_name')) {
-                echo '<td class="head">' . _ADSLIGHT_SENDBY . " </td><td class=\"head\"><input type=\"text\" name=\"submitter\" size=\"50\" value=\"${submitter}\" ></td>";
+                echo '<td class="head">' . _ADSLIGHT_SENDBY . " </td><td class=\"head\"><input type=\"text\" name=\"submitter\" size=\"50\" value=\"{$submitter}\" ></td>";
             } else {
-                echo '<td class="head">' . _ADSLIGHT_SENDBY . " </td><td class=\"head\"><input type=\"hidden\" name=\"submitter\" value=\"${submitter}\">${submitter}</td>";
+                echo '<td class="head">' . _ADSLIGHT_SENDBY . " </td><td class=\"head\"><input type=\"hidden\" name=\"submitter\" value=\"{$submitter}\">{$submitter}</td>";
             }
             echo '</tr><tr>';
             if (1 === $contactby) {
@@ -241,19 +241,19 @@ function modifyAd($lid): void
     <option value="3">' . _ADSLIGHT_CONTACT_BY_BOTH . '</option>
     <option value="4">' . _ADSLIGHT_CONTACT_BY_PHONE . '</option></select></td></tr>';
             if ('1' === $helper->getConfig('adslight_diff_email')) {
-                echo '<tr><td class="head">' . _ADSLIGHT_EMAIL . " </td><td class=\"head\"><input type=\"text\" name=\"email\" size=\"50\" value=\"${email}\" ></td>";
+                echo '<tr><td class="head">' . _ADSLIGHT_EMAIL . " </td><td class=\"head\"><input type=\"text\" name=\"email\" size=\"50\" value=\"{$email}\" ></td>";
             } else {
-                echo '<tr><td class="head">' . _ADSLIGHT_EMAIL . " </td><td class=\"head\">${email}<input type=\"hidden\" name=\"email\" value=\"${email}\" ></td>";
+                echo '<tr><td class="head">' . _ADSLIGHT_EMAIL . " </td><td class=\"head\">{$email}<input type=\"hidden\" name=\"email\" value=\"{$email}\" ></td>";
             }
             echo '</tr><tr>
-    <td class="head">' . _ADSLIGHT_TEL . " </td><td class=\"head\"><input type=\"text\" name=\"tel\" size=\"50\" value=\"${tel}\" ></td>
+    <td class="head">' . _ADSLIGHT_TEL . " </td><td class=\"head\"><input type=\"text\" name=\"tel\" size=\"50\" value=\"{$tel}\" ></td>
     </tr>";
             echo '<tr>
-    <td class="head">' . _ADSLIGHT_TOWN . " </td><td class=\"head\"><input type=\"text\" name=\"town\" size=\"50\" value=\"${town}\" ></td>
+    <td class="head">' . _ADSLIGHT_TOWN . " </td><td class=\"head\"><input type=\"text\" name=\"town\" size=\"50\" value=\"{$town}\" ></td>
     </tr>";
             if ('1' === $helper->getConfig('adslight_use_country')) {
                 echo '<tr>
-    <td class="head">' . _ADSLIGHT_COUNTRY . " </td><td class=\"head\"><input type=\"text\" name=\"country\" size=\"50\" value=\"${country}\" ></td>
+    <td class="head">' . _ADSLIGHT_COUNTRY . " </td><td class=\"head\"><input type=\"text\" name=\"country\" size=\"50\" value=\"{$country}\" ></td>
     </tr>";
             } else {
                 echo '<input type="hidden" name="country" value="">';
@@ -273,9 +273,9 @@ function modifyAd($lid): void
             }
             echo '>' . _ADSLIGHT_SOLD . '</td></tr>';
             echo '<tr>
-    <td class="head">' . _ADSLIGHT_TITLE2 . " </td><td class=\"head\"><input type=\"text\" name=\"title\" size=\"50\" value=\"${title}\" ></td>
+    <td class="head">' . _ADSLIGHT_TITLE2 . " </td><td class=\"head\"><input type=\"text\" name=\"title\" size=\"50\" value=\"{$title}\" ></td>
     </tr>";
-            echo '<tr><td class="head">' . _ADSLIGHT_PRICE2 . " </td><td class=\"head\"><input type=\"text\" name=\"price\" size=\"20\" value=\"${price}\" > " . $helper->getConfig('adslight_currency_symbol');
+            echo '<tr><td class="head">' . _ADSLIGHT_PRICE2 . " </td><td class=\"head\"><input type=\"text\" name=\"price\" size=\"20\" value=\"{$price}\" > " . $helper->getConfig('adslight_currency_symbol');
 
             $sql     = 'SELECT nom_price, id_price FROM ' . $xoopsDB->prefix('adslight_price') . ' ORDER BY id_price';
             $result3 = $xoopsDB->query($sql);
@@ -285,7 +285,7 @@ function modifyAd($lid): void
                 if ($id_price === $typeprice) {
                     $sel = 'selected';
                 }
-                echo "<option value=\"${id_price}\" ${sel}>${nom_price}</option>";
+                echo "<option value=\"{$id_price}\" {$sel}>{$nom_price}</option>";
             }
             echo '</select></td></tr>';
             $moduleId = $xoopsModule->getVar('mid');
@@ -297,13 +297,13 @@ function modifyAd($lid): void
             //If no access
             if ($grouppermHandler->checkRight('adslight_premium', $perm_itemid, $groups, $moduleId)) {
                 echo "<tr>
-    <td width='30%' class='head'>" . _ADSLIGHT_HOW_LONG . " </td><td class='head'><input type=\"text\" name=\"expire\" size=\"3\" maxlength=\"3\" value=\"${expire}\" >  " . _ADSLIGHT_DAY . '</td>
+    <td width='30%' class='head'>" . _ADSLIGHT_HOW_LONG . " </td><td class='head'><input type=\"text\" name=\"expire\" size=\"3\" maxlength=\"3\" value=\"{$expire}\" >  " . _ADSLIGHT_DAY . '</td>
     </tr>';
             } else {
                 echo "<tr>
-    <td width='30%' class='head'>" . _ADSLIGHT_WILL_LAST . " </td><td class='head'>${expire}  " . _ADSLIGHT_DAY . '</td>
+    <td width='30%' class='head'>" . _ADSLIGHT_WILL_LAST . " </td><td class='head'>{$expire}  " . _ADSLIGHT_DAY . '</td>
     </tr>';
-                echo "<input type=\"hidden\" name=\"expire\" value=\"${expire}\" >";
+                echo "<input type=\"hidden\" name=\"expire\" value=\"{$expire}\" >";
             }
 
             /// Type d'annonce
@@ -317,7 +317,7 @@ function modifyAd($lid): void
                 if ($id_type === $type) {
                     $sel = 'selected';
                 }
-                echo "<option value=\"${id_type}\" ${sel}>${nom_type}</option>";
+                echo "<option value=\"{$id_type}\" {$sel}>{$nom_type}</option>";
             }
             echo '</select></td></tr>';
 
@@ -332,7 +332,7 @@ function modifyAd($lid): void
                 if ($id_condition === $typecondition) {
                     $sel = 'selected';
                 }
-                echo "<option value=\"${id_condition}\" ${sel}>${nom_condition}</option>";
+                echo "<option value=\"{$id_condition}\" {$sel}>{$nom_condition}</option>";
             }
             echo '</select></td></tr>';
 
@@ -379,9 +379,9 @@ function modifyAd($lid): void
             } else {
                 echo '<input type="hidden" name="valid" value="Yes" >';
             }
-            echo "<input type=\"hidden\" name=\"lid\" value=\"${lid}\" >";
-            echo "<input type=\"hidden\" name=\"premium\" value=\"${premium}\" >";
-            echo "<input type=\"hidden\" name=\"date_created\" value=\"${date_created}\" >
+            echo "<input type=\"hidden\" name=\"lid\" value=\"{$lid}\" >";
+            echo "<input type=\"hidden\" name=\"premium\" value=\"{$premium}\" >";
+            echo "<input type=\"hidden\" name=\"date_created\" value=\"{$date_created}\" >
     " . $GLOBALS['xoopsSecurity']->getTokenHTML() . '';
             echo '</form><br></fieldset><br>';
         }
@@ -438,7 +438,7 @@ function modifyAds(
 
     $sql    = 'UPDATE '
               . $xoopsDB->prefix('adslight_listing')
-              . " SET cid='${cat}', title='${title}', status='${status}',  expire='${expire}', type='${type}', desctext='${desctext}', tel='${tel}', price='${price}', typeprice='${typeprice}', typecondition='${typecondition}', email='${email}', submitter='${submitter}', town='${town}', country='${country}', contactby='${contactby}', premium='${premium}', valid='${valid}' WHERE lid=${lid}";
+              . " SET cid='{$cat}', title='{$title}', status='{$status}',  expire='{$expire}', type='{$type}', desctext='{$desctext}', tel='{$tel}', price='{$price}', typeprice='{$typeprice}', typecondition='{$typecondition}', email='{$email}', submitter='{$submitter}', town='{$town}', country='{$country}', contactby='{$contactby}', premium='{$premium}', valid='{$valid}' WHERE lid={$lid}";
     $result = $xoopsDB->query($sql);
 
     $helper->redirect('index.php', 1, _ADSLIGHT_ANNMOD2);

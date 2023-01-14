@@ -79,7 +79,7 @@ if ($trows > '0') {
     $GLOBALS['xoopsTpl']->assign('last_head_photo', _ADSLIGHT_PHOTO);
     $GLOBALS['xoopsTpl']->assign('min', $min);
 
-    $sql    = 'SELECT r_lid, lid, title, date_created, submitter, message, tele, email, r_usid FROM ' . $xoopsDB->prefix('adslight_replies') . ' WHERE lid=' . $xoopsDB->escape($lid) . " ORDER BY ${orderby}";
+    $sql    = 'SELECT r_lid, lid, title, date_created, submitter, message, tele, email, r_usid FROM ' . $xoopsDB->prefix('adslight_replies') . ' WHERE lid=' . $xoopsDB->escape($lid) . " ORDER BY {$orderby}";
     $result = $xoopsDB->query($sql, $show, $min);
 
     if ($trows > '1') {
@@ -103,18 +103,18 @@ if ($trows > '0') {
             $timezone   = $GLOBALS['xoopsUser']->timezone();
             $useroffset = isset($timezone) ? $GLOBALS['xoopsUser']->timezone() : $xoopsConfig['default_TZ'];
         }
-        $GLOBALS['xoopsTpl']->assign('submitter', " <a href='" . XOOPS_URL . "/userinfo.php?uid=${r_usid}'>${submitter}</a>");
+        $GLOBALS['xoopsTpl']->assign('submitter', " <a href='" . XOOPS_URL . "/userinfo.php?uid={$r_usid}'>{$submitter}</a>");
         $date_created = ($useroffset * 3600) + $date_created;
         $date_created = formatTimestamp($date_created, 's');
-        $GLOBALS['xoopsTpl']->assign('title', "<a href='viewads.php?lid=${lid}'>${title}</a>");
+        $GLOBALS['xoopsTpl']->assign('title', "<a href='viewads.php?lid={$lid}'>{$title}</a>");
         $GLOBALS['xoopsTpl']->assign('title_head', _ADSLIGHT_REPLY_TITLE);
         $GLOBALS['xoopsTpl']->assign('date_head', _ADSLIGHT_REPLIED_ON);
         $GLOBALS['xoopsTpl']->assign('submitter_head', _ADSLIGHT_REPLIED_BY);
         $GLOBALS['xoopsTpl']->assign('message_head', _ADSLIGHT_REPLY_MESSAGE);
         $GLOBALS['xoopsTpl']->assign('email_head', _ADSLIGHT_EMAIL);
         $GLOBALS['xoopsTpl']->assign('tele_head', _ADSLIGHT_TEL);
-        $GLOBALS['xoopsTpl']->assign('email', "<a href ='mailto:${email}'>${email}</a>");
-        $GLOBALS['xoopsTpl']->assign('delete_reply', "<a href='modify.php?op=DelReply&amp;r_lid=${r_lid}'>" . _ADSLIGHT_DELETE_REPLY . '</a>');
+        $GLOBALS['xoopsTpl']->assign('email', "<a href ='mailto:{$email}'>{$email}</a>");
+        $GLOBALS['xoopsTpl']->assign('delete_reply', "<a href='modify.php?op=DelReply&amp;r_lid={$r_lid}'>" . _ADSLIGHT_DELETE_REPLY . '</a>');
         $GLOBALS['xoopsTpl']->append('items', [
             'id'           => $lid,
             'title'        => htmlspecialchars($title, ENT_QUOTES | ENT_HTML5),
@@ -130,24 +130,24 @@ if ($trows > '0') {
     if (1 !== (int)$linkpages && 0 !== (int)$linkpages) {
         $prev = $min - $show;
         if ($prev >= 0) {
-            $pagenav .= "<a href='replies.php?lid=${lid}&min=${prev}&show=${show}'><strong><u>&laquo;</u></strong></a> ";
+            $pagenav .= "<a href='replies.php?lid={$lid}&min={$prev}&show={$show}'><strong><u>&laquo;</u></strong></a> ";
         }
         $counter     = 1;
         $currentpage = $max / $show;
         while ($counter <= $linkpages) {
             $mintemp = ($show * $counter) - $show;
             if ($counter === $currentpage) {
-                $pagenav .= "<strong>(${counter})</strong> ";
+                $pagenav .= "<strong>({$counter})</strong> ";
             } else {
-                $pagenav .= "<a href='replies.php?lid=${lid}&min=${mintemp}&show=${show}'>${counter}</a> ";
+                $pagenav .= "<a href='replies.php?lid={$lid}&min={$mintemp}&show={$show}'>{$counter}</a> ";
             }
             ++$counter;
         }
         if ($trows > $max) {
-            $pagenav .= "<a href='replies.php?lid=${lid}&min=${max}&show=${show}'>";
+            $pagenav .= "<a href='replies.php?lid={$lid}&min={$max}&show={$show}'>";
             $pagenav .= '<strong><u>&raquo;</u></strong></a>';
         }
-        $GLOBALS['xoopsTpl']->assign('nav_page', '<strong>' . _ADSLIGHT_REPLY . "</strong>&nbsp;&nbsp; ${pagenav}");
+        $GLOBALS['xoopsTpl']->assign('nav_page', '<strong>' . _ADSLIGHT_REPLY . "</strong>&nbsp;&nbsp; {$pagenav}");
     }
 }
 

@@ -91,7 +91,7 @@ function adslight_b2_show($options)
         $a_item['country']      = $country;
         $a_item['id']           = (int)$myrow['lid'];
         $a_item['cid']          = (int)$myrow['cid'];
-        $a_item['no_photo']     = '<a href="' . XOOPS_URL . "/modules/${moduleDirName}/viewads.php?lid={$a_item['id']}\"><img class=\"thumb\" src=\"" . XOOPS_URL . "/modules/{$moduleDirName}/assets/images/nophoto.jpg\" align=\"left\" width=\"100px\" alt=\"{$ad_title}\"></a>";
+        $a_item['no_photo']     = '<a href="' . XOOPS_URL . "/modules/{$moduleDirName}/viewads.php?lid={$a_item['id']}\"><img class=\"thumb\" src=\"" . XOOPS_URL . "/modules/{$moduleDirName}/assets/images/nophoto.jpg\" align=\"left\" width=\"100px\" alt=\"{$ad_title}\"></a>";
         $a_item['price_symbol'] = $helper->getConfig($moduleDirName . '_currency_symbol', '');
 
         $currencyCode                 = $helper->getConfig('adslight_currency_code');
@@ -121,7 +121,7 @@ function adslight_b2_show($options)
             //            }
             $resultp = $xoopsDB->query($sql);
             while ([$cod_img, $pic_lid, $uid_owner, $url] = $xoopsDB->fetchRow($resultp)) {
-                $a_item['photo'] = '<a href="' . XOOPS_URL . "/modules/${moduleDirName}/viewads.php?lid={$a_item['id']}\"><img class=\"thumb\" src=\"" . XOOPS_URL . "/uploads/adslight/thumbs/thumb_{$url}\" align=\"left\" width=\"100px\" alt=\"{$title}\"></a>";
+                $a_item['photo'] = '<a href="' . XOOPS_URL . "/modules/{$moduleDirName}/viewads.php?lid={$a_item['id']}\"><img class=\"thumb\" src=\"" . XOOPS_URL . "/uploads/adslight/thumbs/thumb_{$url}\" align=\"left\" width=\"100px\" alt=\"{$title}\"></a>";
             }
         } else {
             $a_item['photo'] = '';

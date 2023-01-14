@@ -114,7 +114,7 @@ function viewAds($lid = 0): void
 
             $GLOBALS['xoopsTpl']->assign('user_email', $GLOBALS['xoopsUser']->getVar('email'));
 
-            $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE usid=${member_usid}";
+            $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE usid={$member_usid}";
             [$show_user] = $xoopsDB->fetchRow($xoopsDB->query($sql));
 
             $GLOBALS['xoopsTpl']->assign('show_user', $show_user);
@@ -139,7 +139,7 @@ function viewAds($lid = 0): void
         . $xoopsDB->prefix('adslight_pictures')
         . " p ON l.lid=p.lid  WHERE l.valid='Yes' AND l.lid = "
         . $xoopsDB->escape($lid)
-        . " and l.status!='1' ${cat_perms}"
+        . " and l.status!='1' {$cat_perms}"
     );
     $recordexist = $xoopsDB->getRowsNum($result);
 
@@ -312,7 +312,7 @@ function viewAds($lid = 0): void
             $GLOBALS['xoopsTpl']->assign('submitter', _ADSLIGHT_VIEW_MY_ADS . ' $submitter');
         }
         $GLOBALS['xoopsTpl']->assign('lid', $lid);
-        $GLOBALS['xoopsTpl']->assign('read', "${hits} " . _ADSLIGHT_VIEW2);
+        $GLOBALS['xoopsTpl']->assign('read', "{$hits} " . _ADSLIGHT_VIEW2);
         $GLOBALS['xoopsTpl']->assign('rating', $tempXoopsLocal->number_format($item_rating));
         $GLOBALS['xoopsTpl']->assign('votes', $votestring);
         $GLOBALS['xoopsTpl']->assign('lang_rating', _ADSLIGHT_RATINGC);
@@ -355,7 +355,7 @@ function viewAds($lid = 0): void
 
         // meta description tags for ads
         $desctextclean = strip_tags($desctext, '<span><img><strong><i><u>');
-        $GLOBALS['xoTheme']->addMeta('meta', 'description', "${title} - " . mb_substr($desctextclean, 0, 150));
+        $GLOBALS['xoTheme']->addMeta('meta', 'description', "{$title} - " . mb_substr($desctextclean, 0, 150));
 
         $currencyCode                 = $helper->getConfig('adslight_currency_code');
         $currencySymbol               = $helper->getConfig('adslight_currency_symbol');

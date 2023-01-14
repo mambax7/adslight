@@ -75,11 +75,11 @@ function tips_writing(): void
         if ($usid) {
             $GLOBALS['xoopsTpl']->assign('istheirs', true);
 
-            $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE usid=${member_usid}";
+            $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE usid={$member_usid}";
             [$show_user] = $xoopsDB->fetchRow($xoopsDB->query($sql));
 
             $GLOBALS['xoopsTpl']->assign('show_user', $show_user);
-            $GLOBALS['xoopsTpl']->assign('show_user_link', "members.php?usid=${member_usid}");
+            $GLOBALS['xoopsTpl']->assign('show_user_link', "members.php?usid={$member_usid}");
         }
     }
 }

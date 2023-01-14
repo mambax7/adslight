@@ -72,7 +72,7 @@ class Tree
         }
 
         if ('' !== $order) {
-            $sql .= " ORDER BY ${order}";
+            $sql .= " ORDER BY {$order}";
         }
 
         $result  = $this->db->query($sql);
@@ -241,7 +241,7 @@ class Tree
         }
 
         if ('' !== $order) {
-            $sql .= " ORDER BY ${order}";
+            $sql .= " ORDER BY {$order}";
         }
 
         $result = $this->db->query($sql);

@@ -46,9 +46,9 @@ function sendFriend($lid): void
     [$lid, $title, $type] = $xoopsDB->fetchRow($result);
 
     echo "<table width='100%' border='0' cellspacing='1' cellpadding='8'><tr class='bg4'><td valign='top'>
-        <strong>" . _ADSLIGHT_SENDTO . " ${lid} \"<strong>${type} : ${title}</strong>\" " . _ADSLIGHT_FRIEND . "<br><br>
+        <strong>" . _ADSLIGHT_SENDTO . " {$lid} \"<strong>{$type} : {$title}</strong>\" " . _ADSLIGHT_FRIEND . "<br><br>
         <form action=\"sendfriend.php\" method=post>
-        <input type=\"hidden\" name=\"lid\" value=\"${lid}\" >";
+        <input type=\"hidden\" name=\"lid\" value=\"{$lid}\" >";
 
     if ($GLOBALS['xoopsUser'] instanceof \XoopsUser) {
         $idd  = $GLOBALS['xoopsUser']->getVar('uname', 'E');
@@ -59,11 +59,11 @@ function sendFriend($lid): void
     <table width='99%' class='outer' cellspacing='1'>
     <tr>
       <td class='head' width='30%'>" . _ADSLIGHT_NAME . " </td>
-      <td class='even'><input class='textbox' type='text' name='yname' value='${idd}' ></td>
+      <td class='even'><input class='textbox' type='text' name='yname' value='{$idd}' ></td>
     </tr>
     <tr>
       <td class='head'>" . _ADSLIGHT_MAIL . " </td>
-      <td class='even'><input class='textbox' type='text' name='ymail' value='${idde}' ></td>
+      <td class='even'><input class='textbox' type='text' name='ymail' value='{$idde}' ></td>
     </tr>
     <tr>
       <td class='head'>" . _ADSLIGHT_NAMEFR . " </td>

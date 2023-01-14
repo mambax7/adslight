@@ -57,7 +57,7 @@ function adslight_search(
     if (is_array($queryarray) && $count = count($queryarray)) {
         $sql .= " AND ((title LIKE '%{$queryarray[0]}%' OR type LIKE '%{$queryarray[0]}%' OR desctext LIKE '%{$queryarray[0]}%' OR tel LIKE '%{$queryarray[0]}%' OR price LIKE '%{$queryarray[0]}%' OR typeprice LIKE '%{$queryarray[0]}%' OR submitter LIKE '%{$queryarray[0]}%' OR town LIKE '%{$queryarray[0]}%' OR country LIKE '%{$queryarray[0]}%')";
         for ($i = 1; $i < $count; ++$i) {
-            $sql .= " ${andor} ";
+            $sql .= " {$andor} ";
             $sql .= "(title LIKE '%{$queryarray[$i]}%' OR type LIKE '%{$queryarray[$i]}%' OR desctext LIKE '%{$queryarray[$i]}%' OR tel LIKE '%{$queryarray[$i]}%' OR price LIKE '%{$queryarray[$i]}%' OR typeprice LIKE '%{$queryarray[$i]}%' OR submitter LIKE '%{$queryarray[$i]}%' OR town LIKE '%{$queryarray[$i]}%' OR country LIKE '%{$queryarray[$i]}%')";
         }
         $sql .= ') ';

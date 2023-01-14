@@ -217,7 +217,7 @@ function rssDisplayForum(
         $title = $article['title'];
         $link  = $article['link'];
 
-        $page .= "<img src=\"../assets/images/admin/comment.png\" border=0 >&nbsp;&nbsp;&nbsp;<a href=\"${link}\">${title}</a><br><br>";
+        $page .= "<img src=\"../assets/images/admin/comment.png\" border=0 >&nbsp;&nbsp;&nbsp;<a href=\"{$link}\">{$title}</a><br><br>";
 
         if (0 === $type) {
             $page .= '</b>';

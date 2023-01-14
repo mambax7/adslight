@@ -48,9 +48,9 @@ function reportAbuse($lid): void
     $GLOBALS['xoTheme']->addMeta('meta', 'robots', 'noindex, nofollow');
 
     echo "<table width='100%' border='0' cellspacing='1' cellpadding='8'><tr class='bg4'><td valign='top'>\n";
-    echo '<strong>' . _ADSLIGHT_REPORTSENDTO . " ${lid} </strong>: \" ${type} : ${title} \"<br><br>
+    echo '<strong>' . _ADSLIGHT_REPORTSENDTO . " {$lid} </strong>: \" {$type} : {$title} \"<br><br>
         <form action=\"report-abuse.php\" method=post>
-        <input type=\"hidden\" name=\"lid\" value=\"${lid}\" >";
+        <input type=\"hidden\" name=\"lid\" value=\"{$lid}\" >";
     if ($GLOBALS['xoopsUser']) {
         $idd   = $GLOBALS['xoopsUser']->getVar('uname', 'E');
         $idde  = $GLOBALS['xoopsUser']->getVar('email', 'E');
@@ -63,15 +63,15 @@ function reportAbuse($lid): void
     <table width='99%' class='outer' cellspacing='1'>
     <tr>
       <td class='head' width='30%'>" . _ADSLIGHT_NAME . " </td>
-      <td class='even'><input class=\"textbox\" type=\"text\" name=\"yname\" value=\"${idd}\" ></td>
+      <td class='even'><input class=\"textbox\" type=\"text\" name=\"yname\" value=\"{$idd}\" ></td>
     </tr>
     <tr>
       <td class='head'>" . _ADSLIGHT_MAIL . " </td>
-      <td class='even'><input class=\"textbox\" type=\"text\" name=\"ymail\" value=\"${idde}\" ></td>
+      <td class='even'><input class=\"textbox\" type=\"text\" name=\"ymail\" value=\"{$idde}\" ></td>
     </tr>
     <tr>
       <td class='head'></td>
-      <td class='even'><input class=\"textbox\" type=\"hidden\" name=\"fmail\" value=\"${iddee}\"></td>
+      <td class='even'><input class=\"textbox\" type=\"hidden\" name=\"fmail\" value=\"{$iddee}\"></td>
     </tr>";
 
     if ('1' === $helper->getConfig('adslight_use_captcha')) {

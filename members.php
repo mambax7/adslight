@@ -105,7 +105,7 @@ if (is_array($categories) && count($categories) > 0) {
 }
 
 if (1 === $istheirs) {
-    $sql         = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE usid=' . $xoopsDB->escape($usid) . " AND valid='Yes' ${cat_perms}";
+    $sql         = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE usid=' . $xoopsDB->escape($usid) . " AND valid='Yes' {$cat_perms}";
     $countresult = $xoopsDB->query($sql);
     [$trow] = $xoopsDB->fetchRow($countresult);
 
@@ -113,10 +113,10 @@ if (1 === $istheirs) {
               . $xoopsDB->prefix('adslight_listing')
               . ' WHERE usid = '
               . $xoopsDB->escape($usid)
-              . " AND valid='Yes' ${cat_perms} ORDER BY ${orderby}";
+              . " AND valid='Yes' {$cat_perms} ORDER BY {$orderby}";
     $result = $xoopsDB->query($sql, $show, $min);
 } else {
-    $sql         = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE usid=' . $xoopsDB->escape($usid) . " AND valid='Yes' AND status!='1' ${cat_perms}";
+    $sql         = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE usid=' . $xoopsDB->escape($usid) . " AND valid='Yes' AND status!='1' {$cat_perms}";
     $countresult = $xoopsDB->query($sql);
     [$trow] = $xoopsDB->fetchRow($countresult);
 
@@ -124,7 +124,7 @@ if (1 === $istheirs) {
               . $xoopsDB->prefix('adslight_listing')
               . ' WHERE usid = '
               . $xoopsDB->escape($usid)
-              . " AND valid='Yes' AND status!='1' ${cat_perms} ORDER BY ${orderby}";
+              . " AND valid='Yes' AND status!='1' {$cat_perms} ORDER BY {$orderby}";
     $result = $xoopsDB->query($sql, $show, $min);
 }
 
@@ -210,7 +210,7 @@ if ($trows > '0') {
 
         $GLOBALS['xoopsTpl']->assign('submitter', $submitter);
         $GLOBALS['xoopsTpl']->assign('usid', $usid);
-        $GLOBALS['xoopsTpl']->assign('read', "${hits} " . _ADSLIGHT_VIEW2);
+        $GLOBALS['xoopsTpl']->assign('read', "{$hits} " . _ADSLIGHT_VIEW2);
         $GLOBALS['xoopsTpl']->assign('rating', number_format((float)$user_rating, 2));
         $GLOBALS['xoopsTpl']->assign('status_head', _ADSLIGHT_STATUS);
         $tempXoopsLocal = new \XoopsLocal();
@@ -282,10 +282,10 @@ if ($trows > '0') {
         $resultp = $xoopsDB->query($sql);
         while ([$cod_img, $pic_lid, $uid_owner, $url] = $xoopsDB->fetchRow($resultp)) {
             if ($photo) {
-                $photo = "<a href='viewads.php?lid=" . $lid . "'><img class=\"thumb\" src=\"${updir}/thumbs/thumb_${url}\" align=\"left\" width=\"100px\" alt=\"${title}\" ></a>";
+                $photo = "<a href='viewads.php?lid=" . $lid . "'><img class=\"thumb\" src=\"{$updir}/thumbs/thumb_{$url}\" align=\"left\" width=\"100px\" alt=\"{$title}\" ></a>";
             }
         }
-        $no_photo = "<a href='viewads.php?lid=" . $lid . "'><img class=\"thumb\" src=\"assets/images/nophoto.jpg\" align=\"left\" width=\"100px\" alt=\"${title}\" ></a>";
+        $no_photo = "<a href='viewads.php?lid=" . $lid . "'><img class=\"thumb\" src=\"assets/images/nophoto.jpg\" align=\"left\" width=\"100px\" alt=\"{$title}\" ></a>";
 
         $GLOBALS['xoopsTpl']->append('items', [
             'id'           => $lid,
@@ -333,24 +333,24 @@ if ($trows > '0') {
     if (1 !== (int)$linkpages && 0 !== (int)$linkpages) {
         $prev = $min - $show;
         if ($prev >= 0) {
-            $pagenav .= "<a href='members.php?usid=${usid}&min=${prev}&show=${show}'><strong><u>&laquo;</u></strong></a> ";
+            $pagenav .= "<a href='members.php?usid={$usid}&min={$prev}&show={$show}'><strong><u>&laquo;</u></strong></a> ";
         }
         $counter     = 1;
         $currentpage = $max / $show;
         while ($counter <= $linkpages) {
             $mintemp = ($show * $counter) - $show;
             if ($counter === $currentpage) {
-                $pagenav .= "<strong>(${counter})</strong> ";
+                $pagenav .= "<strong>({$counter})</strong> ";
             } else {
-                $pagenav .= "<a href='members.php?usid=${usid}&min=${mintemp}&show=${show}'>${counter}</a> ";
+                $pagenav .= "<a href='members.php?usid={$usid}&min={$mintemp}&show={$show}'>{$counter}</a> ";
             }
             ++$counter;
         }
         if ($trows > $max) {
-            $pagenav .= "<a href='members.php?usid=${usid}&min=${max}&show=${show}'>";
+            $pagenav .= "<a href='members.php?usid={$usid}&min={$max}&show={$show}'>";
             $pagenav .= '<strong><u>&raquo;</u></strong></a>';
         }
-        $GLOBALS['xoopsTpl']->assign('nav_page', '<strong>' . _ADSLIGHT_PAGES . "</strong>&nbsp;&nbsp; ${pagenav}");
+        $GLOBALS['xoopsTpl']->assign('nav_page', '<strong>' . _ADSLIGHT_PAGES . "</strong>&nbsp;&nbsp; {$pagenav}");
     }
 }
 

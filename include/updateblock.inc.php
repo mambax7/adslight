@@ -75,7 +75,7 @@ if ($record) {
         }
     } */
 
-    $sql     = 'SELECT * FROM ' . $xoopsDB->prefix('newblocks') . ' WHERE mid=' . $mid . " AND block_type <>'D' AND func_num > ${count}";
+    $sql     = 'SELECT * FROM ' . $xoopsDB->prefix('newblocks') . ' WHERE mid=' . $mid . " AND block_type <>'D' AND func_num > {$count}";
     $fresult = $xoopsDB->query($sql);
     while (false !== ($fblock = $xoopsDB->fetchArray($fresult))) {
         $local_msgs[] = 'Non Defined Block <b>' . $fblock['name'] . '</b> will be deleted';

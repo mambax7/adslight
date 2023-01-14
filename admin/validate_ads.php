@@ -79,7 +79,7 @@ function index(): void
         ///////// There are [..] Ads waiting to be approved//////
         echo "<table class='outer bnone' cellspacing=5 cellpadding=0><tr><td class='width40'>";
         echo "<img src='../assets/images/admin/error_button.png' border=0 ></td><td>";
-        echo "<span style='color:#00B4C4;'><b>" . _AM_ADSLIGHT_THEREIS . "</b></span> <b>${numrows}</b> <span style='color:#00B4C4;'>" . _AM_ADSLIGHT_WAIT . '</b></span>';
+        echo "<span style='color:#00B4C4;'><b>" . _AM_ADSLIGHT_THEREIS . "</b></span> <b>{$numrows}</b> <span style='color:#00B4C4;'>" . _AM_ADSLIGHT_WAIT . '</b></span>';
         echo '</td></tr></table><br>';
         ///// Liste des ID  ///// Soumis par /////  Titre   /////  Description  /////  Date d'ajout
         echo "<table width='100%' border='0' class='outer'>";
@@ -144,7 +144,7 @@ function index(): void
             echo "<tr><td class='even' width='3%'></td>";
             echo "<td class='odd width10'>{$photo3}</td>";
             echo "<td class='even width20'><b>{$title}</b><br><br>{$nom_type}<br>{$price} {$helper->getConfig('adslight_currency_symbol') } {$nom_price}<br>";
-            echo "${town} - ${country}<br>";
+            echo "{$town} - {$country}<br>";
             echo '<b>' . _AM_ADSLIGHT_SUBMITTER . ":</b> {$submitter}<br>";
             echo '<b>' . _AM_ADSLIGHT_DATE . ":</b> {$date2}</td>";
             echo "<td class='even width35'>{$desctext}</td><td class='even right' width='2%'></td>";
@@ -322,7 +322,7 @@ function indexView($lid): void
         }
         echo '</select></td></tr>';
         echo "<tr class='head' border='1'>
-            <td>" . _AM_ADSLIGHT_PHOTO1 . " </td><td><input type=\"text\" name=\"photo\" size=\"40\" value=\"${photo}\"></td>
+            <td>" . _AM_ADSLIGHT_PHOTO1 . " </td><td><input type=\"text\" name=\"photo\" size=\"40\" value=\"{$photo}\"></td>
             </tr>";
         echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_DESC . '</td><td>';
         $wysiwyg_text_area = Utility::getEditor(

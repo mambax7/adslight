@@ -82,7 +82,7 @@ function index(): void
         ///////// Il y a [..] Annonces en attente d'être approuvées //////
         echo "<table class='outer bnone' cellspacing=5 cellpadding=0><tr><td width=40>";
         echo "<img src='../assets/images/admin/error_button.png' border=0 ></td><td>";
-        echo "<span style='color:#00B4C4;'><b>" . _AM_ADSLIGHT_THEREIS . "</b></span> <b>${numrows}</b> <span style='color:#00B4C4;'>" . _AM_ADSLIGHT_WAIT . '</b></span>';
+        echo "<span style='color:#00B4C4;'><b>" . _AM_ADSLIGHT_THEREIS . "</b></span> <b>{$numrows}</b> <span style='color:#00B4C4;'>" . _AM_ADSLIGHT_WAIT . '</b></span>';
         echo '</td></tr></table><br>';
     } else {
         echo "<table class='outer' width='50%' border='0'><tr><td width=40>";
@@ -187,7 +187,7 @@ function modifyAd($lid): void
 
         $contactSel1 = $contactSel2 = $contactSel3 = $contactSel4 = '';
         $selected    = 'contactSel' . (int)$contactby;
-        ${$selected} = ' selected';
+        {$$selected} = ' selected';
 
         echo " <td class='head'>"
              . _AM_ADSLIGHT_CONTACTBY
@@ -258,7 +258,7 @@ function modifyAd($lid): void
         echo '</select></td></tr>';
 
         /////// Price
-        echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_PRICE2 . " </td><td><input type=\"text\" name=\"price\" size=\"20\" value=\"${price}\"> " . $helper->getConfig('adslight_currency_symbol') . '';
+        echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_PRICE2 . " </td><td><input type=\"text\" name=\"price\" size=\"20\" value=\"{$price}\"> " . $helper->getConfig('adslight_currency_symbol') . '';
 
         //////// Price type
         $sql     = 'SELECT nom_price, id_price FROM ' . $xoopsDB->prefix('adslight_price') . ' ORDER BY nom_price';

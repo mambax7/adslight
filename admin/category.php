@@ -63,12 +63,12 @@ function adsNewCat($cid): void
         echo '<tr><td class="even">'
              . _AM_ADSLIGHT_CAT_META_DESCRIPTION
              . " </td><td class=\"odd\" colspan=2>\n"
-             . "    <input type=\"text\" name=\"cat_desc\" value=\"${cat_desc}\" size=\"80\" maxlength=\"200\">\n"
+             . "    <input type=\"text\" name=\"cat_desc\" value=\"{$cat_desc}\" size=\"80\" maxlength=\"200\">\n"
              . "  </td></tr>\n"
              . '  <tr><td class="even">'
              . _AM_ADSLIGHT_CAT_META_KEYWORDS
              . " </td><td class=\"odd\" colspan=2>\n"
-             . "    <input type=\"text\" name=\"cat_keywords\" value=\"${cat_keywords}\" size=\"80\" maxlength=\"200\">\n"
+             . "    <input type=\"text\" name=\"cat_keywords\" value=\"{$cat_keywords}\" size=\"80\" maxlength=\"200\">\n"
              . "  </td></tr>\n";
     }
 
@@ -103,7 +103,7 @@ function adsNewCat($cid): void
         echo '<tr><td>' . _AM_ADSLIGHT_ORDER . ' </td><td><input type="text" name="cat_order" size="4" value="0" ></td><td class="foot"><input type="submit" value="' . _AM_ADSLIGHT_ADD . '" ></td></tr>';
     } else {
         $cat_order = (int)$cat_order;
-        echo "<input type=\"hidden\" name=\"cat_order\" value=\"${cat_order}\">";
+        echo "<input type=\"hidden\" name=\"cat_order\" value=\"{$cat_order}\">";
         echo '<tr><td class="foot" colspan=3><input type="submit" value="' . _AM_ADSLIGHT_ADD . '" ></td></tr>';
     }
 
@@ -128,7 +128,7 @@ function adsModCat($cid): void
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_ADSLIGHT_MODIFCAT . '</legend>';
     //    ShowImg();
     Utility::showImage();
-    $sql    = 'SELECT cid, pid, title, cat_desc, cat_keywords, img, cat_order, affprice, cat_moderate, moderate_subcat FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid=${cid}";
+    $sql    = 'SELECT cid, pid, title, cat_desc, cat_keywords, img, cat_order, affprice, cat_moderate, moderate_subcat FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
     $result = $xoopsDB->query($sql);
     [$cat_id, $pid, $title, $cat_desc, $cat_keywords, $imgs, $cat_order, $affprice, $cat_moderate, $moderate_subcat] = $xoopsDB->fetchRow($result);
 
@@ -204,7 +204,7 @@ function adsModCat($cid): void
     echo '>' . _NO . '</td></tr>';
 
     if ('title' !== $helper->getConfig('adslight_csortorder')) {
-        echo '<tr><td class="even">' . _AM_ADSLIGHT_ORDER . " </td><td class=\"odd\"><input type=\"text\" name=\"cat_order\" size=\"4\" value=\"${cat_order}\"></td></tr>";
+        echo '<tr><td class="even">' . _AM_ADSLIGHT_ORDER . " </td><td class=\"odd\"><input type=\"text\" name=\"cat_order\" size=\"4\" value=\"{$cat_order}\"></td></tr>";
     } else {
         $cat_order = (int)$cat_order;
         echo "<input type=\"hidden\" name=\"cat_order\" value=\"{$cat_order}\">";
@@ -262,7 +262,7 @@ function adsModCatS(
 
     $sql = 'UPDATE '
            . $xoopsDB->prefix('adslight_categories')
-           . " SET title='${title}', cat_desc='${cat_desc}', cat_keywords='${cat_keywords}', pid='${cid}', img='${img}', cat_order='${cat_order}', affprice='${affprice}', cat_moderate='${cat_moderate}', moderate_subcat='${moderate_subcat}' WHERE cid={$cidd}";
+           . " SET title='{$title}', cat_desc='{$cat_desc}', cat_keywords='{$cat_keywords}', pid='{$cid}', img='{$img}', cat_order='{$cat_order}', affprice='{$affprice}', cat_moderate='{$cat_moderate}', moderate_subcat='{$moderate_subcat}' WHERE cid={$cidd}";
     $xoopsDB->query($sql);
 
     if (1 !== $moderate_subcat) {
@@ -306,7 +306,7 @@ function adsAddCat(
         $title = '! ! ? ! !';
     }
 
-    $sql = 'INSERT INTO ' . $xoopsDB->prefix('adslight_categories') . " VALUES (NULL, '${cid}', '${title}', '${cat_desc}', '${cat_keywords}', '${img}', '${cat_order}', '${affprice}', '${cat_moderate}', '${moderate_subcat}')";
+    $sql = 'INSERT INTO ' . $xoopsDB->prefix('adslight_categories') . " VALUES (NULL, '{$cid}', '{$title}', '{$cat_desc}', '{$cat_keywords}', '{$img}', '{$cat_order}', '{$affprice}', '{$cat_moderate}', '{$moderate_subcat}')";
     $xoopsDB->query($sql);
 
     if (1 === $moderate_subcat) {

@@ -218,7 +218,7 @@ switch ($action) {
                     }
                     if ($count >= 5) {
                         $search_url = XOOPS_URL . '/modules/adslight/search.php?query=' . urlencode(stripslashes(implode(' ', $queries)));
-                        $search_url .= "&mid=${mid}&action=showall&andor=${andor}";
+                        $search_url .= "&mid={$mid}&action=showall&andor={$andor}";
                         echo '<br><a href="' . htmlspecialchars($search_url, ENT_QUOTES | ENT_HTML5) . '">' . _SR_SHOWALLR . '</a>';
                     }
                     echo '<table>';
@@ -313,15 +313,15 @@ switch ($action) {
           <tr>
         ';
             $search_url = XOOPS_URL . '/modules/adslight/search.php?query=' . urlencode(stripslashes(implode(' ', $queries)));
-            $search_url .= "&mid=${mid}&action=${action}&andor=${andor}";
+            $search_url .= "&mid={$mid}&action={$action}&andor={$andor}";
             if ('showallbyuser' === $action) {
-                $search_url .= "&uid=${uid}";
+                $search_url .= "&uid={$uid}";
             }
             if ($start > 0) {
                 $prev = $start - 20;
                 echo '<td align="left">
             ';
-                $search_url_prev = $search_url . "&start=${prev}";
+                $search_url_prev = $search_url . "&start={$prev}";
                 echo '<a href="' . htmlspecialchars($search_url_prev, ENT_QUOTES | ENT_HTML5) . '">' . _SR_PREVIOUS . '</a></td>
             ';
             }
@@ -329,7 +329,7 @@ switch ($action) {
         ';
             if (false !== $has_next) {
                 $next            = $start + 20;
-                $search_url_next = $search_url . "&start=${next}";
+                $search_url_next = $search_url . "&start={$next}";
                 echo '<td align="right"><a href="' . htmlspecialchars($search_url_next, ENT_QUOTES | ENT_HTML5) . '">' . _SR_NEXT . '</a></td>
             ';
             }

@@ -60,7 +60,7 @@ class Utility extends Common\SysUtility
             if ($almost > 0 && ($supprdate - $almost * 86400) < $datenow
                 && 'Yes' === $valid
                 && 0 === $remind) {
-                $xoopsDB->queryF('UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET remind='1' WHERE lid=${lids}");
+                $xoopsDB->queryF('UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET remind='1' WHERE lid={$lids}");
 
                 if ($email) {
                     $tags               = [];
@@ -108,14 +108,14 @@ class Utility extends Common\SysUtility
                         $destination  = XOOPS_ROOT_PATH . '/uploads/adslight';
                         $destination2 = XOOPS_ROOT_PATH . '/uploads/adslight/thumbs';
                         $destination3 = XOOPS_ROOT_PATH . '/uploads/adslight/midsize';
-                        if (\is_file("${destination}/${url}")) {
-                            \unlink("${destination}/${url}");
+                        if (\is_file("{$destination}/{$url}")) {
+                            \unlink("{$destination}/{$url}");
                         }
-                        if (\is_file("${destination2}/thumb_${url}")) {
-                            \unlink("${destination2}/thumb_${url}");
+                        if (\is_file("{$destination2}/thumb_{$url}")) {
+                            \unlink("{$destination2}/thumb_{$url}");
                         }
-                        if (\is_file("${destination3}/resized_${url}")) {
-                            \unlink("${destination3}/resized_${url}");
+                        if (\is_file("{$destination3}/resized_{$url}")) {
+                            \unlink("{$destination3}/resized_{$url}");
                         }
                     }
                 }
@@ -183,7 +183,7 @@ class Utility extends Common\SysUtility
         }
         $finalrating = $totalrating / $votesDB;
         $finalrating = \number_format($finalrating, 4);
-        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET user_rating=${finalrating}, user_votes=${votesDB} WHERE usid=" . $xoopsDB->escape($sel_id) . '';
+        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET user_rating={$finalrating}, user_votes={$votesDB} WHERE usid=" . $xoopsDB->escape($sel_id) . '';
         //echo $query;
         $xoopsDB->query($query) || exit();
     }
@@ -209,7 +209,7 @@ class Utility extends Common\SysUtility
         }
         $finalrating = $totalrating / $votesDB;
         $finalrating = \number_format($finalrating, 4);
-        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET item_rating=${finalrating}, item_votes=${votesDB} WHERE lid=" . $xoopsDB->escape($sel_id) . '';
+        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET item_rating={$finalrating}, item_votes={$votesDB} WHERE lid=" . $xoopsDB->escape($sel_id) . '';
         //echo $query;
         $xoopsDB->query($query) || exit();
     }
@@ -441,7 +441,7 @@ class Utility extends Common\SysUtility
     public static function checkTableExists($tablename): bool
     {
         global $xoopsDB;
-        $result = $xoopsDB->queryF("SHOW TABLES LIKE '${tablename}'");
+        $result = $xoopsDB->queryF("SHOW TABLES LIKE '{$tablename}'");
 
         return $xoopsDB->getRowsNum($result) > 0;
     }
@@ -454,7 +454,7 @@ class Utility extends Common\SysUtility
     public static function checkFieldExists($fieldname, $table): bool
     {
         global $xoopsDB;
-        $result = $xoopsDB->queryF("SHOW COLUMNS FROM ${table} LIKE '${fieldname}'");
+        $result = $xoopsDB->queryF("SHOW COLUMNS FROM {$table} LIKE '{$fieldname}'");
 
         return $xoopsDB->getRowsNum($result) > 0;
     }
@@ -467,7 +467,7 @@ class Utility extends Common\SysUtility
     {
         global $xoopsDB, $myts;
 
-        $sql = 'SELECT SQL_CACHE title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid = '${cid}'";
+        $sql = 'SELECT SQL_CACHE title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid = '{$cid}'";
 
         if (!$result = $xoopsDB->query($sql)) {
             return false;

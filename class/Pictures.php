@@ -128,13 +128,13 @@ class Pictures extends \XoopsObject
             $where_query = " WHERE {$criteria}";
         }
         if ($asobject) {
-            $sql    = 'SELECT * FROM ' . $xoopsDB->prefix('adslight_pictures') . "${where_query} ORDER BY ${sort} ${cat_order}";
+            $sql    = 'SELECT * FROM ' . $xoopsDB->prefix('adslight_pictures') . "{$where_query} ORDER BY {$sort} {$cat_order}";
             $result = $xoopsDB->query($sql, $limit, $start);
             while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         } else {
-            $sql    = 'SELECT cod_img FROM ' . $xoopsDB->prefix('adslight_pictures') . "${where_query} ORDER BY ${sort} ${cat_order}";
+            $sql    = 'SELECT cod_img FROM ' . $xoopsDB->prefix('adslight_pictures') . "{$where_query} ORDER BY {$sort} {$cat_order}";
             $result = $xoopsDB->query($sql, $limit, $start);
             while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
                 $ret[] = $myrow['cog_img'];

@@ -85,31 +85,31 @@ function printAd($lid): void
 
     echo '<br><br><table width=99% border=0>
         <tr>
-      <td>' . _ADSLIGHT_CLASSIFIED . " (No. ${lid} ) <br>" . _ADSLIGHT_FROM . " ${submitter} <br><br>";
+      <td>' . _ADSLIGHT_CLASSIFIED . " (No. {$lid} ) <br>" . _ADSLIGHT_FROM . " {$submitter} <br><br>";
 
-    echo " <strong>${type} :</strong> <i>${title}</i><br>";
+    echo " <strong>{$type} :</strong> <i>{$title}</i><br>";
     if ($price > 0) {
-        echo '<strong>' . _ADSLIGHT_PRICE2 . "</strong> ${price} " . $helper->getConfig('adslight_currency_symbol') . "  - ${typeprice}<br>";
+        echo '<strong>' . _ADSLIGHT_PRICE2 . "</strong> {$price} " . $helper->getConfig('adslight_currency_symbol') . "  - {$typeprice}<br>";
     }
     if ($photo) {
-        echo "<tr><td><div style='text-align:left'><img class=\"thumb\" src=\"" . XOOPS_URL . "/uploads/adslight/${url}\" width=\"130px\" border=0 ></div>";
+        echo "<tr><td><div style='text-align:left'><img class=\"thumb\" src=\"" . XOOPS_URL . "/uploads/adslight/{$url}\" width=\"130px\" border=0 ></div>";
     }
     echo '</td>
           </tr>
     <tr>
-      <td><strong>' . _ADSLIGHT_DESC . "</strong><br><br><div style=\"text-align:justify;\">${desctext}</div><p>";
+      <td><strong>' . _ADSLIGHT_DESC . "</strong><br><br><div style=\"text-align:justify;\">{$desctext}</div><p>";
     if ('' !== $tel) {
-        echo '<br><strong>' . _ADSLIGHT_TEL . "</strong> ${tel}";
+        echo '<br><strong>' . _ADSLIGHT_TEL . "</strong> {$tel}";
     }
     if ('' !== $town) {
-        echo '<br><strong>' . _ADSLIGHT_TOWN . "</strong> ${town}";
+        echo '<br><strong>' . _ADSLIGHT_TOWN . "</strong> {$town}";
     }
     if ('' !== $country) {
-        echo '<br><strong>' . _ADSLIGHT_COUNTRY . "</strong> ${country}";
+        echo '<br><strong>' . _ADSLIGHT_COUNTRY . "</strong> {$country}";
     }
     echo '<hr>';
     echo '' . _ADSLIGHT_NOMAIL . ' <br>' . XOOPS_URL . '/modules/adslight/viewads.php?lid=' . $lid . '<br>';
-    echo '<br><br>' . _ADSLIGHT_DATE2 . " ${date_created} " . _ADSLIGHT_AND . ' ' . _ADSLIGHT_DISPO . " ${date2}<br><br>";
+    echo '<br><br>' . _ADSLIGHT_DATE2 . " {$date_created} " . _ADSLIGHT_AND . ' ' . _ADSLIGHT_DISPO . " {$date2}<br><br>";
     echo '</td>
     </tr>
     </table>';

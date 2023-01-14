@@ -69,7 +69,7 @@ if (!empty($_POST['submit'])) {
     } else {
         // Check if ANONYMOUS user is trying to vote more than once per day.
         $yesterday = time() - (86400 * $anonwaitdays);
-        $sql       = 'SELECT count(*) FROM ' . $xoopsDB->prefix('adslight_user_votedata') . ' WHERE usid=' . $xoopsDB->escape($usid) . " AND ratinguser=0 AND ratinghostname = '${ip}' AND date_created > ${yesterday}";
+        $sql       = 'SELECT count(*) FROM ' . $xoopsDB->prefix('adslight_user_votedata') . ' WHERE usid=' . $xoopsDB->escape($usid) . " AND ratinguser=0 AND ratinghostname = '{$ip}' AND date_created > {$yesterday}";
         $result    = $xoopsDB->query($sql);
         [$anonvotecount] = $xoopsDB->fetchRow($result);
         if ($anonvotecount > 0) {

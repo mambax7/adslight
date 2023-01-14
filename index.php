@@ -213,7 +213,7 @@ function index(): void
     }
 
     $GLOBALS['xoopsTpl']->assign('bullinfotext', _ADSLIGHT_ACTUALY . ' ' . $ads . ' ' . _ADSLIGHT_ADVERTISEMENTS . '<br>' . $add_listing);
-    $GLOBALS['xoopsTpl']->assign('total_confirm', _ADSLIGHT_AND . " ${propo} " . _ADSLIGHT_WAIT3);
+    $GLOBALS['xoopsTpl']->assign('total_confirm', _ADSLIGHT_AND . " {$propo} " . _ADSLIGHT_WAIT3);
 
     if (1 === $helper->getConfig('adslight_newad')) {
         $cat_perms = '';

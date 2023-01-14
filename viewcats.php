@@ -407,21 +407,21 @@ function adsView($cid, $min, $orderby, $show = 0): void
         if (1 !== (int)$linkpages && 0 !== (int)$linkpages) {
             $prev = $min - $show;
             if ($prev >= 0) {
-                $pagenav .= "<a href='viewcats.php?cid=${cid}&min=${prev}&orderby=${orderby}&show=${show}'><strong><u>&laquo;</u></strong></a> ";
+                $pagenav .= "<a href='viewcats.php?cid={$cid}&min={$prev}&orderby={$orderby}&show={$show}'><strong><u>&laquo;</u></strong></a> ";
             }
             $counter     = 1;
             $currentpage = $max / $show;
             while ($counter <= $linkpages) {
                 $mintemp = ($show * $counter) - $show;
                 if ($counter === $currentpage) {
-                    $pagenav .= "<strong>(${counter})</strong> ";
+                    $pagenav .= "<strong>({$counter})</strong> ";
                 } else {
-                    $pagenav .= "<a href='viewcats.php?cid=${cid}&min=${mintemp}&orderby=${orderby}&show=${show}'>${counter}</a> ";
+                    $pagenav .= "<a href='viewcats.php?cid={$cid}&min={$mintemp}&orderby={$orderby}&show={$show}'>{$counter}</a> ";
                 }
                 ++$counter;
             }
             if ($trows > $max) {
-                $pagenav .= "<a href='viewcats.php?cid=${cid}&min=${max}&orderby=${orderby}&show=${show}'>";
+                $pagenav .= "<a href='viewcats.php?cid={$cid}&min={$max}&orderby={$orderby}&show={$show}'>";
                 $pagenav .= '<strong><u>&raquo;</u></strong></a>';
             }
         }

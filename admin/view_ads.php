@@ -82,7 +82,7 @@ function index(): void
         // Il y a [..] Annonces en attente d'être approuvées //////
         echo "<table class='outer bnone' cellspacing=5 cellpadding=0><tr><td width=40>";
         echo "<img src='../assets/images/admin/error_button.png' border=0 ></td><td>";
-        echo "<span style='color:#00B4C4;'><b>" . _AM_ADSLIGHT_THEREIS . "</b></span> <b>${numrows}</b> <b><span style='color:#00B4C4;'>" . _AM_ADSLIGHT_ADSVALIDE . '</b></span>';
+        echo "<span style='color:#00B4C4;'><b>" . _AM_ADSLIGHT_THEREIS . "</b></span> <b>{$numrows}</b> <b><span style='color:#00B4C4;'>" . _AM_ADSLIGHT_ADSVALIDE . '</b></span>';
         echo '</td></tr></table><br>';
 
         // Liste des ID  ///// Soumis par /////  Titre   /////  Description  /////  Date d'ajout
@@ -122,7 +122,7 @@ function index(): void
                 }
             }
             if ($photo <= 0) {
-                $photo3 = "<a href=\"index.php?op=indexView&lid=${lid}\"><img class=\"thumb\" src=\"" . XOOPS_URL . "/modules/adslight/assets/images/nophoto.jpg\" align=\"left\" width=\"100px\" alt=\"${title}\"></a>";
+                $photo3 = "<a href=\"index.php?op=indexView&lid={$lid}\"><img class=\"thumb\" src=\"" . XOOPS_URL . "/modules/adslight/assets/images/nophoto.jpg\" align=\"left\" width=\"100px\" alt=\"{$title}\"></a>";
             } else {
                 $photo4 = (string)$photo;
             }
@@ -141,8 +141,8 @@ function index(): void
 
             echo "<tr><td class='even width3'></td>";
             echo "<td class='odd width10' >{$photo3}</td>";
-            echo "<td class='even width20'><b>{$title}</b><br><br>{$nom_type}<br>{$price} " . $helper->getConfig('adslight_currency_symbol') . " ${nom_price}<br>";
-            echo "${town} - ${country}<br>";
+            echo "<td class='even width20'><b>{$title}</b><br><br>{$nom_type}<br>{$price} " . $helper->getConfig('adslight_currency_symbol') . " {$nom_price}<br>";
+            echo "{$town} - {$country}<br>";
             echo '<b>' . _AM_ADSLIGHT_SUBMITTER . ":</b> {$submitter}<br>";
             echo '<b>' . _AM_ADSLIGHT_DATE . ":</b> {$date2}</td>";
             echo "<td class='even width='35%'>{$desctext}</td><td class='even right width2'></td>";
@@ -300,12 +300,12 @@ function indexView($lid = null): void
         }
         echo '</select></td></tr>';
 
-        echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_PRICE2 . " </td><td><input type=\"text\" name=\"price\" size=\"20\" value=\"${price}\"> " . $helper->getConfig('adslight_currency_symbol') . '';
+        echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_PRICE2 . " </td><td><input type=\"text\" name=\"price\" size=\"20\" value=\"{$price}\"> " . $helper->getConfig('adslight_currency_symbol') . '';
         $sql     = 'SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . ' ORDER BY id_price';
         $result3 = $xoopsDB->query($sql);
         echo " <select name=\"typeprice\"><option value=\"{$typeprice}\">{$typeprice}</option>";
         while ([$nom_price] = $xoopsDB->fetchRow($result3)) {
-            echo "<option value=\"${nom_price}\">${nom_price}</option>";
+            echo "<option value=\"{$nom_price}\">{$nom_price}</option>";
         }
         echo '</select></td></tr>';
 
@@ -620,16 +620,16 @@ function listingDel($lid, $photo): void
     while ([$purl] = $xoopsDB->fetchRow($result2)) {
         if ($purl) {
             $destination = XOOPS_ROOT_PATH . '/uploads/adslight';
-            if (is_file("${destination}/${purl}")) {
-                unlink("${destination}/${purl}");
+            if (is_file("{$destination}/{$purl}")) {
+                unlink("{$destination}/{$purl}");
             }
             $destination2 = XOOPS_ROOT_PATH . '/uploads/adslight/thumbs';
-            if (is_file("${destination2}/thumb_${purl}")) {
-                unlink("${destination2}/thumb_${purl}");
+            if (is_file("{$destination2}/thumb_{$purl}")) {
+                unlink("{$destination2}/thumb_{$purl}");
             }
             $destination3 = XOOPS_ROOT_PATH . '/uploads/adslight/midsize';
-            if (is_file("${destination3}/resized_${purl}")) {
-                unlink("${destination3}/resized_${purl}");
+            if (is_file("{$destination3}/resized_{$purl}")) {
+                unlink("{$destination3}/resized_{$purl}");
             }
             $sql = 'DELETE FROM ' . $xoopsDB->prefix('adslight_pictures') . " WHERE lid={$lid}";
             $xoopsDB->query($sql);
