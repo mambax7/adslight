@@ -33,7 +33,9 @@ use XoopsModules\Adslight\{
 class Utility extends Common\SysUtility
 {
     //--------------- Custom module methods -----------------------------
-
+    /**
+     * @return void
+     */
     public static function expireAd(): void
     {
         global $xoopsDB, $xoopsConfig, $xoopsModule, $myts, $meta;
@@ -312,6 +314,9 @@ class Utility extends Common\SysUtility
         return $retval;
     }
 
+    /**
+     * @return void
+     */
     public static function showImage(): void
     {
         echo "<script type=\"text/javascript\">\n";
@@ -480,6 +485,9 @@ class Utility extends Common\SysUtility
         return $arr['title'];
     }
 
+    /**
+     * @return array
+     */
     public static function goCategory(): array
     {
         global $xoopsDB;
@@ -496,6 +504,9 @@ class Utility extends Common\SysUtility
     // ADSLIGHT Version 2 //
     // Fonction rss.php RSS par categories
 
+    /**
+     * @return array
+     */
     public static function returnAllAdsRss(): array
     {
         global $xoopsDB;
@@ -516,6 +527,9 @@ class Utility extends Common\SysUtility
 
     // Fonction fluxrss.php RSS Global
 
+    /**
+     * @return array
+     */
     public static function returnAllAdsFluxRss(): array
     {
         global $xoopsDB;
