@@ -180,9 +180,9 @@ class Utility extends Common\SysUtility
 
         $usid = Request::getInt('usid', 0, 'GET');
 
-        $query = 'SELECT rating FROM ' . $xoopsDB->prefix('adslight_user_votedata') . ' WHERE usid=' . $xoopsDB->escape($sel_id) . ' ';
-        //echo $query;
-        $voteresult  = $xoopsDB->query($query);
+        $sql = 'SELECT rating FROM ' . $xoopsDB->prefix('adslight_user_votedata') . ' WHERE usid=' . $xoopsDB->escape($sel_id) . ' ';
+        //echo $sql;
+        $voteresult  = $xoopsDB->query($sql);
         if (!$xoopsDB->isResultSet($voteresult)) {
             \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
         }
@@ -193,9 +193,9 @@ class Utility extends Common\SysUtility
         }
         $finalrating = $totalrating / $votesDB;
         $finalrating = \number_format($finalrating, 4);
-        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET user_rating={$finalrating}, user_votes={$votesDB} WHERE usid=" . $xoopsDB->escape($sel_id);
-        //echo $query;
-        $xoopsDB->query($query) || exit();
+        $sql       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET user_rating={$finalrating}, user_votes={$votesDB} WHERE usid=" . $xoopsDB->escape($sel_id);
+        //echo $sql;
+        $xoopsDB->query($sql) || exit();
     }
 
     //updates rating data in itemtable for a given item
@@ -210,7 +210,7 @@ class Utility extends Common\SysUtility
         $lid = Request::getInt('lid', 0, 'GET');
 
         $sql = 'SELECT rating FROM ' . $xoopsDB->prefix('adslight_item_votedata') . ' WHERE lid=' . $xoopsDB->escape($sel_id) . ' ';
-        //echo $query;
+        //echo $sql;
         $voteresult  = $xoopsDB->query($sql);
         if (!$xoopsDB->isResultSet($voteresult)) {
             \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
@@ -222,9 +222,9 @@ class Utility extends Common\SysUtility
         }
         $finalrating = $totalrating / $votesDB;
         $finalrating = \number_format($finalrating, 4);
-        $query       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET item_rating={$finalrating}, item_votes={$votesDB} WHERE lid=" . $xoopsDB->escape($sel_id);
-        //echo $query;
-        $xoopsDB->query($query) || exit();
+        $sql       = 'UPDATE ' . $xoopsDB->prefix('adslight_listing') . " SET item_rating={$finalrating}, item_votes={$votesDB} WHERE lid=" . $xoopsDB->escape($sel_id);
+        //echo $sql;
+        $xoopsDB->query($sql) || exit();
     }
 
     /**

@@ -506,6 +506,7 @@ class Tree
 
     public function getCategoryList(): array
     {
+        global $xoopsDB;
         $sql    = 'SELECT SQL_CACHE cid, pid, title FROM ' . $this->table;
         $result = $xoopsDB->query($sql);
         if (!$xoopsDB->isResultSet($result)) {
