@@ -1,3 +1,3 @@
-<?php declare(strict_types=1);
+<?php
 
 header('HTTP/1.0 404 Not Found');
