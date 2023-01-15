@@ -100,6 +100,9 @@ class Tree
         $sel_id  = (int)$sel_id;
         $sql     = 'SELECT SQL_CACHE ' . $this->id . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id;
         $result  = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
 
         $categories = Utility::getMyItemIds('adslight_view');
         if (\is_array($categories) && $categories !== []) {
@@ -171,6 +174,9 @@ class Tree
             $sql .= " ORDER BY {$order}";
         }
         $result = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
         [$r_id] = $this->db->fetchRow($result);
         if (0 === $r_id) {
             return $idarray;
@@ -198,6 +204,9 @@ class Tree
         }
 
         $result = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
 
         if (0 === $this->db->getRowsNum($result)) {
             return $path;
@@ -245,6 +254,9 @@ class Tree
         }
 
         $result = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
         if (0 !== $none) {
             echo '<option value="0">----</option>';
         }
@@ -280,6 +292,9 @@ class Tree
     {
         $sql    = 'SELECT SQL_CACHE ' . $this->pid . ", {$title} FROM " . $this->table . ' WHERE ' . $this->id . '=' . (int)$sel_id;
         $result = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
         if (0 === $this->db->getRowsNum($result)) {
             return $path;
         }
@@ -308,6 +323,9 @@ class Tree
         $sel_id = (int)$sel_id;
         $sql    = 'SELECT SQL_CACHE ' . $this->pid . ' FROM ' . $this->table . ' WHERE ' . $this->id . '=' . $sel_id;
         $result = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
         if (0 === $this->db->getRowsNum($result)) {
             return $path;
         }
@@ -413,6 +431,9 @@ class Tree
             $sql .= " ORDER BY {$order}";
         }
         $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while (false !== [$catid, $name, $cat_order] = $xoopsDB->fetchRow($result)) {
             echo '<table class="width100 bnone outer"><tr>
                 <th class="left">';
@@ -467,6 +488,9 @@ class Tree
             $sql .= " ORDER BY {$order}";
         }
         $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         $count  = $xoopsDB->getRowsNum($result);
         if (0 === $count) {
             return $parray;
@@ -483,10 +507,14 @@ class Tree
     public function getCategoryList(): array
     {
         $sql    = 'SELECT SQL_CACHE cid, pid, title FROM ' . $this->table;
-        $result = $this->db->query($sql);
+        $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
+
         $ret    = [];
         \MyTextSanitizer::getInstance();
-        while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
             $ret[$myrow['cid']] = [
                 'title' => \htmlspecialchars($myrow['title'], \ENT_QUOTES | \ENT_HTML5),
                 'pid'   => $myrow['pid'],

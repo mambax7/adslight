@@ -49,6 +49,9 @@ function adslight_notify_iteminfo(
         $sql = 'SELECT SQL_CACHE title  FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid ={$item_id} LIMIT 1";
 
         $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         if ($xoopsDB->isResultSet($result)) {
             $result_array = $xoopsDB->fetchArray($result);
             $item['name'] = $result_array['title'];
@@ -66,7 +69,10 @@ function adslight_notify_iteminfo(
     if ('listing' === $category) {
         // Assume we have a valid post id
         $sql          = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE lid={$item_id} LIMIT 1";
-        $result       = $xoopsDB->query($sql);
+        $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         $result_array = $xoopsDB->fetchArray($result);
         $item['name'] = $result_array['title'];
         //      $item['catname'] = $result_array['cat.title'];

@@ -34,6 +34,9 @@ echo '<br><br>';
 global $xoopsDB;
 $sql         = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_categories');
 $countresult = $xoopsDB->query($sql);
+if (!$xoopsDB->isResultSet($countresult)) {
+    \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+}
 [$cat_row] = $xoopsDB->fetchRow($countresult);
 $cat_rows = $cat_row;
 

@@ -29,8 +29,11 @@ $moduleDirName = \basename(__DIR__);
 $com_itemid = Request::getInt('com_itemid', 0, 'GET');
 if ($com_itemid > 0) {
     // Get link title
-    $sql            = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE usid={$com_itemid}";
-    $result         = $xoopsDB->query($sql);
+    $sql    = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE usid={$com_itemid}";
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     $row            = $xoopsDB->fetchArray($result);
     $com_replytitle = $row['title'];
     require_once XOOPS_ROOT_PATH . '/include/comment_new.php';

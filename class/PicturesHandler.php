@@ -96,7 +96,9 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
     {
         //        $sql = 'SELECT * FROM ' . $this->db->prefix('adslight_pictures') . ' WHERE cod_img=' . $id . ' AND lid=' . $lid . ' ';
         $sql = 'SELECT * FROM ' . $this->db->prefix('adslight_pictures') . ' WHERE cod_img=' . $id . ' ';
-        if (!$result = $this->db->query($sql)) {
+        $result = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+//            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
@@ -213,7 +215,8 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
             $start = $criteria->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
-        if (!$result) {
+        if (!$this->db->isResultSet($result)) {
+//            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
@@ -243,7 +246,7 @@ class PicturesHandler extends \XoopsPersistableObjectHandler
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
-        if (!$result) {
+        if (!$this->db->isResultSet($result)) {
             return 0;
         }
         [$count] = $this->db->fetchRow($result);

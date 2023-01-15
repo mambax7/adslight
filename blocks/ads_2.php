@@ -54,7 +54,9 @@ function adslight_b2_show($options)
 
     $sql    = 'SELECT lid, cid, title, status, type, price, typeprice, date_created, town, country, contactby, usid, premium, valid, photo, hits FROM ' . $xoopsDB->prefix("{$moduleDirName}_listing") . " WHERE valid='Yes' AND status!='1' {$cat_perms} ORDER BY {$options[0]} DESC";
     $result = $xoopsDB->query($sql, $options[1], 0);
-
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $a_item = [];
         $title  = \htmlspecialchars($myrow['title'], ENT_QUOTES | ENT_HTML5);
@@ -76,10 +78,16 @@ function adslight_b2_show($options)
 
         $sql     = 'SELECT nom_type FROM ' . $xoopsDB->prefix('adslight_type') . ' WHERE id_type=' . (int)$type;
         $result7 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result7)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$nom_type] = $xoopsDB->fetchRow($result7);
 
         $sql     = 'SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . ' WHERE id_price=' . (int)$typeprice;
         $result8 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result8)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$nom_price] = $xoopsDB->fetchRow($result8);
 
         $ad_title         = $myrow['title'];
@@ -120,6 +128,9 @@ function adslight_b2_show($options)
             //                       . ' ORDER BY date_created ASC limit 1';
             //            }
             $resultp = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($resultp)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             while ([$cod_img, $pic_lid, $uid_owner, $url] = $xoopsDB->fetchRow($resultp)) {
                 $a_item['photo'] = '<a href="' . XOOPS_URL . "/modules/{$moduleDirName}/viewads.php?lid={$a_item['id']}\"><img class=\"thumb\" src=\"" . XOOPS_URL . "/uploads/adslight/thumbs/thumb_{$url}\" align=\"left\" width=\"100px\" alt=\"{$title}\"></a>";
             }

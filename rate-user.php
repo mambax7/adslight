@@ -61,6 +61,9 @@ if (!empty($_POST['submit'])) {
         // Check if REG user is trying to vote twice.
         $sql    = 'SELECT ratinguser FROM ' . $xoopsDB->prefix('adslight_user_votedata') . ' WHERE usid=' . $xoopsDB->escape($usid);
         $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while ([$ratinguserDB] = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB === $ratinguser) {
                 $helper->redirect('members.php?usid=' . addslashes($usid) . '', 4, constant('_ADSLIGHT_VOTEONCE2'));
@@ -70,7 +73,10 @@ if (!empty($_POST['submit'])) {
         // Check if ANONYMOUS user is trying to vote more than once per day.
         $yesterday = time() - (86400 * $anonwaitdays);
         $sql       = 'SELECT count(*) FROM ' . $xoopsDB->prefix('adslight_user_votedata') . ' WHERE usid=' . $xoopsDB->escape($usid) . " AND ratinguser=0 AND ratinghostname = '{$ip}' AND date_created > {$yesterday}";
-        $result    = $xoopsDB->query($sql);
+        $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$anonvotecount] = $xoopsDB->fetchRow($result);
         if ($anonvotecount > 0) {
             $helper->redirect('members.php?usid=' . addslashes($usid) . '', 4, constant('_ADSLIGHT_VOTEONCE2'));
@@ -102,6 +108,9 @@ if (!empty($_POST['submit'])) {
     $usid   = Request::getInt('usid', 0, 'GET');
     $sql    = 'SELECT title, usid, submitter FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE usid=' . $xoopsDB->escape($usid);
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$title, $usid, $submitter] = $xoopsDB->fetchRow($result);
     $GLOBALS['xoopsTpl']->assign('link', [
         'usid'      => $usid,

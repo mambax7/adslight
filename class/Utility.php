@@ -46,6 +46,9 @@ class Utility extends Common\SysUtility
 
         $sql     = 'SELECT lid, title, expire, type, desctext, date_created, email, submitter, photo, valid, hits, comments, remind FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE valid='Yes'";
         $result5 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result5)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
 
         while (false !== [$lids, $title, $expire, $type, $desctext, $dateann, $email, $submitter, $photo, $valid, $hits, $comments, $remind] = $xoopsDB->fetchRow($result5)) {
             $title     = \htmlspecialchars($title, \ENT_QUOTES | \ENT_HTML5);
@@ -105,7 +108,9 @@ class Utility extends Common\SysUtility
                 if (0 !== $photo) {
                     $sql     = 'SELECT url FROM ' . $xoopsDB->prefix('adslight_pictures') . ' WHERE lid=' . $xoopsDB->escape($lids);
                     $result2 = $xoopsDB->query($sql);
-
+                    if (!$xoopsDB->isResultSet($result2)) {
+                        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+                    }
                     while (false !== [$url] = $xoopsDB->fetchRow($result2)) {
                         $destination  = XOOPS_ROOT_PATH . '/uploads/adslight';
                         $destination2 = XOOPS_ROOT_PATH . '/uploads/adslight/thumbs';
@@ -178,6 +183,9 @@ class Utility extends Common\SysUtility
         $query = 'SELECT rating FROM ' . $xoopsDB->prefix('adslight_user_votedata') . ' WHERE usid=' . $xoopsDB->escape($sel_id) . ' ';
         //echo $query;
         $voteresult  = $xoopsDB->query($query);
+        if (!$xoopsDB->isResultSet($voteresult)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         $votesDB     = $xoopsDB->getRowsNum($voteresult);
         $totalrating = 0;
         while (false !== [$rating] = $xoopsDB->fetchRow($voteresult)) {
@@ -201,9 +209,12 @@ class Utility extends Common\SysUtility
 
         $lid = Request::getInt('lid', 0, 'GET');
 
-        $query = 'SELECT rating FROM ' . $xoopsDB->prefix('adslight_item_votedata') . ' WHERE lid=' . $xoopsDB->escape($sel_id) . ' ';
+        $sql = 'SELECT rating FROM ' . $xoopsDB->prefix('adslight_item_votedata') . ' WHERE lid=' . $xoopsDB->escape($sel_id) . ' ';
         //echo $query;
-        $voteresult  = $xoopsDB->query($query);
+        $voteresult  = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($voteresult)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         $votesDB     = $xoopsDB->getRowsNum($voteresult);
         $totalrating = 0;
         while (false !== [$rating] = $xoopsDB->fetchRow($voteresult)) {
@@ -228,17 +239,22 @@ class Utility extends Common\SysUtility
         $count      = 0;
         $arr        = [];
         if (\in_array((int)$sel_id, $categories, true)) {
-            $query = 'SELECT SQL_CACHE count(*) FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE cid=' . (int)$sel_id . " AND valid='Yes' AND status!='1'";
-
-            $result = $xoopsDB->query($query);
+            $sql = 'SELECT SQL_CACHE count(*) FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE cid=' . (int)$sel_id . " AND valid='Yes' AND status!='1'";
+            $result = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($result)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             [$thing] = $xoopsDB->fetchRow($result);
             $count = $thing;
             $arr   = $mytree->getAllChildId($sel_id);
             foreach ($arr as $iValue) {
                 if (\in_array((int)$iValue, $categories, true)) {
-                    $query2 = 'SELECT SQL_CACHE count(*) FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE cid=' . (int)$iValue . " AND valid='Yes' AND status!='1'";
+                    $sql2 = 'SELECT SQL_CACHE count(*) FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE cid=' . (int)$iValue . " AND valid='Yes' AND status!='1'";
 
-                    $result2 = $xoopsDB->query($query2);
+                    $result2 = $xoopsDB->query($sql2);
+                    if (!$xoopsDB->isResultSet($result2)) {
+                        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+                    }
                     [$thing] = $xoopsDB->fetchRow($result2);
                     $count += $thing;
                 }
@@ -474,7 +490,8 @@ class Utility extends Common\SysUtility
 
         $sql = 'SELECT SQL_CACHE title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid = '{$cid}'";
 
-        if (!$result = $xoopsDB->query($sql)) {
+        $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
             return false;
         }
 
@@ -518,6 +535,9 @@ class Utility extends Common\SysUtility
         $sql = 'SELECT lid, title, price, date_created, town FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE valid='yes' AND cid=" . $xoopsDB->escape($cid) . ' ORDER BY date_created DESC';
 
         $resultValues = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($resultValues)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while (false !== ($resultTemp = $xoopsDB->fetchBoth($resultValues))) {
             $result[] = $resultTemp;
         }
@@ -539,6 +559,9 @@ class Utility extends Common\SysUtility
         $sql = 'SELECT lid, title, price, desctext, date_created, town FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE valid='yes' ORDER BY date_created DESC LIMIT 0,15";
 
         $resultValues = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($resultValues)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while (false !== ($resultTemp = $xoopsDB->fetchBoth($resultValues))) {
             $result[] = $resultTemp;
         }
@@ -555,6 +578,9 @@ class Utility extends Common\SysUtility
         global $xoopsDB;
         $sql    = 'SELECT nom_type FROM ' . $xoopsDB->prefix('adslight_type') . " WHERE id_type='" . $xoopsDB->escape($type) . "'";
         $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$nom_type] = $xoopsDB->fetchRow($result);
 
         return $nom_type;

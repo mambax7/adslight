@@ -40,14 +40,16 @@ function printAd($lid): void
     $currenttheme = $xoopsConfig['theme_set'];
     $lid          = (int)$lid;
 
-    $result = $xoopsDB->query(
-        'SELECT l.lid, l.title, l.expire, l.type, l.desctext, l.tel, l.price, l.typeprice, l.date_created, l.email, l.submitter, l.town, l.country, l.photo, p.cod_img, p.lid, p.uid_owner, p.url FROM '
+    $sql = 'SELECT l.lid, l.title, l.expire, l.type, l.desctext, l.tel, l.price, l.typeprice, l.date_created, l.email, l.submitter, l.town, l.country, l.photo, p.cod_img, p.lid, p.uid_owner, p.url FROM '
         . $xoopsDB->prefix('adslight_listing')
         . ' l LEFT JOIN '
         . $xoopsDB->prefix('adslight_pictures')
         . ' p ON l.lid=p.lid WHERE l.lid='
-        . $xoopsDB->escape($lid)
-    );
+        . $xoopsDB->escape($lid);
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$lid, $title, $expire, $type, $desctext, $tel, $price, $typeprice, $date_created, $email, $submitter, $town, $country, $photo, $cod_img, $pic_lid, $uid_owner, $url] = $xoopsDB->fetchRow($result);
 
     $title     = \htmlspecialchars($title, ENT_QUOTES | ENT_HTML5);

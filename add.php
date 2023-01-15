@@ -157,7 +157,7 @@ if (Request::hasVar('submit', 'POST')) {
         $tags['LINK_URL']        = XOOPS_URL . '/modules/adslight/viewads.php?' . '&lid=' . $lid;
         $sql                     = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . ' WHERE cid=' . $cid;
         $result2                 = $xoopsDB->query($sql);
-        if ($result2 instanceof \mysqli_result) {
+         if ($xoopsDB->isResultSet($result2)) {
             $row                    = $xoopsDB->fetchArray($result2);
             $tags['CATEGORY_TITLE'] = $row['title'];
         }
@@ -183,7 +183,7 @@ if (Request::hasVar('submit', 'POST')) {
         $tags['ADMIN_LINK']    = XOOPS_URL . '/modules/adslight/admin/validate_ads.php';
         $sql                   = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . ' WHERE cid=' . $cid;
         $result2               = $xoopsDB->query($sql);
-        if ($result2 instanceof \mysqli_result) {
+        if ($xoopsDB->isResultSet($result2)) {
             $row                    = $xoopsDB->fetchArray($result2);
             $tags['CATEGORY_TITLE'] = $row['title'];
         }
@@ -281,7 +281,7 @@ if (Request::hasVar('submit', 'POST')) {
         $form->addElement(new \XoopsFormLabel(_ADSLIGHT_CAT3, (string)ob_get_clean()) ?? '', true);
         $sql      = 'SELECT title, cat_moderate FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid='" . $xoopsDB->escape($cid) . "'";
         $category = $xoopsDB->query($sql);
-        if ($category instanceof \mysqli_result) {
+        if ($xoopsDB->isResultSet($category)) {
             [$cat_title, $cat_moderate] = $xoopsDB->fetchRow($category);
         }
         if (1 === (int)$premium) {
@@ -302,14 +302,18 @@ if (Request::hasVar('submit', 'POST')) {
 
         // Type
         $type_form = new \XoopsFormSelect(_ADSLIGHT_TYPE, 'type', '', 1);
-        while ([$nom_type, $id_type] = $xoopsDB->fetchRow($result)) {
-            $type_form->addOption($nom_type, $id_type);
+        if ($xoopsDB->isResultSet($result)) {
+            while ([$nom_type, $id_type] = $xoopsDB->fetchRow($result)) {
+                $type_form->addOption($nom_type, $id_type);
+            }
         }
 
         // Item Condition
         $condition_form = new \XoopsFormSelect(_ADSLIGHT_TYPE_CONDITION, 'typecondition', '', 1);
-        while (false !== [$nom_condition, $id_condition] = $xoopsDB->fetchRow($result3)) {
-            $condition_form->addOption($nom_condition, $id_condition);
+        if ($xoopsDB->isResultSet($result3)) {
+            while (false !== [$nom_condition, $id_condition] = $xoopsDB->fetchRow($result3)) {
+                $condition_form->addOption($nom_condition, $id_condition);
+            }
         }
 
         $form->addElement($type_form, true);
@@ -333,8 +337,10 @@ if (Request::hasVar('submit', 'POST')) {
 
         // Price Type
         $sel_form = new \XoopsFormSelect(_ADSLIGHT_PRICETYPE, 'typeprice', '', 1);
-        while ([$nom_price, $id_price] = $xoopsDB->fetchRow($result2)) {
-            $sel_form->addOption($nom_price, $id_price);
+        if ($xoopsDB->isResultSet($result2)) {
+            while ([$nom_price, $id_price] = $xoopsDB->fetchRow($result2)) {
+                $sel_form->addOption($nom_price, $id_price);
+            }
         }
 
         $form->addElement($sel_form);

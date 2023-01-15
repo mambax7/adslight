@@ -51,6 +51,9 @@ if (!empty($_POST['submit'])) {
     if (0 !== (int)$ratinguser) {
         $sql    = 'SELECT submitter FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE lid=' . $xoopsDB->escape($lid);
         $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while ([$ratinguserDB] = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB === $ratinguser) {
                 $helper->redirect('viewads.php?lid=' . $lid . '', 4, constant('_ADSLIGHT_CANTVOTEOWN'));
@@ -60,6 +63,9 @@ if (!empty($_POST['submit'])) {
         // Check if REG user is trying to vote twice.
         $sql    = 'SELECT ratinguser FROM ' . $xoopsDB->prefix('adslight_item_votedata') . ' WHERE lid=' . $xoopsDB->escape($lid);
         $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while ([$ratinguserDB] = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB === $ratinguser) {
                 $helper->redirect('viewads.php?lid=' . $lid . '', 4, constant('_ADSLIGHT_VOTEONCE2'));
@@ -69,7 +75,10 @@ if (!empty($_POST['submit'])) {
         // Check if ANONYMOUS user is trying to vote more than once per day.
         $yesterday = time() - (86400 * $anonwaitdays);
         $sql       = 'SELECT count(*) FROM ' . $xoopsDB->prefix('adslight_item_votedata') . ' WHERE lid=' . $xoopsDB->escape($lid) . " AND ratinguser=0 AND ratinghostname = '{$ip}' AND date_created > {$yesterday}";
-        $result    = $xoopsDB->query($sql);
+        $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$anonvotecount] = $xoopsDB->fetchRow($result);
         if ($anonvotecount > 0) {
             $helper->redirect('viewads.php?lid=' . $lid . '', 4, constant('_ADSLIGHT_VOTEONCE2'));
@@ -101,6 +110,9 @@ if (!empty($_POST['submit'])) {
     $lid    = Request::getInt('lid', 0, 'GET');
     $sql    = 'SELECT lid, title FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE lid=' . $xoopsDB->escape($lid);
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$lid, $title] = $xoopsDB->fetchRow($result);
     $GLOBALS['xoopsTpl']->assign('link', [
         'lid'   => $lid,

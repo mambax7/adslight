@@ -23,8 +23,11 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 // Keep Block option values when update (by nobunobu)
 global $xoopsDB;
-$query  = 'SELECT SQL_CACHE mid FROM ' . $xoopsDB->prefix('modules') . " WHERE dirname='" . $modversion['dirname'] . "' ";
-$result = $xoopsDB->query($query);
+$sql  = 'SELECT SQL_CACHE mid FROM ' . $xoopsDB->prefix('modules') . " WHERE dirname='" . $modversion['dirname'] . "' ";
+$result = $xoopsDB->query($sql);
+if (!$xoopsDB->isResultSet($result)) {
+    \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+}
 if ($xoopsDB->isResultSet($result)) {
     $record = $xoopsDB->fetchArray($result);
 }
@@ -77,6 +80,9 @@ if ($record) {
 
     $sql     = 'SELECT * FROM ' . $xoopsDB->prefix('newblocks') . ' WHERE mid=' . $mid . " AND block_type <>'D' AND func_num > {$count}";
     $fresult = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($fresult)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     while (false !== ($fblock = $xoopsDB->fetchArray($fresult))) {
         $local_msgs[] = 'Non Defined Block <b>' . $fblock['name'] . '</b> will be deleted';
         $sql          = 'DELETE FROM ' . $xoopsDB->prefix('newblocks') . " WHERE bid='" . $fblock['bid'] . "'";
@@ -86,6 +92,9 @@ if ($record) {
     for ($i = 1; $i <= $count; ++$i) {
         $sql     = 'SELECT name,options FROM ' . $xoopsDB->prefix('newblocks') . ' WHERE mid=' . $mid . ' AND func_num=' . $i . " AND show_func='" . addslashes($modversion['blocks'][$i]['show_func']) . "' AND func_file='" . addslashes($modversion['blocks'][$i]['file']) . "'";
         $fresult = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($fresult)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         $fblock  = $xoopsDB->fetchArray($fresult);
         if (isset($fblock['options'])) {
             $old_vals = explode('|', $fblock['options']);

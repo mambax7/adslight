@@ -158,6 +158,9 @@ Utility::loadLightbox(); // JJDai
  */
 $sql    = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE lid=' . $lid . " AND valid='Yes'";
 $result = $xoopsDB->query($sql);
+if (!$xoopsDB->isResultSet($result)) {
+    \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+}
 while ([$title] = $xoopsDB->fetchRow($result)) {
     $GLOBALS['xoopsTpl']->assign('lang_gtitle', "<a href='viewads.php?lid=" . $lid . "'>" . $title . '</a>');
     $GLOBALS['xoopsTpl']->assign('lang_showcase', _ADSLIGHT_SHOWCASE);

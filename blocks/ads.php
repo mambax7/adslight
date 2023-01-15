@@ -48,7 +48,9 @@ function adslight_show($options)
 
     $sql    = 'SELECT lid, cid, title, type, date_created, hits FROM ' . $xoopsDB->prefix("{$moduleDirName}_listing") . " WHERE valid='Yes' ORDER BY {$options[0]} DESC";
     $result = $xoopsDB->query($sql, $options[1], 0);
-
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $a_item = [];
         $title  = \htmlspecialchars($myrow['title'], ENT_QUOTES | ENT_HTML5);

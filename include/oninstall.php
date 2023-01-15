@@ -107,6 +107,9 @@ function xoops_module_install_adslight(\XoopsModule $module): bool
 
     $sql    = 'SELECT cid FROM ' . $xoopsDB->prefix('adslight_categories');
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
 
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $categoryId = (int)$myrow['cid'];

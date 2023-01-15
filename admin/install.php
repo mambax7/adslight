@@ -49,8 +49,12 @@ if (Request::hasVar('action', 'POST')) {
 }
 */
 $sql = 'SELECT conf_id FROM ' . $xoopsDB->prefix('config') . ' WHERE conf_name = "theme_set"';
-$res = $xoopsDB->query($sql);
-[$conf_id] = $xoopsDB->fetchRow($res);
+$countresult = $xoopsDB->query($sql);
+$result = $xoopsDB->query($sql);
+if (!$xoopsDB->isResultSet($result)) {
+    \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+}
+[$conf_id] = $xoopsDB->fetchRow($result);
 /** @var \XoopsModuleHandler $moduleHandler */
 $moduleHandler = xoops_getHandler('module');
 $module        = $moduleHandler->getByDirname('system');

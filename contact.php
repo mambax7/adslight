@@ -66,6 +66,9 @@ if (Request::hasVar('submit', 'POST')) {
     $lid    = Request::getInt('id', 0, 'POST');
     $sql    = 'SELECT email, submitter, title, type, desctext, price, typeprice FROM  ' . $xoopsDB->prefix('adslight_listing') . ' WHERE lid = ' . $xoopsDB->escape($id);
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
 
     while (false !== [$email, $submitter, $title, $type, $desctext, $price, $typeprice] = $xoopsDB->fetchRow($result)) {
         $teles = Request::getString('tele', '', 'POST');

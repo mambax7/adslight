@@ -26,6 +26,7 @@ use XoopsModules\Adslight\{
     Tree,
     Utility
 };
+
 /** @var Admin $adminObject */
 /** @var Helper $helper */
 require_once __DIR__ . '/admin_header.php';
@@ -75,8 +76,11 @@ function index(): void
         echo '</fieldset><br>';
     }
 
-    $sql     = 'SELECT lid, cid, title, status, expire, type, desctext, tel, price, typeprice, typecondition, date_created, email, submitter, town, country, contactby, premium, photo, usid FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE valid='Yes' ORDER BY lid";
-    $result  = $xoopsDB->query($sql);
+    $sql    = 'SELECT lid, cid, title, status, expire, type, desctext, tel, price, typeprice, typecondition, date_created, email, submitter, town, country, contactby, premium, photo, usid FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE valid='Yes' ORDER BY lid";
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     $numrows = $xoopsDB->getRowsNum($result);
     if ($numrows > 0) {
         // Il y a [..] Annonces en attente d'être approuvées //////
@@ -116,6 +120,9 @@ function index(): void
             $updir   = $helper->getConfig('adslight_link_upload');
             $sql     = 'SELECT cod_img, lid, uid_owner, url FROM ' . $xoopsDB->prefix('adslight_pictures') . " WHERE  uid_owner={$usid} AND lid={$lid} ORDER BY date_created ASC LIMIT 1";
             $resultp = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($resultp)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             while ([$cod_img, $pic_lid, $uid_owner, $url] = $xoopsDB->fetchRow($resultp)) {
                 if ($photo) {
                     $photo3 = "<a href='" . XOOPS_URL . "/modules/adslight/viewads.php?lid={$lid}'><img class=\"thumb\" src=\"{$updir}/thumbs/thumb_{$url}\" align=\"left\" width=\"100px\" alt=\"{$title}\"></a>";
@@ -129,10 +136,16 @@ function index(): void
 
             $sql     = 'SELECT nom_type FROM ' . $xoopsDB->prefix('adslight_type') . ' WHERE id_type=' . (int)$type;
             $result7 = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($result7)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             [$nom_type] = $xoopsDB->fetchRow($result7);
 
             $sql     = 'SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . ' WHERE id_price=' . (int)$typeprice;
             $result8 = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($result8)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             [$nom_price] = $xoopsDB->fetchRow($result8);
 
             echo '<form action="view_ads.php" method="post">';
@@ -204,8 +217,11 @@ function indexView($lid = null): void
     xoops_cp_header();
     //    loadModuleAdminMenu(0, '');
 
-    $sql     = 'SELECT lid, cid, title, status, expire, type, desctext, tel, price, typeprice, typecondition, date_created, email, submitter, town, country, contactby, premium, photo FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE valid='No' AND lid='{$lid}'";
-    $result  = $xoopsDB->query($sql);
+    $sql    = 'SELECT lid, cid, title, status, expire, type, desctext, tel, price, typeprice, typecondition, date_created, email, submitter, town, country, contactby, premium, photo FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE valid='No' AND lid='{$lid}'";
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     $numrows = $xoopsDB->getRowsNum($result);
     if ($numrows > 0) {
         echo "<table class='width100' cellspacing='1' cellpadding='8' style='border: 2px solid #DFE0E0;'><tr class='bg4'><td class='top'>";
@@ -275,6 +291,9 @@ function indexView($lid = null): void
 
         $sql     = 'SELECT nom_type FROM ' . $xoopsDB->prefix('adslight_type') . ' ORDER BY nom_type';
         $result5 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result5)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while ([$nom_type] = $xoopsDB->fetchRow($result5)) {
             $sel = '';
             if ($nom_type === $type) {
@@ -291,6 +310,9 @@ function indexView($lid = null): void
 
         $sql     = 'SELECT nom_condition FROM ' . $xoopsDB->prefix('adslight_condition') . ' ORDER BY nom_condition';
         $result6 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result6)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while ([$nom_condition] = $xoopsDB->fetchRow($result6)) {
             $sel = '';
             if ($nom_condition === $typecondition) {
@@ -303,6 +325,9 @@ function indexView($lid = null): void
         echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_PRICE2 . " </td><td><input type=\"text\" name=\"price\" size=\"20\" value=\"{$price}\"> " . $helper->getConfig('adslight_currency_symbol') . '';
         $sql     = 'SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . ' ORDER BY id_price';
         $result3 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result3)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         echo " <select name=\"typeprice\"><option value=\"{$typeprice}\">{$typeprice}</option>";
         while ([$nom_price] = $xoopsDB->fetchRow($result3)) {
             echo "<option value=\"{$nom_price}\">{$nom_price}</option>";
@@ -362,6 +387,9 @@ function modifyAds($lid): void
 
     $sql    = 'SELECT lid, cid, title, status, expire, type, desctext, tel, price, typeprice, typecondition, date_created, email, submitter, town, country, contactby, premium, valid, photo FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE lid={$lid}";
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     while ([$lid, $cid, $title, $status, $expire, $type, $desctext, $tel, $price, $typeprice, $typecondition, $date_created, $email, $submitter, $town, $country, $contactby, $premium, $valid, $photo] = $xoopsDB->fetchRow(
         $result
     )) {
@@ -450,6 +478,9 @@ function modifyAds($lid): void
 
         $sql     = 'SELECT nom_type, id_type FROM ' . $xoopsDB->prefix('adslight_type') . ' ORDER BY nom_type';
         $result5 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result5)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while ([$nom_type, $id_type] = $xoopsDB->fetchRow($result5)) {
             $sel = '';
             if ($id_type === $type) {
@@ -465,6 +496,9 @@ function modifyAds($lid): void
 
         $sql     = 'SELECT nom_condition, id_condition FROM ' . $xoopsDB->prefix('adslight_condition') . ' ORDER BY nom_condition';
         $result6 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result6)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while ([$nom_condition, $id_condition] = $xoopsDB->fetchRow($result6)) {
             $sel = '';
             if ($id_condition === $typecondition) {
@@ -480,7 +514,9 @@ function modifyAds($lid): void
         // Price type
         $sql     = 'SELECT nom_price, id_price FROM ' . $xoopsDB->prefix('adslight_price') . ' ORDER BY nom_price';
         $resultx = $xoopsDB->query($sql);
-
+        if (!$xoopsDB->isResultSet($resultx)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         echo " <select name=\"typeprice\"><option value=\"{$id_price}\">{$nom_price}</option>";
         while ([$nom_price, $id_price] = $xoopsDB->fetchRow($resultx)) {
             $sel = '';
@@ -616,7 +652,9 @@ function listingDel($lid, $photo): void
     $lid     = (int)$lid;
     $sql     = 'SELECT p.url FROM ' . $xoopsDB->prefix('adslight_listing') . ' l LEFT JOIN ' . $xoopsDB->prefix('adslight_pictures') . " p  ON l.lid=p.lid WHERE l.lid={$lid}";
     $result2 = $xoopsDB->query($sql);
-
+    if (!$xoopsDB->isResultSet($result2)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     while ([$purl] = $xoopsDB->fetchRow($result2)) {
         if ($purl) {
             $destination = XOOPS_ROOT_PATH . '/uploads/adslight';
@@ -760,9 +798,11 @@ function listingValid(
     $tags['FOLLOW_LINK']     = _AM_ADSLIGHT_FOLLOW_LINK;
     $tags['TYPE']            = Utility::getNameType($type);
     $tags['LINK_URL']        = XOOPS_URL . "/modules/adslight/viewads.php?&lid={$lid}";
-
-    $sql                    = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
-    $result                 = $xoopsDB->query($sql);
+    $sql                     = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
+    $result                  = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     $row                    = $xoopsDB->fetchArray($result);
     $tags['CATEGORY_TITLE'] = $row['title'];
     $tags['CATEGORY_URL']   = XOOPS_URL . "/modules/adslight/viewcats.php?cid={$cat}";

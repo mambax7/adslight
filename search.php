@@ -192,6 +192,9 @@ switch ($action) {
                         echo '' . $myts->displayTarea($results[$i]['desctext'], 1, 1, 1, 1, 1) . '';
                         $sql     = 'SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . ' WHERE id_price=' . (int)$results[$i]['typeprice'];
                         $result8 = $xoopsDB->query($sql);
+                        if (!$xoopsDB->isResultSet($result8)) {
+                            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+                        }
                         [$nom_price] = $xoopsDB->fetchRow($result8);
                         //                        $a_item['typeprice']    = $nom_price;
 

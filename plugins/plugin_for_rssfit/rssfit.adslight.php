@@ -78,6 +78,9 @@ class RssfitAdslight
         //    The following example code grabs the latest entries from the module MyLinks
         $sql    = 'SELECT lid, title, status, desctext, date_created from ' . $xoopsDB->prefix('adslight_listing') . " WHERE valid = 'Yes' ORDER BY date_created DESC";
         $result = $xoopsDB->query($sql, $this->grab, 0);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $link = XOOPS_URL . '/modules/' . $this->dirname . '/viewads.php?lid=' . $row['lid'];
             /*

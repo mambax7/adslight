@@ -52,13 +52,17 @@ function listingDel($lid, $ok): void
 {
     global $xoopsDB;
     $helper = Helper::getInstance();
-    $result = $xoopsDB->query(
-        'SELECT usid FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE lid=' . $xoopsDB->escape($lid)
-    );
+    $sql = 'SELECT usid FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE lid=' . $xoopsDB->escape($lid);
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$usid] = $xoopsDB->fetchRow($result);
-    $result1 = $xoopsDB->query(
-        'SELECT url FROM ' . $xoopsDB->prefix('adslight_pictures') . ' WHERE lid=' . $xoopsDB->escape($lid)
-    );
+    $sql ='SELECT url FROM ' . $xoopsDB->prefix('adslight_pictures') . ' WHERE lid=' . $xoopsDB->escape($lid);
+    $result1 = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result1)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     if ($GLOBALS['xoopsUser']) {
         $currentid = $GLOBALS['xoopsUser']->getVar('uid', 'E');
         if ($usid === $currentid) {
@@ -113,6 +117,9 @@ function delReply($r_lid, $ok): void
             'adslight_replies'
         ) . ' r ON l.lid=r.lid  WHERE r.r_lid=' . $xoopsDB->escape($r_lid);
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$usid, $r_lid, $rlid, $title, $date_created, $submitter, $message, $tele, $email, $r_usid] = $xoopsDB->fetchRow(
         $result
     );
@@ -164,6 +171,9 @@ function modifyAd($lid): void
             $lid
         );
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$lid, $cide, $title, $status, $expire, $type, $desctext, $tel, $price, $typeprice, $typecondition, $date_created, $email, $submitter, $usid, $town, $country, $contactby, $premium, $valid] = $xoopsDB->fetchRow(
         $result
     );
@@ -279,6 +289,9 @@ function modifyAd($lid): void
 
             $sql     = 'SELECT nom_price, id_price FROM ' . $xoopsDB->prefix('adslight_price') . ' ORDER BY id_price';
             $result3 = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($result3)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             echo ' <select name="typeprice">';
             while ([$nom_price, $id_price] = $xoopsDB->fetchRow($result3)) {
                 $sel = '';
@@ -312,6 +325,9 @@ function modifyAd($lid): void
 
             $sql     = 'SELECT nom_type, id_type FROM ' . $xoopsDB->prefix('adslight_type') . ' ORDER BY nom_type';
             $result5 = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($result5)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             while ([$nom_type, $id_type] = $xoopsDB->fetchRow($result5)) {
                 $sel = '';
                 if ($id_type === $type) {
@@ -327,6 +343,9 @@ function modifyAd($lid): void
 
             $sql     = 'SELECT nom_condition, id_condition FROM ' . $xoopsDB->prefix('adslight_condition') . ' ORDER BY nom_condition';
             $result6 = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($result6)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             while ([$nom_condition, $id_condition] = $xoopsDB->fetchRow($result6)) {
                 $sel = '';
                 if ($id_condition === $typecondition) {

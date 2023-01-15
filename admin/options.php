@@ -50,12 +50,19 @@ function index(): void
 
     // Modifier un type
     $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_type');
-    [$numrows] = $xoopsDB->fetchRow($xoopsDB->query($sql));
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
+    [$numrows] = $xoopsDB->fetchRow($result);
     if ($numrows > 0) {
         echo '<form method="post" action="options.php">
              <b>' . _AM_ADSLIGHT_MODTYPE . '</b></font><br><br>';
         $sql     = 'SELECT id_type, nom_type FROM ' . $xoopsDB->prefix('adslight_type') . ' ORDER BY nom_type';
         $result2 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result2)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         echo '' . _AM_ADSLIGHT_TYPE . ' <select name="id_type">';
 
         while ([$id_type, $nom_type] = $xoopsDB->fetchRow($result2)) {
@@ -82,12 +89,19 @@ function index(): void
 
     // modify a price type
     $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_price');
-    [$numrows] = $xoopsDB->fetchRow($xoopsDB->query($sql));
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
+    [$numrows] = $xoopsDB->fetchRow($result);
     if ($numrows > 0) {
         echo '<form method="post" action="options.php">
             <b>' . _AM_ADSLIGHT_MODPRICE . '</b></font><br><br>';
         $sql     = 'SELECT id_price, nom_price FROM ' . $xoopsDB->prefix('adslight_price') . ' ORDER BY nom_price';
         $result3 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result3)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         echo '' . _AM_ADSLIGHT_TYPE . ' <select name="id_price">';
         while ([$id_price, $nom_price] = $xoopsDB->fetchRow($result3)) {
             $nom_price = \htmlspecialchars($nom_price, ENT_QUOTES | ENT_HTML5);
@@ -113,12 +127,19 @@ function index(): void
 
     // Modify a condition type
     $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_condition');
-    [$numrows] = $xoopsDB->fetchRow($xoopsDB->query($sql));
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
+    [$numrows] = $xoopsDB->fetchRow($result);
     if ($numrows > 0) {
         echo '<form method="post" action="options.php">
             <b>' . _AM_ADSLIGHT_MODCONDITION . '</b></font><br><br>';
         $sql     = 'SELECT id_condition, nom_condition FROM ' . $xoopsDB->prefix('adslight_condition') . ' ORDER BY nom_condition';
         $result8 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result8)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         echo _AM_ADSLIGHT_TYPE . ' <select name="id_condition">';
 
         while ([$id_condition, $nom_condition] = $xoopsDB->fetchRow($result8)) {
@@ -147,7 +168,11 @@ function listingAddType($type): void
     $helper = Helper::getInstance();
 
     $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_type') . " WHERE nom_type='{$type}'";
-    [$numrows] = $xoopsDB->fetchRow($xoopsDB->query($sql));
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
+    [$numrows] = $xoopsDB->fetchRow($result);
     if ($numrows > 0) {
         $nom_type = \htmlspecialchars($numrows, ENT_QUOTES | ENT_HTML5); //mb
         //        require_once __DIR__ . '/admin_header.php';
@@ -190,6 +215,9 @@ function listingModType($id_type): void
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_ADSLIGHT_MODTYPE . '</legend>';
     $sql    = 'SELECT id_type, nom_type FROM ' . $xoopsDB->prefix('adslight_type') . " WHERE id_type={$id_type}";
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$id_type, $nom_type] = $xoopsDB->fetchRow($result);
 
     $nom_type = \htmlspecialchars($nom_type, ENT_QUOTES | ENT_HTML5);
@@ -258,7 +286,11 @@ function listingAddPrice(string $nom_price): void
     global $xoopsDB, $xoopsConfig, $myts, $admin_lang;
     $helper = Helper::getInstance();
     $sql    = 'SELECT  COUNT(*)  FROM ' . $xoopsDB->prefix('adslight_price') . " WHERE nom_price='{$nom_price}'";
-    [$numrows] = $xoopsDB->fetchRow($xoopsDB->query($sql));
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
+    [$numrows] = $xoopsDB->fetchRow($result);
     if ($numrows > 0) {
         $nom_price = \htmlspecialchars($numrows, ENT_QUOTES | ENT_HTML5); //mb
         //        require_once __DIR__ . '/admin_header.php';
@@ -302,7 +334,10 @@ function listingModPrice($id_price): void
     echo '<b>' . _AM_ADSLIGHT_MODPRICE . '</b><br><br>';
     $id_price = (int)$id_price;
     $sql      = 'SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . " WHERE id_price={$id_price}";
-    $result   = $xoopsDB->query($sql);
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$nom_price] = $xoopsDB->fetchRow($result);
 
     $nom_price = \htmlspecialchars($nom_price, ENT_QUOTES | ENT_HTML5);
@@ -371,7 +406,11 @@ function listingAddcondition($type): void
     $type   = \htmlspecialchars($type, ENT_QUOTES | ENT_HTML5);
 
     $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_condition') . " WHERE nom_condition='{$type}'";
-    [$numrows] = $xoopsDB->fetchRow($xoopsDB->query($sql));
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
+    [$numrows] = $xoopsDB->fetchRow($result);
     if ($numrows > 0) {
         $nom_condition = \htmlspecialchars($numrows, ENT_QUOTES | ENT_HTML5); //mb
 
@@ -416,6 +455,9 @@ function listingModcondition($id_condition): void
     echo '<b>' . _AM_ADSLIGHT_MODCONDITION . '</b><br><br>';
     $sql     = 'SELECT nom_condition FROM ' . $xoopsDB->prefix('adslight_condition') . " WHERE id_condition={$id_condition}";
     $result9 = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result9)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$nom_condition] = $xoopsDB->fetchRow($result9);
 
     $nom_condition = \htmlspecialchars($nom_condition, ENT_QUOTES | ENT_HTML5);

@@ -89,7 +89,11 @@ class Pictures extends \XoopsObject
     public function load($id): void
     {
         $sql   = 'SELECT * FROM ' . $this->db->prefix('adslight_pictures') . ' WHERE cod_img=' . $id . ' ';
-        $myrow = $this->db->fetchArray($this->db->query($sql));
+        $result = $this->db->query($sql);
+        if (!$this->db->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $this->db->error(), E_USER_ERROR);
+        }
+        $myrow = $this->db->fetchArray($result);
         $this->assignVars($myrow);
         if (!$myrow) {
             $this->setNew();
@@ -130,12 +134,18 @@ class Pictures extends \XoopsObject
         if ($asobject) {
             $sql    = 'SELECT * FROM ' . $xoopsDB->prefix('adslight_pictures') . "{$where_query} ORDER BY {$sort} {$cat_order}";
             $result = $xoopsDB->query($sql, $limit, $start);
+            if (!$xoopsDB->isResultSet($result)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         } else {
             $sql    = 'SELECT cod_img FROM ' . $xoopsDB->prefix('adslight_pictures') . "{$where_query} ORDER BY {$sort} {$cat_order}";
             $result = $xoopsDB->query($sql, $limit, $start);
+            if (!$xoopsDB->isResultSet($result)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
             while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
                 $ret[] = $myrow['cog_img'];
             }

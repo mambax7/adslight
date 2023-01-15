@@ -59,6 +59,9 @@ $orderby = 'date_created Desc';
 $GLOBALS['xoopsTpl']->assign('lid', $lid);
 $sql         = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_replies') . ' WHERE lid=' . $xoopsDB->escape($lid);
 $countresult = $xoopsDB->query($sql);
+if (!$xoopsDB->isResultSet($countresult)) {
+    \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+}
 [$trow] = $xoopsDB->fetchRow($countresult);
 $trows   = $trow;
 $pagenav = '';
@@ -81,6 +84,9 @@ if ($trows > '0') {
 
     $sql    = 'SELECT r_lid, lid, title, date_created, submitter, message, tele, email, r_usid FROM ' . $xoopsDB->prefix('adslight_replies') . ' WHERE lid=' . $xoopsDB->escape($lid) . " ORDER BY {$orderby}";
     $result = $xoopsDB->query($sql, $show, $min);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
 
     if ($trows > '1') {
         $GLOBALS['xoopsTpl']->assign('has_replies', true);

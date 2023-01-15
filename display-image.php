@@ -37,8 +37,11 @@ xoops_header();
 global $xoopsConfig, $xoopsTheme, $xoopsDB, $xoops_footer, $xoopsLogger;
 $currenttheme = getTheme();
 
-$sql         = 'SELECT url FROM ' . $xoopsDB->prefix('adslight_picture') . " WHERE cod_img={$cod_img}";
-$result      = $xoopsDB->query($sql);
+$sql    = 'SELECT url FROM ' . $xoopsDB->prefix('adslight_picture') . " WHERE cod_img={$cod_img}";
+$result = $xoopsDB->query($sql);
+if (!$xoopsDB->isResultSet($result)) {
+    \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+}
 $recordexist = $xoopsDB->getRowsNum($result);
 
 if ($recordexist) {

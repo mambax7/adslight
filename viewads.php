@@ -23,6 +23,7 @@
 use Xmf\Module\Admin;
 use Xmf\Request;
 use XoopsModules\Adslight\{
+    Form\GoogleMapForm,
     Helper,
     PicturesHandler,
     Tree,
@@ -80,7 +81,7 @@ function viewAds($lid = 0): void
     require_once XOOPS_ROOT_PATH . '/header.php';
     //    require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
     $lid  = max((int)$lid, 0);
-    $rate = '1' === $helper->getConfig('adslight_rate_item') ? '1' : '0';
+    $rate = ('1' === $helper->getConfig('adslight_rate_item')) ? '1' : '0';
     $GLOBALS['xoopsTpl']->assign('rate', $rate);
     $GLOBALS['xoopsTpl']->assign('xmid', $xoopsModule->getVar('mid'));
     $GLOBALS['xoopsTpl']->assign('adslight_logolink', _ADSLIGHT_LOGOLINK);
@@ -115,7 +116,14 @@ function viewAds($lid = 0): void
             $GLOBALS['xoopsTpl']->assign('user_email', $GLOBALS['xoopsUser']->getVar('email'));
 
             $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE usid={$member_usid}";
-            [$show_user] = $xoopsDB->fetchRow($xoopsDB->query($sql));
+            $result = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($result)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
+            if (!$xoopsDB->isResultSet($result)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
+            [$show_user] = $xoopsDB->fetchRow($result);
 
             $GLOBALS['xoopsTpl']->assign('show_user', $show_user);
             $GLOBALS['xoopsTpl']->assign('show_user_link', 'members.php?uid=' . $member_usid);
@@ -132,15 +140,18 @@ function viewAds($lid = 0): void
         $cat_perms .= ' AND cid IN (' . implode(',', $categories) . ') ';
     }
 
-    $result      = $xoopsDB->query(
+    $sql    =
         'SELECT l.lid, l.cid, l.title, l.status, l.expire, l.type, l.desctext, l.tel, l.price, l.typeprice, l.typecondition, l.date_created, l.email, l.submitter, l.usid, l.town, l.country, l.contactby, l.premium, l.valid, l.photo, l.hits, l.item_rating, l.item_votes, l.user_rating, l.user_votes, l.comments, p.cod_img, p.lid, p.uid_owner, p.url FROM '
         . $xoopsDB->prefix('adslight_listing')
         . ' l LEFT JOIN '
         . $xoopsDB->prefix('adslight_pictures')
         . " p ON l.lid=p.lid  WHERE l.valid='Yes' AND l.lid = "
         . $xoopsDB->escape($lid)
-        . " and l.status!='1' {$cat_perms}"
-    );
+        . " and l.status!='1' {$cat_perms}";
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     $recordexist = $xoopsDB->getRowsNum($result);
 
     // Hack redirection erreur 404  si recordexist=null
@@ -205,6 +216,9 @@ function viewAds($lid = 0): void
         $i       = 0;
         $sql     = 'SELECT cid, pid, title FROM ' . $xoopsDB->prefix('adslight_categories') . ' WHERE  cid=' . $xoopsDB->escape($cid);
         $result3 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result3)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$ccid, $pid, $ctitle] = $xoopsDB->fetchRow($result3);
 
         $GLOBALS['xoopsTpl']->assign('category_title', $ctitle);
@@ -224,12 +238,19 @@ function viewAds($lid = 0): void
         $varnom[$x] = $ctitle;
 
         $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE valid="Yes" AND cid=' . $xoopsDB->escape($cid) . ' AND status!="1"';
-        [$nbe] = $xoopsDB->fetchRow($xoopsDB->query($sql));
+        $result = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
+        [$nbe] = $xoopsDB->fetchRow($result);
         if (0 !== (int)$pid) {
             $x = 1;
             while (0 !== (int)$pid) {
                 $sql     = 'SELECT cid, pid, title FROM ' . $xoopsDB->prefix('adslight_categories') . ' WHERE cid=' . $xoopsDB->escape($pid);
                 $result4 = $xoopsDB->query($sql);
+                if (!$xoopsDB->isResultSet($result4)) {
+                    \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+                }
                 [$ccid, $pid, $ctitle] = $xoopsDB->fetchRow($result4);
 
                 $ctitle     = \htmlspecialchars($ctitle, ENT_QUOTES | ENT_HTML5);
@@ -337,14 +358,23 @@ function viewAds($lid = 0): void
 
         $sql     = 'SELECT nom_type FROM ' . $xoopsDB->prefix('adslight_type') . " WHERE id_type='" . $xoopsDB->escape($type) . "'";
         $result7 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result7)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$nom_type] = $xoopsDB->fetchRow($result7);
 
         $sql     = 'SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . " WHERE id_price='" . $xoopsDB->escape($typeprice) . "'";
         $result8 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result8)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$nom_price] = $xoopsDB->fetchRow($result8);
 
         $sql     = 'SELECT nom_condition FROM ' . $xoopsDB->prefix('adslight_condition') . " WHERE id_condition='" . $xoopsDB->escape($typecondition) . "'";
         $result9 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result9)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$nom_condition] = $xoopsDB->fetchRow($result9);
 
         $GLOBALS['xoopsTpl']->assign('type', htmlspecialchars($nom_type, ENT_QUOTES | ENT_HTML5));
@@ -431,6 +461,7 @@ function viewAds($lid = 0): void
         if ('' !== $photo) {
             $criteria_lid          = new \Criteria('lid', $lid);
             $criteria_uid          = new \Criteria('uid', $usid);
+            /** @var PicturesHandler $picturesHandler */
             $picturesHandler       = $helper->getHandler('Pictures');
             $pictures_object_array = $picturesHandler->getObjects($criteria_lid, $criteria_uid);
             $pictures_number       = $picturesHandler->getCount($criteria_lid);
@@ -496,6 +527,9 @@ function viewAds($lid = 0): void
     }
     $sql     = 'SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . ' WHERE cid=' . $xoopsDB->escape($cid);
     $result8 = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result8)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
 
     [$ctitle] = $xoopsDB->fetchRow($result8);
     $GLOBALS['xoopsTpl']->assign('friend', '<img src="assets/images/friend.gif" border="0" alt="' . _ADSLIGHT_SENDFRIENDS . '" >&nbsp;&nbsp;<a rel="nofollow" href="sendfriend.php?op=SendFriend&amp;lid=' . $lid . '">' . _ADSLIGHT_SENDFRIENDS . '</a>');
@@ -503,12 +537,24 @@ function viewAds($lid = 0): void
     $GLOBALS['xoopsTpl']->assign('alerteabus', '<img src="assets/images/error.png" border="0" alt="' . _ADSLIGHT_ALERTEABUS . '" >&nbsp;&nbsp;<a rel="nofollow" href="report-abuse.php?op=ReportAbuse&amp;lid=' . $lid . '">' . _ADSLIGHT_ALERTEABUS . '</a>');
 
     $GLOBALS['xoopsTpl']->assign('link_main', '<a href="../adslight/">' . _ADSLIGHT_MAIN . '</a>');
-    $GLOBALS['xoopsTpl']->assign('link_cat', '<a href="viewcats.php?cid=' . addslashes($cid) . '">' . _ADSLIGHT_GORUB . ' ' . $ctitle . '</a>');
+    $GLOBALS['xoopsTpl']->assign('link_cat', '<a href="viewcats.php?cid=' . addslashes((string)$cid) . '">' . _ADSLIGHT_GORUB . ' ' . $ctitle . '</a>');
 
     $GLOBALS['xoopsTpl']->assign('printA', '<img src="assets/images/print.gif" border="0" alt="' . _ADSLIGHT_PRINT . '" >&nbsp;&nbsp;<a rel="nofollow" href="print.php?op=PrintAd&amp;lid=' . $lid . '">' . _ADSLIGHT_PRINT . '</a>');
 
+//Google Maps
+    $GLOBALS['xoopsTpl']->assign('adslight_googlemaps', false);
+    if ('' !== $helper->getConfig('GoogleMapsAPIKey') && (1 === $helper->getConfig('adslight_use_GoogleMaps'))) {
+        $GLOBALS['xoopsTpl']->assign('adslight_googlemaps', $helper->getConfig('adslight_use_GoogleMaps'));
+
+
+    }
+
+
     //($helper->getConfig('useRating') == 1);
-    if ((is_dir('../rating'))) {
+//    if ((is_dir('../rating') && $xoops->isActiveModule('rating'))) {
+    $moduleHandler = xoops_getHandler('module');
+    $module        = $moduleHandler->getByDirname('rating');
+    if ($module && $module->isactive()) {
         require XOOPS_ROOT_PATH . '/modules/rating/include/rating.php';
         $GLOBALS['xoopsTpl']->assign('ratingPerm', true);
         $GLOBALS['xoopsTpl']->assign('ratings', rating($lid));
@@ -536,6 +582,9 @@ function categorynewgraphic($cid): string
 
     $sql       = 'SELECT date_created FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE cid=' . $xoopsDB->escape($cid) . ' AND valid = "Yes" ' . $cat_perms . ' ORDER BY date_created DESC LIMIT 1';
     $newresult = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($newresult)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$date_created] = $xoopsDB->fetchRow($newresult);
 
     $newcount  = $helper->getConfig('adslight_countday');

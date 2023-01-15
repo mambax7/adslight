@@ -106,7 +106,10 @@ function adslight_seo_cat($cid)
     /** @var \XoopsMySQLDatabase $xoopsDB */
     $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
     $sql     = ' SELECT title FROM ' . $xoopsDB->prefix('adslight_categories') . ' WHERE cid = ' . $cid . ' ';
-    $result  = $xoopsDB->query($sql);
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     $res     = $xoopsDB->fetchArray($result);
 
     return adslight_seo_title($res['title']);
@@ -122,7 +125,10 @@ function adslight_seo_titre($lid)
     /** @var \XoopsMySQLDatabase $xoopsDB */
     $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
     $sql     = ' SELECT title FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE lid = ' . $lid . ' ';
-    $result  = $xoopsDB->query($sql);
+    $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     $res     = $xoopsDB->fetchArray($result);
 
     return adslight_seo_title($res['title']);

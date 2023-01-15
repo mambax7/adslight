@@ -94,7 +94,11 @@ function adslightMaps(): void
             $GLOBALS['xoopsTpl']->assign('istheirs', true);
 
             $sql = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('adslight_listing') . " WHERE usid={$member_usid}";
-            [$show_user] = $xoopsDB->fetchRow($xoopsDB->query($sql));
+            $result = $xoopsDB->query($sql);
+            if (!$xoopsDB->isResultSet($result)) {
+                \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+            }
+            [$show_user] = $xoopsDB->fetchRow($result);
 
             $GLOBALS['xoopsTpl']->assign('show_user', $show_user);
             $GLOBALS['xoopsTpl']->assign('show_user_link', "members.php?usid={$member_usid}");

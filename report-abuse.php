@@ -43,6 +43,9 @@ function reportAbuse($lid): void
     $idd    = $idde = $iddee = '';
     $sql    = 'SELECT lid, title, type FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE lid=' . $xoopsDB->escape($lid);
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$lid, $title, $type] = $xoopsDB->fetchRow($result);
 
     $GLOBALS['xoTheme']->addMeta('meta', 'robots', 'noindex, nofollow');
@@ -110,6 +113,9 @@ function mailAd($lid, $yname, $ymail, $fname, $fmail): void
     $lid    = (int)$lid;
     $sql    = 'SELECT lid, title, expire, type, desctext, tel, price, typeprice, date_created, email, submitter, town, country, photo FROM ' . $xoopsDB->prefix('adslight_listing') . ' WHERE lid=' . $xoopsDB->escape($lid);
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$lid, $title, $expire, $type, $desctext, $tel, $price, $typeprice, $date_created, $email, $submitter, $town, $country, $photo] = $xoopsDB->fetchRow($result);
 
     $title     = $GLOBALS['xoopsDB']->escape($title);

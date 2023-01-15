@@ -64,12 +64,18 @@ function adslight_search(
     }
     $sql    .= ' ORDER BY premium DESC, date_created DESC';
     $result = $xoopsDB->query($sql, $limit, $offset);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     $ret    = [];
     $i      = 0;
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $myts    = \MyTextSanitizer::getInstance();
         $sql     = 'SELECT url FROM ' . $xoopsDB->prefix('adslight_pictures') . " WHERE lid={$myrow['lid']} ORDER BY date_created LIMIT 1 ";
         $result2 = $xoopsDB->query($sql);
+        if (!$xoopsDB->isResultSet($result2)) {
+            \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+        }
         [$url] = $xoopsDB->fetchRow($result2);
         $url = \htmlspecialchars($url ?? '', ENT_QUOTES | ENT_HTML5);
 

@@ -53,6 +53,9 @@ function adsNewCat($cid): void
     $cid    = Request::getInt('cid', 0, 'GET');
     $sql    = 'SELECT cid, pid, title, cat_desc, cat_keywords, img, cat_order, affprice, cat_moderate, moderate_subcat FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$cat_id, $pid, $title, $cat_desc, $cat_keywords, $imgs, $cat_order, $affprice, $cat_moderate, $moderate_subcat] = $xoopsDB->fetchRow($result);
     $mytree->makeMySelBox('title', 'title', $cid, 1);
     echo '    </td>  </tr>';
@@ -130,6 +133,9 @@ function adsModCat($cid): void
     Utility::showImage();
     $sql    = 'SELECT cid, pid, title, cat_desc, cat_keywords, img, cat_order, affprice, cat_moderate, moderate_subcat FROM ' . $xoopsDB->prefix('adslight_categories') . " WHERE cid={$cid}";
     $result = $xoopsDB->query($sql);
+    if (!$xoopsDB->isResultSet($result)) {
+        \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
+    }
     [$cat_id, $pid, $title, $cat_desc, $cat_keywords, $imgs, $cat_order, $affprice, $cat_moderate, $moderate_subcat] = $xoopsDB->fetchRow($result);
 
     $title    = \htmlspecialchars($title, ENT_QUOTES | ENT_HTML5);
