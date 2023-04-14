@@ -110,7 +110,7 @@ function printAd($lid): void
         echo '<br><strong>' . _ADSLIGHT_COUNTRY . "</strong> {$country}";
     }
     echo '<hr>';
-    echo '' . _ADSLIGHT_NOMAIL . ' <br>' . XOOPS_URL . '/modules/adslight/viewads.php?lid=' . $lid . '<br>';
+    echo _ADSLIGHT_NOMAIL . ' <br>' . XOOPS_URL . '/modules/adslight/viewads.php?lid=' . $lid . '<br>';
     echo '<br><br>' . _ADSLIGHT_DATE2 . " {$date_created} " . _ADSLIGHT_AND . ' ' . _ADSLIGHT_DISPO . " {$date2}<br><br>";
     echo '</td>
     </tr>

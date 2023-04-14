@@ -130,7 +130,7 @@ function delReply($r_lid, $ok): void
                 $xoopsDB->queryF(
                     'DELETE FROM ' . $xoopsDB->prefix('adslight_replies') . ' WHERE r_lid=' . $xoopsDB->escape($r_lid)
                 );
-                $helper->redirect('members.php?usid=' . addslashes($usid) . '', 1, _ADSLIGHT_ANNDEL);
+                $helper->redirect('members.php?usid=' . addslashes($usid), 1, _ADSLIGHT_ANNDEL);
             } else {
                 echo "<table width='100%' border='0' cellspacing='1' cellpadding='8'><tr class='bg4'><td valign='top'>\n";
                 echo '<br><div style="text-align:center">';
@@ -401,7 +401,7 @@ function modifyAd($lid): void
             echo "<input type=\"hidden\" name=\"lid\" value=\"{$lid}\" >";
             echo "<input type=\"hidden\" name=\"premium\" value=\"{$premium}\" >";
             echo "<input type=\"hidden\" name=\"date_created\" value=\"{$date_created}\" >
-    " . $GLOBALS['xoopsSecurity']->getTokenHTML() . '';
+    " . $GLOBALS['xoopsSecurity']->getTokenHTML();
             echo '</form><br></fieldset><br>';
         }
     }
@@ -540,6 +540,6 @@ switch ($op) {
         require_once XOOPS_ROOT_PATH . '/footer.php';
         break;
     default:
-        $helper->redirect('index.php', 1, '' . _RETURNANN);
+        $helper->redirect('index.php', 1, _RETURNANN);
         break;
 }

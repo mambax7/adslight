@@ -54,13 +54,13 @@ if (Request::hasVar('submit', 'POST')) {
     global $xoopsConfig, $xoopsDB, $myts, $meta;
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $helper->redirect('viewads.php?lid=' . addslashes($id) . '', 3, $GLOBALS['xoopsSecurity']->getErrors());
+        $helper->redirect('viewads.php?lid=' . addslashes($id), 3, $GLOBALS['xoopsSecurity']->getErrors());
     }
     if ('1' === $helper->getConfig('adslight_use_captcha')) {
         xoops_load('xoopscaptcha');
         $xoopsCaptcha = XoopsCaptcha::getInstance();
         if (!$xoopsCaptcha->verify()) {
-            $helper->redirect('contact.php?lid=' . addslashes($id) . '', 2, $xoopsCaptcha->getMessage());
+            $helper->redirect('contact.php?lid=' . addslashes($id), 2, $xoopsCaptcha->getMessage());
         }
     }
     $lid    = Request::getInt('id', 0, 'POST');
@@ -74,7 +74,7 @@ if (Request::hasVar('submit', 'POST')) {
         $teles = Request::getString('tele', '', 'POST');
 
         if ($price) {
-            $price = '' . _ADSLIGHT_PRICE . ' ' . $helper->getConfig('adslight_currency_symbol') . " {$price}";
+            $price = _ADSLIGHT_PRICE . ' ' . $helper->getConfig('adslight_currency_symbol') . " {$price}";
         } else {
             $price = '';
         }
@@ -114,7 +114,7 @@ if (Request::hasVar('submit', 'POST')) {
         $tags['LINK_URL']    = '<a href="' . XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/viewads.php?lid=' . addslashes($id) . '">' . XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/viewads.php?lid=' . addslashes($id) . '</a>';
         $tags['VIEW_AD']     = _ADSLIGHT_VIEW_AD;
 
-        $subject = '' . _ADSLIGHT_CONTACTAFTERANN . '';
+        $subject = _ADSLIGHT_CONTACTAFTERANN;
         $mail    = xoops_getMailer();
 
         $mail->setTemplateDir(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/mail_template/');
@@ -189,7 +189,7 @@ if (Request::hasVar('submit', 'POST')) {
           </script>';
 
     echo '<b>' . _ADSLIGHT_CONTACTAUTOR . '</b><br><br>';
-    echo '' . _ADSLIGHT_TEXTAUTO . '<br>';
+    echo _ADSLIGHT_TEXTAUTO . '<br>';
     echo '<form onSubmit="return verify();" method="post" action="contact.php" name="cont">';
     echo "<input type=\"hidden\" name=\"id\" value=\"{$lid}\" >";
     echo '<input type="hidden" name="submit" value="1" >';

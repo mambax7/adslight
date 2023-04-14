@@ -44,7 +44,7 @@ if (!empty($_POST['submit'])) {
 
     // Check if Rating is Null
     if ('--' === $rating) {
-        $helper->redirect('rate-item.php?lid=' . $lid . '', 4, constant('_ADSLIGHT_NORATING'));
+        $helper->redirect('rate-item.php?lid=' . $lid, 4, constant('_ADSLIGHT_NORATING'));
     }
 
     // Check if Link POSTER is voting (UNLESS Anonymous users allowed to post)
@@ -56,7 +56,7 @@ if (!empty($_POST['submit'])) {
         }
         while ([$ratinguserDB] = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB === $ratinguser) {
-                $helper->redirect('viewads.php?lid=' . $lid . '', 4, constant('_ADSLIGHT_CANTVOTEOWN'));
+                $helper->redirect('viewads.php?lid=' . $lid, 4, constant('_ADSLIGHT_CANTVOTEOWN'));
             }
         }
 
@@ -68,7 +68,7 @@ if (!empty($_POST['submit'])) {
         }
         while ([$ratinguserDB] = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB === $ratinguser) {
-                $helper->redirect('viewads.php?lid=' . $lid . '', 4, constant('_ADSLIGHT_VOTEONCE2'));
+                $helper->redirect('viewads.php?lid=' . $lid, 4, constant('_ADSLIGHT_VOTEONCE2'));
             }
         }
     } else {
@@ -81,7 +81,7 @@ if (!empty($_POST['submit'])) {
         }
         [$anonvotecount] = $xoopsDB->fetchRow($result);
         if ($anonvotecount > 0) {
-            $helper->redirect('viewads.php?lid=' . $lid . '', 4, constant('_ADSLIGHT_VOTEONCE2'));
+            $helper->redirect('viewads.php?lid=' . $lid, 4, constant('_ADSLIGHT_VOTEONCE2'));
         }
     }
     $rating = $rating > 10 ? 10 : $rating;
@@ -103,7 +103,7 @@ if (!empty($_POST['submit'])) {
     //    updateIrating($lid);
     Utility::updateItemRating($lid);
     $ratemessage = constant('_ADSLIGHT_VOTEAPPRE') . '<br>' . sprintf(constant('_ADSLIGHT_THANKURATEITEM'), $xoopsConfig['sitename']);
-    $helper->redirect('viewads.php?lid=' . $lid . '', 3, $ratemessage);
+    $helper->redirect('viewads.php?lid=' . $lid, 3, $ratemessage);
 } else {
     $GLOBALS['xoopsOption']['template_main'] = 'adslight_rate_item.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';

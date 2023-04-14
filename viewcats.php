@@ -115,9 +115,9 @@ function adsView($cid, $min, $orderby, $show = 0): void
 
     if (is_array($submit_perms) && $GLOBALS['xoopsUser']
         && count($submit_perms) > 0) {
-        $GLOBALS['xoopsTpl']->assign('not_adds_in_this_cat', '' . _ADSLIGHT_ADD_LISTING_NOTADDSINTHISCAT . '<a href="addlisting.php?cid=' . addslashes((string)$cid) . '">' . _ADSLIGHT_ADD_LISTING_NOTADDSSUBMIT . '</a>');
+        $GLOBALS['xoopsTpl']->assign('not_adds_in_this_cat', _ADSLIGHT_ADD_LISTING_NOTADDSINTHISCAT . '<a href="addlisting.php?cid=' . addslashes((string)$cid) . '">' . _ADSLIGHT_ADD_LISTING_NOTADDSSUBMIT . '</a>');
     } else {
-        $GLOBALS['xoopsTpl']->assign('not_adds_in_this_cat', '' . _ADSLIGHT_ADD_LISTING_NOTADDSINTHISCAT . '<br>' . _ADSLIGHT_ADD_LISTING_BULL . '<a href="' . XOOPS_URL . '/register.php">' . _ADSLIGHT_ADD_LISTING_SUB . '</a>.');
+        $GLOBALS['xoopsTpl']->assign('not_adds_in_this_cat', _ADSLIGHT_ADD_LISTING_NOTADDSINTHISCAT . '<br>' . _ADSLIGHT_ADD_LISTING_BULL . '<a href="' . XOOPS_URL . '/register.php">' . _ADSLIGHT_ADD_LISTING_SUB . '</a>.');
     }
 
     $GLOBALS['xoopsTpl']->assign('Feed_RSS_cat', '&nbsp;&nbsp;&nbsp;<a href="rss.php?cid=' . addslashes((string)$cid) . '"><img border="0" alt="Feed RSS" src="assets/images/rssfeed_buttons.png" ></a>');
@@ -210,9 +210,9 @@ function adsView($cid, $min, $orderby, $show = 0): void
     $submit_perms = Utility::getMyItemIds('adslight_submit');
     if (is_array($submit_perms) && $GLOBALS['xoopsUser']
         && count($submit_perms) > 0) {
-        $add_listing = '' . _ADSLIGHT_ADD_LISTING_BULLCATS . '<a href="addlisting.php?cid=' . addslashes($cid) . '">' . _ADSLIGHT_ADD_LISTING_SUBOK . '</a>';
+        $add_listing = _ADSLIGHT_ADD_LISTING_BULLCATS . '<a href="addlisting.php?cid=' . addslashes($cid) . '">' . _ADSLIGHT_ADD_LISTING_SUBOK . '</a>';
     } else {    // User can't see any category
-        $add_listing = '' . _ADSLIGHT_ADD_LISTING_BULLCATSOK . '<a href="' . XOOPS_URL . '/register.php">' . _ADSLIGHT_ADD_LISTING_SUB . '</a>.';
+        $add_listing = _ADSLIGHT_ADD_LISTING_BULLCATSOK . '<a href="' . XOOPS_URL . '/register.php">' . _ADSLIGHT_ADD_LISTING_SUB . '</a>.';
     }
 
     if (0 !== (int)$pid || 1 === $helper->getConfig('adslight_main_cat')) {
@@ -246,7 +246,7 @@ function adsView($cid, $min, $orderby, $show = 0): void
                         $infercategories .= '<a href="' . XOOPS_URL . '/modules/adslight/viewcats.php?cid=' . $sub_ele['cid'] . '">' . $chtitle . '</a>';
 
                         $infercategories .= '&nbsp;(' . Utility::getTotalItems($sub_ele['cid']) . ')';
-                        $infercategories .= '&nbsp;' . categorynewgraphic($sub_ele['cid']) . '';
+                        $infercategories .= '&nbsp;' . categorynewgraphic($sub_ele['cid']);
                         ++$space;
                         ++$chcount;
                     }
@@ -291,8 +291,7 @@ function adsView($cid, $min, $orderby, $show = 0): void
                    . ' AND status!="1" '
                    . $cat_perms
                    . ' ORDER BY '
-                   . $orderby
-                   . '';
+                   . $orderby;
         $result1 = $xoopsDB->query($sql, $show, $min);
         if (!$xoopsDB->isResultSet($result1)) {
             \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);

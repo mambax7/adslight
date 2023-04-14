@@ -59,19 +59,19 @@ function index(): void
     }
     if (!is_writable($photo_dir) || !is_readable($photo_dir)) {
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_ADSLIGHT_CHECKER . '</legend><br>';
-        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . '' . $photo_dir . "</b></span><br><br>\n";
+        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . $photo_dir . "</b></span><br><br>\n";
         echo '</fieldset><br>';
     }
 
     if (!is_writable($photo_thumb_dir) || !is_readable($photo_thumb_dir)) {
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_ADSLIGHT_CHECKER . '</legend><br>';
-        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . '' . $photo_thumb_dir . "</b></span><br><br>\n";
+        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . $photo_thumb_dir . "</b></span><br><br>\n";
         echo '</fieldset><br>';
     }
 
     if (!is_writable($photo_resized_dir) || !is_readable($photo_resized_dir)) {
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_ADSLIGHT_CHECKER . '</legend><br>';
-        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . '' . $photo_resized_dir . "</b></span><br><br>\n";
+        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . $photo_resized_dir . "</b></span><br><br>\n";
         echo '</fieldset><br>';
     }
 
@@ -271,7 +271,7 @@ function modifyAd($lid): void
         echo '</select></td></tr>';
 
         /////// Price
-        echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_PRICE2 . " </td><td><input type=\"text\" name=\"price\" size=\"20\" value=\"{$price}\"> " . $helper->getConfig('adslight_currency_symbol') . '';
+        echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_PRICE2 . " </td><td><input type=\"text\" name=\"price\" size=\"20\" value=\"{$price}\"> " . $helper->getConfig('adslight_currency_symbol');
 
         //////// Price type
         $sql     = 'SELECT nom_price, id_price FROM ' . $xoopsDB->prefix('adslight_price') . ' ORDER BY nom_price';

@@ -415,7 +415,7 @@ function viewAds($lid = 0): void
         $GLOBALS['xoopsTpl']->assign('premium', $premium);
 
         // $GLOBALS['xoopsTpl']->assign('mustlogin', _ADSLIGHT_MUSTLOGIN);
-        $GLOBALS['xoopsTpl']->assign('redirect', '' . '?xoops_redirect=/modules/adslight/index.php');
+        $GLOBALS['xoopsTpl']->assign('redirect', '?xoops_redirect=/modules/adslight/index.php');
 
         if ($town) {
             $GLOBALS['xoopsTpl']->assign('local_town', $town);
@@ -432,13 +432,13 @@ function viewAds($lid = 0): void
             $tphon = '<br>' . _ADSLIGHT_ORBY . '&nbsp;<strong>' . _ADSLIGHT_TEL . '</strong> ' . $tel;
         }
         if (1 === (int)$contactby) {
-            $contact = '<a rel="nofollow" href="contact.php?lid=' . $lid . '">' . _ADSLIGHT_BYMAIL2 . '</a>' . $tphon . '';
+            $contact = '<a rel="nofollow" href="contact.php?lid=' . $lid . '">' . _ADSLIGHT_BYMAIL2 . '</a>' . $tphon;
         }
         if (2 === (int)$contactby) {
-            $contact = $contact_pm . '' . $tphon;
+            $contact = $contact_pm . $tphon;
         }
         if (3 === (int)$contactby) {
-            $contact = '<a rel="nofollow" href="contact.php?lid=' . $lid . '">' . _ADSLIGHT_BYMAIL2 . '</a>' . $tphon . '<br>' . _ADSLIGHT_ORBY . '' . $contact_pm;
+            $contact = '<a rel="nofollow" href="contact.php?lid=' . $lid . '">' . _ADSLIGHT_BYMAIL2 . '</a>' . $tphon . '<br>' . _ADSLIGHT_ORBY . $contact_pm;
         }
         if (4 === (int)$contactby) {
             $contact = '<br><strong>' . _ADSLIGHT_TEL . '</strong> ' . $tel;

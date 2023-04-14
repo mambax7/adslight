@@ -194,7 +194,7 @@ class Tree
      */
     public function getPathFromId($sel_id, $title, $path = ''): string
     {
-        $sql = 'SELECT ' . $this->pid . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->id . '=' . (int)$sel_id . '';
+        $sql = 'SELECT ' . $this->pid . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->id . '=' . (int)$sel_id;
         //        $result = $this->db->query('SELECT ' . $this->pid . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->id . '=' . $this->db->escape($sel_id) . "'");
 
         $categories = Utility::getMyItemIds('adslight_view');
@@ -214,7 +214,7 @@ class Tree
         [$parentid, $name] = $this->db->fetchRow($result);
         \MyTextSanitizer::getInstance();
         $name = \htmlspecialchars($name, \ENT_QUOTES | \ENT_HTML5);
-        $path = '/' . $name . $path . '';
+        $path = '/' . $name . $path;
         if (0 === $parentid) {
             return $path;
         }
@@ -457,7 +457,7 @@ class Tree
                 if ('cat_order' === $helper->getConfig('adslight_csortorder')) {
                     echo "({$cat_orderS})";
                 }
-                echo '' . $catpath . '</a></td>
+                echo $catpath . '</a></td>
                     <td align="center"><a href="category.php?op=AdsNewCat&amp;cid=' . $option[$this->id] . '"><img src="' . $pathIcon16 . '/add.png' . '" border=0 width=18 height=18 alt="' . \_AM_ADSLIGHT_ADDSUBCAT . '"title="' . \_AM_ADSLIGHT_ADDSUBCAT . '"></a></td>
                     <td align="center"><a href="category.php?op=AdsModCat&amp;cid=' . $option[$this->id] . '"><img src="' . $pathIcon16 . '/edit.png' . '" border=0 width=18 height=18 alt="' . \_AM_ADSLIGHT_MODIFSUBCAT . '" title ="' . \_AM_ADSLIGHT_MODIFSUBCAT . '"></a></td>
                     <td align="center"><a href="category.php?op=AdsDelCat&amp;cid=' . $option[$this->id] . '"><img src="' . $pathIcon16 . '/delete.png' . '" border=0 width=18 height=18 alt="' . \_AM_ADSLIGHT_DELSUBCAT . '" title="' . \_AM_ADSLIGHT_DELSUBCAT . '"></a></td>';

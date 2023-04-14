@@ -316,9 +316,9 @@ function adsAddCat(
     $xoopsDB->query($sql);
 
     if (1 === $moderate_subcat) {
-        $xoopsDB->queryF('UPDATE ' . $xoopsDB->prefix('adslight_categories') . ' SET cat_moderate=1 WHERE pid = ' . (int)$cid . '');
+        $xoopsDB->queryF('UPDATE ' . $xoopsDB->prefix('adslight_categories') . ' SET cat_moderate=1 WHERE pid = ' . (int)$cid);
     } else {
-        $xoopsDB->queryF('UPDATE ' . $xoopsDB->prefix('adslight_categories') . ' SET cat_moderate=0 WHERE pid = ' . (int)$cid . '');
+        $xoopsDB->queryF('UPDATE ' . $xoopsDB->prefix('adslight_categories') . ' SET cat_moderate=0 WHERE pid = ' . (int)$cid);
     }
 
     $helper->redirect('admin/map.php', 3, _AM_ADSLIGHT_CATADD);

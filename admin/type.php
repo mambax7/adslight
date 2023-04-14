@@ -138,7 +138,7 @@ switch ($op) {
                 $typePaginationLimit,
                 $start,
                 'start',
-                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                'op=list' . '&sort=' . $sort . '&order=' . $order
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null !== $pagenav ? $pagenav->renderNav() : '');
         }
@@ -186,7 +186,7 @@ switch ($op) {
                     $typePaginationLimit,
                     $start,
                     'start',
-                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    'op=list' . '&sort=' . $sort . '&order=' . $order
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

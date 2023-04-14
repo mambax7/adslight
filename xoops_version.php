@@ -185,7 +185,7 @@ if ($GLOBALS['xoopsUser']) {
     $modversion['sub'][3]['name'] = _MI_ADSLIGHT_SMENU3;
     $modversion['sub'][3]['url']  = 'search.php';
     $modversion['sub'][2]['name'] = _MI_ADSLIGHT_SMENU1;
-    $modversion['sub'][2]['url']  = 'members.php?usid=' . $member_usid . '';
+    $modversion['sub'][2]['url']  = 'members.php?usid=' . $member_usid;
 }
 
 // Recherche

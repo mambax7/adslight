@@ -45,7 +45,7 @@ if (!empty($_POST['submit'])) {
 
     // Check if Rating is Null
     if ('--' === $rating) {
-        $helper->redirect('rate-user.php?usid=' . addslashes($usid) . '', 4, constant('_ADSLIGHT_NORATING'));
+        $helper->redirect('rate-user.php?usid=' . addslashes($usid), 4, constant('_ADSLIGHT_NORATING'));
     }
 
     // Check if Link POSTER is voting (UNLESS Anonymous users allowed to post)
@@ -54,7 +54,7 @@ if (!empty($_POST['submit'])) {
         $result = $xoopsDB->query($sql);
         while ([$ratinguserDB] = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB === $ratinguser) {
-                $helper->redirect('members.php?usid=' . addslashes($usid) . '', 4, constant('_ADSLIGHT_CANTVOTEOWN'));
+                $helper->redirect('members.php?usid=' . addslashes($usid), 4, constant('_ADSLIGHT_CANTVOTEOWN'));
             }
         }
 
@@ -66,7 +66,7 @@ if (!empty($_POST['submit'])) {
         }
         while ([$ratinguserDB] = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB === $ratinguser) {
-                $helper->redirect('members.php?usid=' . addslashes($usid) . '', 4, constant('_ADSLIGHT_VOTEONCE2'));
+                $helper->redirect('members.php?usid=' . addslashes($usid), 4, constant('_ADSLIGHT_VOTEONCE2'));
             }
         }
     } else {
@@ -79,7 +79,7 @@ if (!empty($_POST['submit'])) {
         }
         [$anonvotecount] = $xoopsDB->fetchRow($result);
         if ($anonvotecount > 0) {
-            $helper->redirect('members.php?usid=' . addslashes($usid) . '', 4, constant('_ADSLIGHT_VOTEONCE2'));
+            $helper->redirect('members.php?usid=' . addslashes($usid), 4, constant('_ADSLIGHT_VOTEONCE2'));
         }
     }
     $rating = $rating > 10 ? 10 : $rating;
@@ -101,7 +101,7 @@ if (!empty($_POST['submit'])) {
     //    updateUrating($usid);
     Utility::updateUserRating($usid);
     $ratemessage = constant('_ADSLIGHT_VOTEAPPRE') . '<br>' . sprintf(constant('_ADSLIGHT_THANKURATEUSER'), $xoopsConfig['sitename']);
-    $helper->redirect('members.php?usid=' . addslashes($usid) . '', 3, $ratemessage);
+    $helper->redirect('members.php?usid=' . addslashes($usid), 3, $ratemessage);
 } else {
     $GLOBALS['xoopsOption']['template_main'] = 'adslight_rate_user.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';

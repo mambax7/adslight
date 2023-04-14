@@ -107,7 +107,7 @@ function index(): void
             [$show_user] = $xoopsDB->fetchRow($result);
 
             $GLOBALS['xoopsTpl']->assign('show_user', $show_user);
-            $GLOBALS['xoopsTpl']->assign('show_user_link', 'members.php?usid=' . $member_usid . '');
+            $GLOBALS['xoopsTpl']->assign('show_user_link', 'members.php?usid=' . $member_usid);
         }
     }
 
@@ -224,9 +224,9 @@ function index(): void
 
     if ($GLOBALS['xoopsUser'] instanceof \XoopsUser) {
         //        $add_listing = '' . _ADSLIGHT_ADD_LISTING_BULLOK . '<a href="add.php">' . _ADSLIGHT_ADD_LISTING_SUBOK . '</a>';
-        $add_listing = '' . _ADSLIGHT_ADD_LISTING_BULLOK . '<a rel="nofollow" class="btn btn-success text-right"  title="submit your ad" href="add.php">' . _ADSLIGHT_ADD_LISTING_SUBOK . '</a>';
+        $add_listing = _ADSLIGHT_ADD_LISTING_BULLOK . '<a rel="nofollow" class="btn btn-success text-right"  title="submit your ad" href="add.php">' . _ADSLIGHT_ADD_LISTING_SUBOK . '</a>';
     } else {
-        $add_listing = '' . _ADSLIGHT_ADD_LISTING_BULL . '<a href="' . XOOPS_URL . '/register.php">' . _ADSLIGHT_ADD_LISTING_SUB . '</a>.';
+        $add_listing = _ADSLIGHT_ADD_LISTING_BULL . '<a href="' . XOOPS_URL . '/register.php">' . _ADSLIGHT_ADD_LISTING_SUB . '</a>.';
     }
 
     $GLOBALS['xoopsTpl']->assign('bullinfotext', _ADSLIGHT_ACTUALY . ' ' . $ads . ' ' . _ADSLIGHT_ADVERTISEMENTS . '<br>' . $add_listing);

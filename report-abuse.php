@@ -145,15 +145,15 @@ function mailAd($lid, $yname, $ymail, $fname, $fmail): void
     $tags['TEL']                = $tel;
     $tags['TOWN']               = $town;
     $tags['COUNTRY']            = $country;
-    $tags['OTHER']              = '' . _ADSLIGHT_INTERESS . '' . $xoopsConfig['sitename'] . '';
-    $tags['LISTINGS']           = '' . XOOPS_URL . '/modules/adslight/';
-    $tags['LINK_URL']           = '' . XOOPS_URL . '/modules/adslight/viewads.php?lid=' . $lid . '';
-    $tags['THINKS_REPORT']      = '' . _ADSLIGHT_REPORTMESSAGE . '';
-    $tags['NO_MAIL']            = '' . _ADSLIGHT_NOMAIL . '';
-    $tags['YOU_CAN_VIEW_BELOW'] = '' . _ADSLIGHT_YOU_CAN_VIEW_BELOW . '';
+    $tags['OTHER']              = _ADSLIGHT_INTERESS . $xoopsConfig['sitename'];
+    $tags['LISTINGS']           = XOOPS_URL . '/modules/adslight/';
+    $tags['LINK_URL']           = XOOPS_URL . '/modules/adslight/viewads.php?lid=' . $lid;
+    $tags['THINKS_REPORT']      = _ADSLIGHT_REPORTMESSAGE;
+    $tags['NO_MAIL']            = _ADSLIGHT_NOMAIL;
+    $tags['YOU_CAN_VIEW_BELOW'] = _ADSLIGHT_YOU_CAN_VIEW_BELOW;
     $tags['WEBMASTER']          = _ADSLIGHT_WEBMASTER;
     $tags['NO_REPLY']           = _ADSLIGHT_NOREPLY;
-    $subject                    = '' . _ADSLIGHT_REPORTSUBJET . ' ' . $xoopsConfig['sitename'] . '';
+    $subject                    = _ADSLIGHT_REPORTSUBJET . ' ' . $xoopsConfig['sitename'];
 
     $xoopsMailer = xoops_getMailer();
     $xoopsMailer->multimailer->isHTML(true);

@@ -303,7 +303,7 @@ if ($trows > '0') {
             $sold = _ADSLIGHT_RESERVEDMEMBER;
         }
 
-        $GLOBALS['xoopsTpl']->assign('xoops_pagetitle', '' . _ADSLIGHT_ALL_USER_LISTINGS . ' ' . $submitter);
+        $GLOBALS['xoopsTpl']->assign('xoops_pagetitle', _ADSLIGHT_ALL_USER_LISTINGS . ' ' . $submitter);
         $updir   = $helper->getConfig('adslight_link_upload');
         $sql     = 'SELECT cod_img, lid, uid_owner, url FROM ' . $xoopsDB->prefix('adslight_pictures') . ' WHERE  uid_owner=' . $xoopsDB->escape($usid) . ' AND lid=' . $xoopsDB->escape($lid) . ' ORDER BY date_created ASC LIMIT 1';
         $resultp = $xoopsDB->query($sql);

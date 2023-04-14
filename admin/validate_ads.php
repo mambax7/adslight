@@ -58,17 +58,17 @@ function index(): void
     }
     if (!is_writable($photo_dir) || !is_readable($photo_dir)) {
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_ADSLIGHT_CHECKER . '</legend><br>';
-        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . '' . $photo_dir . '</b></span><br><br>';
+        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . $photo_dir . '</b></span><br><br>';
         echo '</fieldset><br>';
     }
     if (!is_writable($photo_thumb_dir) || !is_readable($photo_thumb_dir)) {
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_ADSLIGHT_CHECKER . '</legend><br>';
-        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . '' . $photo_thumb_dir . '</b></span><br><br>';
+        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . $photo_thumb_dir . '</b></span><br><br>';
         echo '</fieldset><br>';
     }
     if (!is_writable($photo_resized_dir) || !is_readable($photo_resized_dir)) {
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_ADSLIGHT_CHECKER . '</legend><br>';
-        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . '' . $photo_resized_dir . '</b></span><br><br>';
+        echo "<span style='color: #FF0000;'><b>" . _AM_ADSLIGHT_DIRPERMS . $photo_resized_dir . '</b></span><br><br>';
         echo '</fieldset><br>';
     }
 
@@ -338,7 +338,7 @@ function indexView($lid): void
             echo "<option value=\"{$nom_condition}\"{$sel}>{$nom_condition}</option>";
         }
         echo '</select></td></tr>';
-        echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_PRICE2 . " </td><td><input type=\"text\" name=\"price\" size=\"20\" value=\"{$price}\"> " . $helper->getConfig('adslight_currency_symbol') . '';
+        echo "<tr class='head' border='1'><td>" . _AM_ADSLIGHT_PRICE2 . " </td><td><input type=\"text\" name=\"price\" size=\"20\" value=\"{$price}\"> " . $helper->getConfig('adslight_currency_symbol');
         $sql     = 'SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . ' ORDER BY id_price';
         $result3 = $xoopsDB->query($sql);
         if (!$xoopsDB->isResultSet($result3)) {
@@ -776,7 +776,7 @@ function listingValid(
         $tags['WEBMASTER']  = _AM_ADSLIGHT_WEBMASTER;
         $tags['YOUR_AD_ON'] = _AM_ADSLIGHT_YOUR_AD_ON;
         $tags['APPROVED']   = _AM_ADSLIGHT_APPROVED;
-        $subject            = '' . _AM_ADSLIGHT_ANNACCEPT . '';
+        $subject            = _AM_ADSLIGHT_ANNACCEPT;
         $mail               = getMailer();
         $mail->setTemplateDir($helper->path("/language/{$xoopsConfig['language']}/mail_template/"));
         $mail->setTemplate('listing_approve.tpl');

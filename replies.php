@@ -101,7 +101,7 @@ if ($trows > '0') {
         $GLOBALS['xoopsTpl']->assign('lang_popularity', _ADSLIGHT_POPULARITY);
         $GLOBALS['xoopsTpl']->assign('lang_popularityleast', _ADSLIGHT_POPULARITYLTOM);
         $GLOBALS['xoopsTpl']->assign('lang_popularitymost', _ADSLIGHT_POPULARITYMTOL);
-        $GLOBALS['xoopsTpl']->assign('lang_cursortedby', _ADSLIGHT_CURSORTEDBY . '' . $orderby);
+        $GLOBALS['xoopsTpl']->assign('lang_cursortedby', _ADSLIGHT_CURSORTEDBY . $orderby);
     }
     while ([$r_lid, $lid, $title, $date_created, $submitter, $message, $tele, $email, $r_usid] = $xoopsDB->fetchRow($result)) {
         $useroffset = '';

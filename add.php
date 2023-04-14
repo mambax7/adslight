@@ -169,7 +169,7 @@ if (Request::hasVar('submit', 'POST')) {
         $notificationHandler->triggerEvent('listing', $lid, 'new_listing', $tags);
     } else {
         $tags                  = [];
-        $subject               = '' . _ADSLIGHT_NEW_WAITING_SUBJECT . '';
+        $subject               = _ADSLIGHT_NEW_WAITING_SUBJECT;
         $tags['TITLE']         = $title;
         $tags['DESCTEXT']      = $desctext;
         $tags['ADMIN']         = _ADSLIGHT_ADMIN;

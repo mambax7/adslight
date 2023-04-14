@@ -80,7 +80,7 @@ function adslight_search(
         $url = \htmlspecialchars($url ?? '', ENT_QUOTES | ENT_HTML5);
 
         $ret[$i]['image'] = 'assets/images/deco/icon.png';
-        $ret[$i]['link']  = 'viewads.php?lid=' . $myrow['lid'] . '';
+        $ret[$i]['link']  = 'viewads.php?lid=' . $myrow['lid'];
         $ret[$i]['title'] = $myrow['title'];
         $ret[$i]['type']  = Utility::getNameType($myrow['type']);
         //        $ret[$i]['price']     = number_format((float)$myrow['price'], 2, '.', ',');

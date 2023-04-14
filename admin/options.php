@@ -63,7 +63,7 @@ function index(): void
         if (!$xoopsDB->isResultSet($result2)) {
             \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
         }
-        echo '' . _AM_ADSLIGHT_TYPE . ' <select name="id_type">';
+        echo _AM_ADSLIGHT_TYPE . ' <select name="id_type">';
 
         while ([$id_type, $nom_type] = $xoopsDB->fetchRow($result2)) {
             $nom_type = \htmlspecialchars($nom_type, ENT_QUOTES | ENT_HTML5);
@@ -102,7 +102,7 @@ function index(): void
         if (!$xoopsDB->isResultSet($result3)) {
             \trigger_error("Query Failed! SQL: $sql- Error: " . $xoopsDB->error(), E_USER_ERROR);
         }
-        echo '' . _AM_ADSLIGHT_TYPE . ' <select name="id_price">';
+        echo _AM_ADSLIGHT_TYPE . ' <select name="id_price">';
         while ([$id_price, $nom_price] = $xoopsDB->fetchRow($result3)) {
             $nom_price = \htmlspecialchars($nom_price, ENT_QUOTES | ENT_HTML5);
             echo "<option value=\"{$id_price}\">{$nom_price}</option>";
@@ -224,8 +224,7 @@ function listingModType($id_type): void
 
     echo '<form action="options.php" method="post">';
     echo $GLOBALS['xoopsSecurity']->getTokenHTML();
-    echo ''
-         . _AM_ADSLIGHT_TYPE
+    echo _AM_ADSLIGHT_TYPE
          . " <input type=\"text\" name=\"nom_type\" value=\"{$nom_type}\" size=\"51\" maxlength=\"50\"><br>"
          . "<input type=\"hidden\" name=\"id_type\" value=\"{$id_type}\">"
          . '<input type="hidden" name="op" value="ListingModTypeS">'

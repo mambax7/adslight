@@ -185,11 +185,11 @@ switch ($action) {
 
                         if (!XOOPS_USE_MULTIBYTES) {
                             if (mb_strlen($results[$i]['desctext']) >= 14) {
-                                $results[$i]['desctext'] = $myts->displayTarea(mb_substr($results[$i]['desctext'], 0, 90), 1, 1, 1, 1, 1) . '';
+                                $results[$i]['desctext'] = $myts->displayTarea(mb_substr($results[$i]['desctext'], 0, 90), 1, 1, 1, 1, 1);
                             }
                         }
 
-                        echo '' . $myts->displayTarea($results[$i]['desctext'], 1, 1, 1, 1, 1) . '';
+                        echo $myts->displayTarea($results[$i]['desctext'], 1, 1, 1, 1, 1);
                         $sql     = 'SELECT nom_price FROM ' . $xoopsDB->prefix('adslight_price') . ' WHERE id_price=' . (int)$results[$i]['typeprice'];
                         $result8 = $xoopsDB->query($sql);
                         if (!$xoopsDB->isResultSet($result8)) {
@@ -206,7 +206,7 @@ switch ($action) {
                         $priceHtml = $formattedCurrencyUtilityTemp . ' - ' . $nom_price;
 
                         echo '</td><td width="20%">';
-                        echo '' . $priceHtml . '</a>';
+                        echo $priceHtml . '</a>';
 
                         echo '</td></tr><tr><td>';
                         echo '<small>';
@@ -293,7 +293,7 @@ switch ($action) {
                     }
                 }
 
-                echo '' . htmlspecialchars($results[$i]['desctext'], ENT_QUOTES | ENT_HTML5) . '';
+                echo htmlspecialchars($results[$i]['desctext'], ENT_QUOTES | ENT_HTML5);
 
                 echo '</td><td width="20%">';
                 echo '' . $helper->getConfig('adslight_currency_symbol') . '
