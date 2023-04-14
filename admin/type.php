@@ -174,7 +174,7 @@ switch ($op) {
                <a href='type.php?op=delete&id_type=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='type.php?op=clone&id_type=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('typeArrays', $typeArray);
+                $GLOBALS['xoopsTpl']->appendByRef('typeArrays', $typeArray);
                 unset($typeArray);
             }
             unset($typeTempArray);

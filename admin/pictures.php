@@ -208,7 +208,7 @@ switch ($op) {
                <a href='pictures.php?op=delete&cod_img=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='pictures.php?op=clone&cod_img=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('picturesArrays', $picturesArray);
+                $GLOBALS['xoopsTpl']->appendByRef('picturesArrays', $picturesArray);
                 unset($picturesArray);
             }
             unset($picturesTempArray);

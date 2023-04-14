@@ -200,7 +200,7 @@ switch ($op) {
                <a href='replies.php?op=delete&r_lid=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='replies.php?op=clone&r_lid=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('repliesArrays', $repliesArray);
+                $GLOBALS['xoopsTpl']->appendByRef('repliesArrays', $repliesArray);
                 unset($repliesArray);
             }
             unset($repliesTempArray);

@@ -41,10 +41,10 @@
                     <td><{$listing.comments}></td>
                     <td><{$listing.remind}></td>
                                 <td>
-                       <a href="listing.php?op=view&lid=<{$listing.lid}>" title="<{$smarty.const._PREVIEW}>"><img src="<{xoModuleIcons16 search.png}>" alt="<{$smarty.const._PREVIEW}>" title="<{$smarty.const._PREVIEW}>"</a>
+                       <a href="listing.php?op=view&lid=<{$listing.lid}>" title="<{$smarty.const._PREVIEW}>"><img src="<{xoModuleIcons16 'search.png'}>" alt="<{$smarty.const._PREVIEW}>" title="<{$smarty.const._PREVIEW}>"</a>
                        <{if $xoops_isadmin === true}>
-                       <a href="listing.php?op=edit&lid=<{$listing.lid}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}>" title="<{$smarty.const._EDIT}>" ></a>
-                       <a href="admin/listing.php?op=delete&lid=<{$listing.lid}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}>" title="<{$smarty.const._DELETE}>"</a>
+                       <a href="listing.php?op=edit&lid=<{$listing.lid}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 'edit.png'}>" alt="<{$smarty.const._EDIT}>" title="<{$smarty.const._EDIT}>" ></a>
+                       <a href="admin/listing.php?op=delete&lid=<{$listing.lid}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 'delete.png'}>" alt="<{$smarty.const._DELETE}>" title="<{$smarty.const._DELETE}>"</a>
                        <{/if}>
                    </td>
                 </tr>

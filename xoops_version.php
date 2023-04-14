@@ -291,6 +291,25 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
+    'name'        => 'adslight_use_GoogleMaps',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'USE_GOOGLEMAPS',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'USE_GOOGLEMAPS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => '1',
+    'options'     => [],
+];
+
+$modversion['config'][] =[
+    'name'        => 'GoogleMapsAPIKey',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'GOOGLEMAPS_APIKEY',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'GOOGLEMAPS_APIKEY_DESC',
+    'formtype'    => 'text',
+    'valuetype'   => 'text',
+    'default'     => ''
+];
+
+$modversion['config'][] = [
     'name'        => 'adslight_perpage',
     'title'       => '_MI_ADSLIGHT_PERPAGE',
     'description' => '',

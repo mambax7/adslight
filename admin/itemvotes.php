@@ -189,7 +189,7 @@ switch ($op) {
                <a href='itemvotes.php?op=delete&ratingid=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='itemvotes.php?op=clone&ratingid=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('itemvotesArrays', $itemvotesArray);
+                $GLOBALS['xoopsTpl']->appendByRef('itemvotesArrays', $itemvotesArray);
                 unset($itemvotesArray);
             }
             unset($itemvotesTempArray);

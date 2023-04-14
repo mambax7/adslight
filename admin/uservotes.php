@@ -191,7 +191,7 @@ switch ($op) {
                <a href='uservotes.php?op=delete&ratingid=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='uservotes.php?op=clone&ratingid=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('uservotesArrays', $uservotesArray);
+                $GLOBALS['xoopsTpl']->appendByRef('uservotesArrays', $uservotesArray);
                 unset($uservotesArray);
             }
             unset($uservotesTempArray);

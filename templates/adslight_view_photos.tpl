@@ -39,7 +39,7 @@
                                     <{securityToken}><{*//mb*}>
                                     <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                                     <input type="hidden" value="<{$pics_array[i].lid}>" name="lid">
-                                    <input name="submit2" type="image" alt="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
+                                    <input name="submit2" type="image" alt="<{$lang_delete}>" src="<{xoModuleIcons16 'delete.png'}>">
                                 </form>
                             </div>
                         </td>
@@ -48,7 +48,7 @@
                                 <{securityToken}><{*//mb*}>
                                 <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                                 <input type="hidden" value="<{$pics_array[i].lid}>" name="lid">
-                                <input name="submit" type="image" alt="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
+                                <input name="submit" type="image" alt="<{$lang_editdesc}>" src="<{xoModuleIcons16 'edit.png'}>">
                             </form>
                         </td>
                         <td width="90">

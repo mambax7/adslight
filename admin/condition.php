@@ -170,7 +170,7 @@ switch ($op) {
                <a href='condition.php?op=delete&id_condition=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='condition.php?op=clone&id_condition=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('conditionArrays', $conditionArray);
+                $GLOBALS['xoopsTpl']->appendByRef('conditionArrays', $conditionArray);
                 unset($conditionArray);
             }
             unset($conditionTempArray);

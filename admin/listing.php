@@ -322,7 +322,7 @@ switch ($op) {
                <a href='listing.php?op=delete&lid=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='listing.php?op=clone&lid=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('listingArrays', $listingArray);
+                $GLOBALS['xoopsTpl']->appendByRef('listingArrays', $listingArray);
                 unset($listingArray);
             }
             unset($listingTempArray);

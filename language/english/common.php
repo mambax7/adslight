@@ -209,3 +209,10 @@ define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_FAIL', "Sorry, we failed in cr
 //JSON-LD generation of www.schema.org
 \define('CO_' . $moduleDirNameUpper . '_' . 'GENERATE_JSONLD', 'Generate Schema Markup through JSON LD');
 \define('CO_' . $moduleDirNameUpper . '_' . 'GENERATE_JSONLD_DESC', 'Mark up your module with structured data to help search engines better understand the content of your web page');
+
+//Google Maps API Key
+\define('CO_' . $moduleDirNameUpper . '_' . 'GOOGLEMAPS_APIKEY', 'Google Maps API Key');
+\define('CO_' . $moduleDirNameUpper . '_' . 'GOOGLEMAPS_APIKEY_DESC', 'Get keys from <a href="https://developers.google.com/maps/documentation/javascript/get-api-key/" rel="external">https://developers.google.com/maps/documentation/javascript/get-api-key/</a>');
+
+\define('CO_' . $moduleDirNameUpper . '_' . 'USE_GOOGLEMAPS', 'Use Google Maps');
+\define('CO_' . $moduleDirNameUpper . '_' . 'USE_GOOGLEMAPS_DESC', "If set to 'Yes', the module will use Google Maps, if map coordinates are provided");

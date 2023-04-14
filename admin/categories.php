@@ -263,7 +263,7 @@ switch ($op) {
                <a href='categories.php?op=delete&cid=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='categories.php?op=clone&cid=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('categoriesArrays', $categoriesArray);
+                $GLOBALS['xoopsTpl']->appendByRef('categoriesArrays', $categoriesArray);
                 unset($categoriesArray);
             }
             unset($categoriesTempArray);

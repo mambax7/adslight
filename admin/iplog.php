@@ -187,7 +187,7 @@ switch ($op) {
                <a href='iplog.php?op=delete&ip_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='iplog.php?op=clone&ip_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('iplogArrays', $iplogArray);
+                $GLOBALS['xoopsTpl']->appendByRef('iplogArrays', $iplogArray);
                 unset($iplogArray);
             }
             unset($iplogTempArray);

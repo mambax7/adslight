@@ -2,12 +2,12 @@
 <table class="width80 bnone" cellpadding=1 cellspacing=0>
     <tr>
         <td>
-            <h4><{$link.title}></h4>
+            <h4><{$link.title|default:''}></h4>
             <ul>
-                <li><{$lang_voteonce}>
-                <li><{$lang_ratingscale}>
-                <li><{$lang_beobjective}>
-                <li><{$lang_donotvote}>
+                <li><{$lang_voteonce|default:''}>
+                <li><{$lang_ratingscale|default:''}>
+                <li><{$lang_beobjective|default:''}>
+                <li><{$lang_donotvote|default:''}>
             </ul>
         </td>
     </tr>
@@ -15,7 +15,7 @@
         <td class="center">
             <form method="post" action="rate-item.php">
                 <{securityToken}><{*//mb*}>
-                <input type="hidden" name="lid" value="<{$link.lid}>">
+                <input type="hidden" name="lid" value="<{$link.lid|default:''}>">
                 <select name="rating">
                     <option>--</option>
                     <option>10</option>
@@ -29,7 +29,7 @@
                     <option>2</option>
                     <option>1</option>
                 </select>&nbsp;&nbsp;
-                <input type="submit" name="submit" value="<{$lang_rateit}>"><input type=button value="<{$lang_cancel}>" onclick="location='<{$xoops_url}>/modules/adslight/viewads.php?lid=<{$link.lid}>'">
+                <input type="submit" name="submit" value="<{$lang_rateit|default:''}>"><input type=button value="<{$lang_cancel|default:''}>" onclick="location='<{$xoops_url}>/modules/adslight/viewads.php?lid=<{$link.lid|default:''}>'">
             </form>
         </td>
     </tr>

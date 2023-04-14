@@ -76,10 +76,19 @@
                         <{$deleteads|default:false}><br>
                         <{$alerteabus}><br>
                         <br>
-                        <{if $local_country|default:''}> <{* JJDai ajouter la clé google dans les preference du module et tester si elle existe/add the google key in the preferences of the module and test if it exists*}>
+                        <{if isset($local_country)}> <{* JJDai ajouter la clé google dans les preference du module et tester si elle existe/add the google key in the preferences of the module and test if it exists*}>
                             <img class="mapsgoogle"
                                  src="https://maps.google.com/maps/api/staticmap?size=200x200&maptype=roadmap\&markers=size:mid|color:red|<{$local_town}>+<{$local_country}>&sensor=false">
                         <{/if}>
+
+<{*                        Google Maps*}>
+
+
+                        <{if isset($local_country)}> <{* JJDai ajouter la clé google dans les preference du module et tester si elle existe/add the google key in the preferences of the module and test if it exists*}>
+                            <img class="mapsgoogle"
+                                 src="https://maps.google.com/maps/api/staticmap?size=200x200&maptype=roadmap\&markers=size:mid|color:red|<{$local_town}>+<{$local_country}>&sensor=false">
+                        <{/if}>
+
                     </td>
                 </tr>
             </table>
@@ -93,7 +102,9 @@
 
 
     <{if $ratingPerm}>
-        <{include file='./../modules/rating/templates/rating.tpl'}>
+<{*        <{include file='./../modules/rating/templates/rating.tpl'}>*}>
+<{*        <{include file='adslight_rate_item.tpl'}>*}>
+        <{include file="db:adslight_rate_item.tpl"}>
     <{/if}>
 
 

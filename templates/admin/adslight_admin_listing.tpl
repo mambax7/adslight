@@ -179,5 +179,5 @@
     <br>
 <{/if}>
 
-<{*<script src="<{xoAppUrl browse.php?Frameworks/jquery/jquery.js}>"></script>*}>
+<{*<script src="<{xoAppUrl 'browse.php?Frameworks/jquery/jquery.js'}>"></script>*}>
 <{*<script src="<{$mod_url|default:false}>/assets/js/functions.js"></script>*}>

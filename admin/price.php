@@ -170,7 +170,7 @@ switch ($op) {
                <a href='price.php?op=delete&id_price=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='price.php?op=clone&id_price=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('priceArrays', $priceArray);
+                $GLOBALS['xoopsTpl']->appendByRef('priceArrays', $priceArray);
                 unset($priceArray);
             }
             unset($priceTempArray);
