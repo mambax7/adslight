@@ -28,9 +28,6 @@ xoops_cp_header();
 $moduleDirName      = $helper->getDirname();
 $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
-/** @var \XoopsMySQLDatabase $xoopsDB */
-$xoopsDB     = \XoopsDatabaseFactory::getDatabaseConnection();
-$blocksadmin = new Blocksadmin($xoopsDB, $helper);
 
 $xoopsModule = XoopsModule::getByDirname($moduleDirName);
 
@@ -38,6 +35,16 @@ if (!is_object($GLOBALS['xoopsUser']) || !is_object($xoopsModule)
     || !$GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     exit(constant('CO_' . $moduleDirNameUpper . '_' . 'ERROR403'));
 }
+
+/** @var \XoopsMySQLDatabase $xoopsDB */
+$xoopsDB       = \XoopsDatabaseFactory::getDatabaseConnection();
+$xoopsSecurity = new \XoopsSecurity();
+
+$blocksadmin = new Blocksadmin($xoopsDB, $helper, $xoopsModule, $xoopsSecurity);
+
+
+
+
 if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
 
