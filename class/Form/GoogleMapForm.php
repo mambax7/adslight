@@ -42,7 +42,7 @@ class GoogleMapForm extends \XoopsFormElementTray
     public function render()
     {
         if (empty($this->apiKey)) {
-            echo "API Key is missing";
+            echo 'API Key is missing';
             exit();
         }
 
