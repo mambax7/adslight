@@ -105,7 +105,7 @@ switch ($op) {
     case 'clone':
         $id_field = Request::getString('ratingid', '');
 
-        if ($utility::cloneRecord('adslight_uservotes', 'ratingid', $id_field)) {
+        if ($utility::cloneRecord('adslight_user_votedata', 'ratingid', $id_field)) {
             redirect_header('uservotes.php', 3, AM_ADSLIGHT_CLONED_OK);
         } else {
             redirect_header('uservotes.php', 3, AM_ADSLIGHT_CLONED_FAILED);

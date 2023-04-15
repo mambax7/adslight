@@ -29,7 +29,7 @@ $permHelper = new \Xmf\Module\Helper\Permission();
  */
 class UservotesHandler extends \XoopsPersistableObjectHandler
 {
-    private const TABLE      = 'adslight_uservotes';
+    private const TABLE      = 'adslight_user_votedata';
     private const ENTITY     = Uservotes::class;
     private const ENTITYNAME = 'Uservotes';
     private const KEYNAME    = 'ratingid';
