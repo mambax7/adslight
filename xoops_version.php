@@ -45,8 +45,8 @@ if (file_exists(XOOPS_ROOT_PATH . '/modules/adslight/sql/' . $xoopsConfig['langu
 }
 
 $modversion['version']             = '2.4.0';
-$modversion['module_status']       = 'Beta 1 NOT RELEASED';
-$modversion['release_date']        = '2021/10/21';
+$modversion['module_status']       = 'Beta 1';
+$modversion['release_date']        = '2023/04/15';
 $modversion['name']                = _MI_ADSLIGHT_NAME;
 $modversion['description']         = _MI_ADSLIGHT_DESC;
 $modversion['credits']             = 'AdsLight';

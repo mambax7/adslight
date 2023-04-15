@@ -1,5 +1,8 @@
-<h5>2.4.0 Beta-1   [NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.24, PHP 8.0.11
+<h5>2.4.0 Beta-1   [2023-04-15]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.24, PHP 8.2.5
 <hr>
+- various updates for PHP 8.2 and Smarty 3 (mamba)
+- fix erreur description (Greg Mage)
+- various fixes (mamba)
 
 <h5>2.4.0 Alpha-3   [2021-10-21]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.24, PHP 8.0.11
 <hr>
