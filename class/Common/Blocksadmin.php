@@ -2,8 +2,6 @@
 
 namespace XoopsModules\Adslight\Common;
 
-use Xmf\Module\Admin;
-
 /**
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -17,12 +15,14 @@ use Xmf\Module\Admin;
  * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
+use Xmf\Module\Admin;
 use Xmf\Request;
 use XoopsModules\Adslight\{
     Helper
 };
 
 //require __DIR__ . '/admin_header.php';
+require_once XOOPS_ROOT_PATH . '/kernel/block.php';
 
 /**
  * class Blocksadmin
@@ -51,13 +51,13 @@ class Blocksadmin
 
     /**
      * Blocksadmin constructor.
-     * @param \XoopsDatabase|null $db
+     * @param \XoopsMySQLDatabase|null $db
      * @param Helper|null         $helper
      * @param \XoopsModule        $xoopsModule
      * @param \XoopsSecurity      $xoopsSecurity
      *
      */
-    public function __construct(?\XoopsDatabase $db, Helper $helper, \XoopsModule $xoopsModule, \XoopsSecurity $xoopsSecurity)
+    public function __construct(?\XoopsMySQLDatabase $db, Helper $helper, \XoopsModule $xoopsModule, \XoopsSecurity $xoopsSecurity)
     {
         if (null === $db) {
             $db = \XoopsDatabaseFactory::getDatabaseConnection();
@@ -68,11 +68,11 @@ class Blocksadmin
         $this->xoopsSecurity      = $xoopsSecurity;
         $this->moduleDirName      = \basename(\dirname(__DIR__, 2));
         $this->moduleDirNameUpper = \mb_strtoupper($this->moduleDirName);
-        \xoops_loadLanguage('admin', 'system');
-        \xoops_loadLanguage('admin/blocksadmin', 'system');
-        \xoops_loadLanguage('admin/groups', 'system');
-        \xoops_loadLanguage('common', $this->moduleDirName);
-        \xoops_loadLanguage('blocksadmin', $this->moduleDirName);
+        xoops_loadLanguage('admin', 'system');
+        xoops_loadLanguage('admin/blocksadmin', 'system');
+        xoops_loadLanguage('admin/groups', 'system');
+        $this->helper->loadLanguage('common');
+        $this->helper->loadLanguage('blocksadmin');
     }
 
     /**
@@ -83,11 +83,6 @@ class Blocksadmin
         $pathIcon16 = Admin::iconUrl('', '16');
 
         require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-        //        xoops_loadLanguage('admin', 'system');
-        //        xoops_loadLanguage('admin/blocksadmin', 'system');
-        //        xoops_loadLanguage('admin/groups', 'system');
-        //        xoops_loadLanguage('common', $moduleDirName);
-        //        xoops_loadLanguage('blocks', $moduleDirName);
 
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = \xoops_getHandler('module');
@@ -294,7 +289,7 @@ class Blocksadmin
     /**
      * @param int $bid
      */
-    public function cloneBlock(int $bid): void
+    public function cloneBlock(int $bid)
     {
         //require __DIR__ . '/admin_header.php';
         //        \xoops_cp_header();
@@ -355,8 +350,9 @@ class Blocksadmin
      * @param array|null $bmodule
      * @param array|null $options
      * @param array|null $groups
+     * @param bool|null $redirect
      */
-    public function isBlockCloned(int $bid, string $bside, string $bweight, string $bvisible, string $bcachetime, ?array $bmodule, ?array $options, ?array $groups): void
+    public function isBlockCloned(int $bid, string $bside, string $bweight, string $bvisible, string $bcachetime, ?array $bmodule, ?array $options, ?array $groups, $redirect=null)
     {
         \xoops_loadLanguage('admin', 'system');
         \xoops_loadLanguage('admin/blocksadmin', 'system');
@@ -365,11 +361,15 @@ class Blocksadmin
         $block = new \XoopsBlock($bid);
         /** @var \XoopsBlock $clone */
         $clone = $block->xoopsClone();
+//        if (empty($bmodule)) {
+//            //            \xoops_cp_header();
+//            \xoops_error(\sprintf(_AM_NOTSELNG, _AM_VISIBLEIN));
+//            \xoops_cp_footer();
+//            exit();
+//        }
+
         if (empty($bmodule)) {
-            //            \xoops_cp_header();
-            \xoops_error(\sprintf(_AM_NOTSELNG, _AM_VISIBLEIN));
-            \xoops_cp_footer();
-            exit();
+            throw new InvalidArgumentException(\sprintf(_AM_NOTSELNG, _AM_VISIBLEIN));
         }
         $clone->setVar('side', $bside);
         $clone->setVar('weight', $bweight);
@@ -383,7 +383,7 @@ class Blocksadmin
         }
         $clone->setVar('bid', 0);
         if (\in_array($block->getVar('block_type'), ['C', 'E'])) {
-            $clone->setVar('block_type', 'E');
+             $clone->setVar('block_type', 'E');
         } else {
             $clone->setVar('block_type', 'D');
         }
@@ -391,13 +391,19 @@ class Blocksadmin
         if ($clone->store()) {
             $newid = $clone->id();  //get the id of the cloned block
         }
+//        if (!$newid) {
+//            //            \xoops_cp_header();
+//            $clone->getHtmlErrors();
+//            \xoops_cp_footer();
+//            exit();
+//        }
+
         if (!$newid) {
-            //            \xoops_cp_header();
-            $clone->getHtmlErrors();
-            \xoops_cp_footer();
-            exit();
+            throw new RuntimeException($clone->getHtmlErrors());
         }
+
         if ('' !== $clone->getVar('template')) {
+
             /** @var \XoopsTplfileHandler $tplfileHandler */
             $tplfileHandler = \xoops_getHandler('tplfile');
             $configHandler = xoops_getHandler('config');
@@ -420,7 +426,12 @@ class Blocksadmin
             $sql = 'INSERT INTO ' . $this->db->prefix('group_permission') . ' (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (' . $iValue . ', ' . $newid . ", 1, 'block_read')";
             $this->db->query($sql);
         }
-        $this->helper->redirect('admin/blocksadmin.php?op=list', 1, _AM_DBUPDATED);
+
+//        if ($redirect) {
+//            $this->helper->redirect('admin/blocksadmin.php?op=list', 1, _AM_DBUPDATED);
+//        }
+
+        return true;
     }
 
     /**
@@ -508,7 +519,7 @@ class Blocksadmin
      * @param array|null $options
      * @param array|null $groups
      */
-    public function updateBlock(int $bid, string $btitle, string $bside, string $bweight, string $bvisible, string $bcachetime, ?array $bmodule, ?array $options, ?array $groups): void 
+    public function updateBlock(int $bid, string $btitle, string $bside, string $bweight, string $bvisible, string $bcachetime, ?array $bmodule, ?array $options, ?array $groups)
     {
         $myblock = new \XoopsBlock($bid);
         $myblock->setVar('title', $btitle);
@@ -530,29 +541,43 @@ class Blocksadmin
                 $myblock->setVar('options', $options);
             }
         }
-        $myblock->store();
-        //        /** @var \XoopsBlockHandler $blockHandler */
-        //        $blockHandler = \xoops_getHandler('block');
-        //        $blockHandler->insert($myblock);
+        $newbid = $myblock->store();
+
+        echo '1--' . $newbid . " \n"  ;
+                /** @var \XoopsBlockHandler $blockHandler */
+                $blockHandler = \xoops_getHandler('block');
+                $blockHandler->insert($myblock);
 
         if (!empty($bmodule) && \count($bmodule) > 0) {
-            $sql = \sprintf('DELETE FROM `%s` WHERE block_id = %u', $this->db->prefix('block_module_link'), $bid);
+            $sql = \sprintf('DELETE FROM %s WHERE block_id = %u', $this->db->prefix('block_module_link'), $bid);
+
+
+//            echo '2a--' . $this->db .  "\n";
+
+            echo '2b--' . $this->db->prefix('block_module_link') . "\n";
+
+            echo '2--' . $sql . "\n";
+
             $this->db->query($sql);
             if (\in_array(0, $bmodule)) {
-                $sql = \sprintf('INSERT INTO `%s` (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid, 0);
+                $sql = \sprintf('INSERT INTO %s (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid, 0);
                 $this->db->query($sql);
             } else {
                 foreach ($bmodule as $bmid) {
-                    $sql = \sprintf('INSERT INTO `%s` (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid, (int)$bmid);
+                    $sql = \sprintf('INSERT INTO %s (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid, (int)$bmid);
+                    echo '3--' . $sql . "\n";
+
                     $this->db->query($sql);
                 }
             }
         }
-        $sql = \sprintf('DELETE FROM `%s` WHERE gperm_itemid = %u', $this->db->prefix('group_permission'), $bid);
+        $sql = \sprintf('DELETE FROM %s WHERE gperm_itemid = %u', $this->db->prefix('group_permission'), $bid);
+        echo '4--' . $sql . "\n";
+
         $this->db->query($sql);
         if (!empty($groups)) {
             foreach ($groups as $grp) {
-                $sql = \sprintf("INSERT INTO `%s` (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (%u, %u, 1, 'block_read')", $this->db->prefix('group_permission'), $grp, $bid);
+                $sql = \sprintf("INSERT INTO %s (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (%u, %u, 1, 'block_read')", $this->db->prefix('group_permission'), $grp, $bid);
                 $this->db->query($sql);
             }
         }
