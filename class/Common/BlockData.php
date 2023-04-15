@@ -38,11 +38,11 @@ class BlockData
     public $side;
     public $weight;
     public $visible;
-    public $oldTitle;
-    public $oldSide;
-    public $oldWeight;
-    public $oldVisible;
-    public $oldGroups;
-    public $oldBcachetime;
-    public $oldBmodule;
+    public $oldtitle;
+    public $oldside;
+    public $oldweight;
+    public $oldvisible;
+    public $oldgroups;
+    public $oldbcachetime;
+    public $oldbmodule;
 }

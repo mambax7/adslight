@@ -28,6 +28,7 @@ use XoopsModules\Adslight\{
 class BlockActionsHandler
 {
     private $blocksadmin;
+    private $request;
 
     public function __construct($blocksadmin)
     {
@@ -154,7 +155,7 @@ class BlockActionsHandler
     }
 
 
-    //for testing as mocking
+    //for testing mocking
     public function setRequest($request)
     {
         $this->request = $request;

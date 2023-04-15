@@ -352,7 +352,7 @@ class Blocksadmin
      * @param array|null $groups
      * @param bool|null $redirect
      */
-    public function isBlockCloned(int $bid, string $bside, string $bweight, string $bvisible, string $bcachetime, ?array $bmodule, ?array $options, ?array $groups, $redirect=null)
+    public function isBlockCloned(int $bid, string $bside, string $bweight, string $bvisible, string $bcachetime, ?array $bmodule, ?array $options, ?array $groups)
     {
         \xoops_loadLanguage('admin', 'system');
         \xoops_loadLanguage('admin/blocksadmin', 'system');
@@ -369,7 +369,7 @@ class Blocksadmin
 //        }
 
         if (empty($bmodule)) {
-            throw new InvalidArgumentException(\sprintf(_AM_NOTSELNG, _AM_VISIBLEIN));
+            throw new \InvalidArgumentException(\sprintf(_AM_NOTSELNG, _AM_VISIBLEIN));
         }
         $clone->setVar('side', $bside);
         $clone->setVar('weight', $bweight);
@@ -399,7 +399,7 @@ class Blocksadmin
 //        }
 
         if (!$newid) {
-            throw new RuntimeException($clone->getHtmlErrors());
+            throw new \RuntimeException($clone->getHtmlErrors());
         }
 
         if ('' !== $clone->getVar('template')) {
@@ -543,21 +543,12 @@ class Blocksadmin
         }
         $newbid = $myblock->store();
 
-        echo '1--' . $newbid . " \n"  ;
-                /** @var \XoopsBlockHandler $blockHandler */
-                $blockHandler = \xoops_getHandler('block');
-                $blockHandler->insert($myblock);
+        /** @var \XoopsBlockHandler $blockHandler */
+        $blockHandler = \xoops_getHandler('block');
+        $blockHandler->insert($myblock);
 
         if (!empty($bmodule) && \count($bmodule) > 0) {
             $sql = \sprintf('DELETE FROM %s WHERE block_id = %u', $this->db->prefix('block_module_link'), $bid);
-
-
-//            echo '2a--' . $this->db .  "\n";
-
-            echo '2b--' . $this->db->prefix('block_module_link') . "\n";
-
-            echo '2--' . $sql . "\n";
-
             $this->db->query($sql);
             if (\in_array(0, $bmodule)) {
                 $sql = \sprintf('INSERT INTO %s (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid, 0);
@@ -565,15 +556,11 @@ class Blocksadmin
             } else {
                 foreach ($bmodule as $bmid) {
                     $sql = \sprintf('INSERT INTO %s (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid, (int)$bmid);
-                    echo '3--' . $sql . "\n";
-
                     $this->db->query($sql);
                 }
             }
         }
         $sql = \sprintf('DELETE FROM %s WHERE gperm_itemid = %u', $this->db->prefix('group_permission'), $bid);
-        echo '4--' . $sql . "\n";
-
         $this->db->query($sql);
         if (!empty($groups)) {
             foreach ($groups as $grp) {
