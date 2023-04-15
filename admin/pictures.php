@@ -98,18 +98,21 @@ switch ($op) {
         break;
     case 'delete':
         $picturesObject = $picturesHandler->get(Request::getString('cod_img', ''));
-        if (1 == Request::getInt('ok', 0)) {
-            if (!$GLOBALS['xoopsSecurity']->check()) {
-                redirect_header('pictures.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
-            }
-            if ($picturesHandler->delete($picturesObject)) {
-                redirect_header('pictures.php', 3, AM_ADSLIGHT_FORMDELOK);
+        if ($picturesObject) {
+            if (1 == Request::getInt('ok', 0)) {
+                if (!$GLOBALS['xoopsSecurity']->check()) {
+                    redirect_header('pictures.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+                }
+                if ($picturesHandler->delete($picturesObject)) {
+                    redirect_header('pictures.php', 3, AM_ADSLIGHT_FORMDELOK);
+                } else {
+                    echo $picturesObject->getHtmlErrors();
+                }
             } else {
-                echo $picturesObject->getHtmlErrors();
+                xoops_confirm(['ok' => 1, 'cod_img' => Request::getString('cod_img', ''), 'op' => 'delete'], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_ADSLIGHT_FORMSUREDEL, $picturesObject->getVar('title')));
             }
-        } else {
-            xoops_confirm(['ok' => 1, 'cod_img' => Request::getString('cod_img', ''), 'op' => 'delete'], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_ADSLIGHT_FORMSUREDEL, $picturesObject->getVar('title')));
         }
+
         break;
     case 'clone':
         $id_field = Request::getString('cod_img', '');
