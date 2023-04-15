@@ -605,7 +605,7 @@ define('AM_ADSLIGHT_UPGRADEFAILED2', "Update failed - couldn't rename table '%s'
 define('AM_ADSLIGHT_ERROR_COLUMN', 'Could not create column in database : %s');
 define('AM_ADSLIGHT_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
 define('AM_ADSLIGHT_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
-define('AM_ADSLIGHT_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');
+
 //directories
 define('AM_ADSLIGHT_AVAILABLE', "<span style='color : #008000;'>Available. </span>");
 define('AM_ADSLIGHT_NOTAVAILABLE', "<span style='color : #ff0000;'>is not available. </span>");
@@ -622,3 +622,4 @@ define('AM_ADSLIGHT_ADD_SAMPLEDATA', 'Import Sample Data (will delete ALL curren
 define('AM_ADSLIGHT_SAMPLEDATA_SUCCESS', 'Sample Date uploaded successfully');
 
 define('AM_ADSLIGHT_MAINTAINEDBY', 'is maintained by the');
+

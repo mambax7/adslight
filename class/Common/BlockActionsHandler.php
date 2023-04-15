@@ -28,11 +28,13 @@ use XoopsModules\Adslight\{
 class BlockActionsHandler
 {
     private $blocksadmin;
+    private $helper;
     private $request;
 
     public function __construct($blocksadmin)
     {
         $this->blocksadmin = $blocksadmin;
+        $this->helper = Helper::getInstance();
     }
 
     public function processPostData(): BlockData
@@ -94,7 +96,11 @@ class BlockActionsHandler
                 break;
 
             case 'edit':
-                $this->blocksadmin->editBlock($bid);
+                if ($bid > 0) {
+                    $this->blocksadmin->editBlock($bid);
+                } else {
+                    $this->helper->redirect('admin/blocksadmin.php', 3, _AM_BLOCK_EDIT_ID_ERROR);
+                }
                 break;
 
             case 'edit_ok':

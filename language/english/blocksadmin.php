@@ -40,3 +40,4 @@ define('_AM_ADDBLOCK', 'Add Block');
 define('_AM_NOTSELNG', 'Not Sel');
 
 define('_AM_DBUPDATED', 'Database updated');
+define('_AM_BLOCK_EDIT_ID_ERROR', 'Missing ID of the block to Edit');
