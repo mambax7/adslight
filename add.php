@@ -322,7 +322,7 @@ if (Request::hasVar('submit', 'POST')) {
         $form->addElement(new \XoopsFormText(_ADSLIGHT_TITLE2, 'title', 40, 50, ''), true);
 
 		$options           = [];
-        $options['name']   = 'desctext';
+        $options['name']   = _ADSLIGHT_DESCRIPTION;
         $options['value']  = '';
         $options['cols']   = '100%';
         $options['width']  = '100%';
