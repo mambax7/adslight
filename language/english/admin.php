@@ -355,7 +355,7 @@ define('AM_ADSLIGHT_LISTING_TYPECONDITION', 'Condition Type');
 define('AM_ADSLIGHT_LISTING_DATE', 'Date');
 define('AM_ADSLIGHT_LISTING_EMAIL', 'Email');
 define('AM_ADSLIGHT_LISTING_SUBMITTER', 'Submitter');
-define('AM_ADSLIGHT_LISTING_USID', 'Zip');
+define('AM_ADSLIGHT_LISTING_USID', 'User ID');
 define('AM_ADSLIGHT_LISTING_TOWN', 'Town');
 define('AM_ADSLIGHT_LISTING_COUNTRY', 'Country');
 define('AM_ADSLIGHT_LISTING_CONTACTBY', 'Contactby');

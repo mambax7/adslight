@@ -571,3 +571,6 @@ define('MD_ADSLIGHT_REPLIES_MESSAGE', 'Message');
 define('MD_ADSLIGHT_REPLIES_TELE', 'Phone');
 define('MD_ADSLIGHT_REPLIES_EMAIL', 'Email');
 define('MD_ADSLIGHT_REPLIES_R_USID', 'User');
+
+//2.4.0
+define('_ADSLIGHT_DESCRIPTION', 'Description:');
