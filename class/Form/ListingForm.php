@@ -134,7 +134,7 @@ class ListingForm extends \XoopsThemeForm
         // Email
         $this->addElement(new \XoopsFormText(\AM_ADSLIGHT_LISTING_EMAIL, 'email', 50, 255, $this->targetObject->getVar('email')), false);
         // Submitter
-        $this->addElement(new \XoopsFormSelectUser(\AM_ADSLIGHT_LISTING_SUBMITTER, 'submitter', false, $this->targetObject->getVar('submitter'), 1, false), false);
+        $this->addElement(new \XoopsFormSelectUser(\AM_ADSLIGHT_LISTING_SUBMITTER, 'submitter', false, $this->targetObject->getVar('usid'), 1, false), false);
         // Usid
         $this->addElement(new \XoopsFormText(\AM_ADSLIGHT_LISTING_USID, 'usid', 50, 255, $this->targetObject->getVar('usid')), false);
         // Town
@@ -151,6 +151,7 @@ class ListingForm extends \XoopsThemeForm
         //        $photo = $this->targetObject->getVar('photo') ?: 'blank.png';
 
         // pull the first picture
+        $photoName = '';
         /** @var \XoopsPersistableObjectHandler $picturesHandler */
         $picturesHandler      = $this->helper->getHandler('Pictures');
         $lid                  = $this->targetObject->getVar('lid');
