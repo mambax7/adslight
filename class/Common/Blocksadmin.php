@@ -68,9 +68,9 @@ class Blocksadmin
         $this->xoopsSecurity      = $xoopsSecurity;
         $this->moduleDirName      = \basename(\dirname(__DIR__, 2));
         $this->moduleDirNameUpper = \mb_strtoupper($this->moduleDirName);
-        xoops_loadLanguage('admin', 'system');
-        xoops_loadLanguage('admin/blocksadmin', 'system');
-        xoops_loadLanguage('admin/groups', 'system');
+        \xoops_loadLanguage('admin', 'system');
+        \xoops_loadLanguage('admin/blocksadmin', 'system');
+        \xoops_loadLanguage('admin/groups', 'system');
         $this->helper->loadLanguage('common');
         $this->helper->loadLanguage('blocksadmin');
     }
@@ -270,7 +270,7 @@ class Blocksadmin
         \xoops_loadLanguage('admin/blocksadmin', 'system');
         \xoops_loadLanguage('admin/groups', 'system');
 
-        $myblock = new \XoopsBlock($bid);
+//        $myblock = new \XoopsBlock($bid);
 
         $sql = \sprintf('DELETE FROM %s WHERE bid = %u', $this->db->prefix('newblocks'), $bid);
         $result = $this->db->queryF($sql);
@@ -335,7 +335,8 @@ class Blocksadmin
         //        $form = new Blockform();
         //        $form->render();
 
-        echo $this->render($block);
+        $output =  $this->render($block);
+        echo $output;
         //        xoops_cp_footer();
         //        require_once __DIR__ . '/admin_footer.php';
         //        exit();
@@ -350,9 +351,9 @@ class Blocksadmin
      * @param array|null $bmodule
      * @param array|null $options
      * @param array|null $groups
-     * @param bool|null $redirect
+     * @param bool $redirect
      */
-    public function isBlockCloned(int $bid, string $bside, string $bweight, string $bvisible, string $bcachetime, ?array $bmodule, ?array $options, ?array $groups)
+    public function isBlockCloned(int $bid, string $bside, string $bweight, string $bvisible, string $bcachetime, ?array $bmodule, ?array $options, ?array $groups, bool $redirect = true)
     {
         \xoops_loadLanguage('admin', 'system');
         \xoops_loadLanguage('admin/blocksadmin', 'system');
@@ -360,7 +361,7 @@ class Blocksadmin
 
         $block = new \XoopsBlock($bid);
         /** @var \XoopsBlock $clone */
-        $clone = $block->xoopsClone();
+        $clone = $block->xoopsClone($bid);
 //        if (empty($bmodule)) {
 //            //            \xoops_cp_header();
 //            \xoops_error(\sprintf(_AM_NOTSELNG, _AM_VISIBLEIN));
@@ -387,6 +388,7 @@ class Blocksadmin
         } else {
             $clone->setVar('block_type', 'D');
         }
+        $newid = null;
         //        $newid = $clone->store(); //see https://github.com/XOOPS/XoopsCore25/issues/1105
         if ($clone->store()) {
             $newid = $clone->id();  //get the id of the cloned block
@@ -407,6 +409,7 @@ class Blocksadmin
             /** @var \XoopsTplfileHandler $tplfileHandler */
             $tplfileHandler = \xoops_getHandler('tplfile');
             $configHandler = xoops_getHandler('config');
+            /** @var \XoopsConfigHandler $xoopsConfig */
             $xoopsConfig = $configHandler->getConfigsByCat(XOOPS_CONF);
             $btemplate      = $tplfileHandler->find($xoopsConfig['template_set'], 'block', (string)$bid);
             if (\count($btemplate) > 0) {
@@ -427,9 +430,9 @@ class Blocksadmin
             $this->db->query($sql);
         }
 
-//        if ($redirect) {
-//            $this->helper->redirect('admin/blocksadmin.php?op=list', 1, _AM_DBUPDATED);
-//        }
+        if ($redirect) {
+            $this->helper->redirect('admin/blocksadmin.php?op=list', 1, _AM_DBUPDATED);
+        }
 
         return true;
     }
@@ -505,7 +508,8 @@ class Blocksadmin
         ];
         echo '<a href="blocksadmin.php">' . \constant('CO_' . $this->moduleDirNameUpper . '_' . 'BADMIN') . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . \_AM_SYSTEM_BLOCKS_EDITBLOCK . '<br><br>';
 
-        echo $this->render($block);
+        $output = $this->render($block);
+        echo $output;
     }
 
     /**
@@ -577,7 +581,7 @@ class Blocksadmin
      * @param array $oldside
      * @param array $oldweight
      * @param array $oldvisible
-     * @param array $oldgroups
+//     * @param array $oldgroups
      * @param array $oldbcachetime
      * @param array $oldbmodule
      * @param array $title
@@ -594,7 +598,7 @@ class Blocksadmin
         array $oldside,
         array $oldweight,
         array $oldvisible,
-        array $oldgroups,
+//        array $oldgroups,
         array $oldbcachetime,
         array $oldbmodule,
         array $title,
