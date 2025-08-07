@@ -1,0 +1,25 @@
+{
+    "name": "xoopsmodules/adslight",
+    "description": "Adslight module for XOOPS CMS",
+    "type": "xoops-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "XOOPS Development Team"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "XoopsModules\\Adslight\\": "class/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    }
+}
